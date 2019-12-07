@@ -15,6 +15,7 @@ import {
   faCut,
   faPaste,
   faTrash,
+  faPowerOff,
   faArrowCircleUp,
   faArrowCircleRight,
   faArrowCircleLeft,
@@ -39,6 +40,7 @@ export class UserPanelComponent implements OnInit {
   faCut = faCut;
   faPaste = faPaste;
   faTrash = faTrash;
+  faPowerOff = faPowerOff;
   faArrowCircleUp = faArrowCircleUp;
   faArrowCircleRight = faArrowCircleRight;
   faArrowCircleLeft = faArrowCircleLeft;
@@ -303,7 +305,10 @@ export class UserPanelComponent implements OnInit {
 
   private logout() {
     this.cookieService.delete('login');
-    this.router.navigateByUrl('/user-entry');
+    this.cookieService.delete('firstName');
+    this.cookieService.delete('secondName');
+    this.cookieService.delete('maxStorage');
+    this.router.navigateByUrl('/login');
   }
 
   private select(entry, event) {

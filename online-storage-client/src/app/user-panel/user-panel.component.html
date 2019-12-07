@@ -60,6 +60,10 @@
         (click)="deleteEntries()" [disabled]="!selected.length">
         <fa-icon [icon]="faTrash"></fa-icon>
       </button>
+      <button class="btn btn-sm btn-light m-1" title="Logout"
+        (click)="logout()">
+        <fa-icon [icon]="faPowerOff"></fa-icon>
+      </button>
     </div>
   </div>
 </div>
