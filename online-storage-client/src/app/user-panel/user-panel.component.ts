@@ -64,6 +64,7 @@ export class UserPanelComponent implements OnInit {
 
   selected = [];
   clipboard = [];
+  clipboardDirectory = null;
   keep = true;
 
   message = null;
@@ -97,11 +98,13 @@ export class UserPanelComponent implements OnInit {
   // ENTRY LEVEL OPERATIONS
   private copyEntries() {
     this.clipboard = this.selected;
+    this.clipboardDirectory = this.currentDirectory;
     this.keep = true;
   }
 
   private cutEntries() {
     this.clipboard = this.selected;
+    this.clipboardDirectory = this.currentDirectory;
     this.keep = false;
   }
 
@@ -159,8 +162,25 @@ export class UserPanelComponent implements OnInit {
           for (const r of res) {
             if (r.mediaType === 'directory') {
               this.currentDirectory.contents.directories.push(r);
+
+              const item = copyObjects.find((c) => {
+                return c.to === r;
+              });
+              const index =
+                this.clipboardDirectory.content.directories.findIndex((d) => {
+                  return d === item;
+                });
+              this.clipboardDirectory.conents.directories.splice(index, 1);
             } else {
               this.currentDirectory.contents.files.push(r);
+              const item = copyObjects.find((c) => {
+                return c.to === r;
+              });
+              const index =
+                this.clipboardDirectory.content.files.findIndex((d) => {
+                  return d === item;
+                });
+              this.clipboardDirectory.conents.files.splice(index, 1);
             }
           }
         },
