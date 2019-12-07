@@ -1,0 +1,18 @@
+{
+  "spec_dir": "spec",
+  "spec_files": [
+    "**/*[sS]pec.js",
+    "../business/*spec.js",
+    "../configuration/*spec.js",
+    "../extra/*spec.js",
+    "../database/*spec.js",
+    "../models/*spec.js",
+    "../routes/*spec.js",
+    "../schemas/*spec.js"
+  ],
+  "helpers": [
+    "helpers/**/*.js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": true
+}

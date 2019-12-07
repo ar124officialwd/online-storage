@@ -1,0 +1,20 @@
+<div class="m-auto">
+  <ngb-tabset>
+    <ngb-tab title="Login">
+      <ng-template ngbTabContent>
+        <app-login></app-login>
+        <div class="alert alert-primary m-1">
+          If you've not yet register, head over to Register tab and register.
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Register">
+      <ng-template ngbTabContent>
+        <app-register></app-register>
+        <div class="alert alert-primary m-1">
+          If you've already register, head over to Login tab and login.
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

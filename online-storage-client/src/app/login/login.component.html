@@ -1,0 +1,51 @@
+<div id="login">
+  <h4 class="title">Login</h4>
+
+  <div *ngIf="otherError" class="text-muted">
+    Some kind of error occured, please try again
+  </div>
+
+  <div *ngIf="loginFailed" class="text-muted">
+    Failed: Invalid email or password!
+  </div>
+
+  <form (ngSubmit)="createSession()" #loginForm="ngForm">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" class="form-control"
+        [(ngModel)]="model.email" #email="ngModel" required>
+      <div *ngIf="email.invalid && (email.dirty || email.touched)">
+        <div *ngIf="email.errors.required" class="text-muted">
+          Email is required
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" name="password" class="form-control"
+        minlength=8 maxlength=64 [(ngModel)]="model.password"
+        #password="ngModel" required>
+      <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div *ngIf="password.errors.required" class="text-muted">
+          Password is required
+        </div>
+        <div *ngIf="password.errors.minlength" class="text-muted">
+          Password must be atleast 8 character long
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-success"
+        [disabled]="!loginForm.valid">Login</button>
+    </div>
+  </form>
+  <div class="text-muted">
+    Not yet registered? <a routerLink="/register">Signup</a> now
+  </div>
+
+  <div *ngIf="loginSuccess" class="text-muted">
+    You have been logined successfully, Redirecting...!
+  </div>
+</div>

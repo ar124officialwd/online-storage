@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .vid-div {
+      position: absolute;
+      top: 5vh;
+      left: 10vw;
+      width: 80vw;
+      height: 90vh;
+    }
+
+    video {
+      width: 100%;
+      height: 90%;
+    }
+
+    p {
+      padding: 1vh 1vw;
+    }
+  </style>
+</head>
+<body>
+  <div id="vid-div">
+    <video controls>
+      <source src="file://home/ar/Whatsapp.mkv" type="video/mkv">
+      <source src="file://disk/videos/android-development.mp4" type="video/mp4">
+      Your browser does not support HTML5 videos.
+    </video>
+    <p>Playing vidoe: </p>
+  </div>
+</body>
+</html>

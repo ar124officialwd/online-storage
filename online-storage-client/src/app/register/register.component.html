@@ -1,0 +1,97 @@
+
+<div id="register">
+  <h4 class="title">Signup</h4>
+
+  <div id="failed" [class.hidden]="!registerFailed" class="alert alert-danger">
+    Error while registering!
+  </div>
+  <div id="success" [class.hidden]="!registerSuccess" class="alert alert-success">
+    You've been registered successfully! <a routerLink="/login">Login</a> now.
+  </div>
+
+  <form (ngSubmit)="save()" #registerForm="ngForm">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input [(ngModel)]="model.firstName" #firstName="ngModel" type="text" name="firstName" class="form-control"
+        maxlength="128" required>
+      <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="text-muted">
+        <div *ngIf="firstName.errors.required">
+          First Name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="secondName">Second Name</label>
+      <input type="text" name="secondName" class="form-control" maxlength="128" [(ngModel)]="model.secondName"
+        #secondName="ngModel">
+      <div *ngIf="secondName.invalid && (secondName.dirty || secondName.touched)" class="text-muted">
+        <div *ngIf="secondName.errors.required">
+          Second Name is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" class="form-control" maxlength="256" [(ngModel)]="model.email" #email="ngModel"
+        required>
+      <div *ngIf="(!validateEmail(email.value) && (email.dirty || email.touched)) || userExist" class="text-muted">
+        <div *ngIf="!validateEmail(email.value)">
+          Email is invalid.
+        </div>
+        <div *ngIf="userExist">
+          Email is already registered, try another one
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" name="password" class="form-control" minlength=8 maxlength="64"
+        [(ngModel)]="model.password" #password="ngModel">
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-muted">
+        <div *ngIf="password.errors.required">
+          Password is required.
+        </div>
+        <div *ngIf="password.errors.minlength">
+          Password must be atleast 8 character long
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="repeatPassword">Repeat Password</label>
+      <input type="password" name="repeatPassword" class="form-control" maxlength="64" [(ngModel)]="passwordRepeat"
+        #repeatPassword="ngModel" required>
+      <div *ngIf="repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)" class="text-muted">
+        <div *ngIf="repeatPassword.errors.required">
+          Reapeat Password is required
+        </div>
+        <div *ngIf="repeatPassword.errors.minlength">
+          Password must be atleast 8 character long
+        </div>
+      </div>
+      <div *ngIf="(repeatPassword.dirty || repeatPassword.touched)" class="text-muted">
+        <div *ngIf="(password.value != repeatPassword.value)">
+          Passwords do not match
+        </div>
+      </div>
+    </div>
+    <div>
+      <label for="pricingPlans">Pricing Plans</label>
+      <select name="pricingPlan" class="form-control"
+        [(ngModel)]="model.pricingPlan" #pricingPlan="ngModel" required>
+        <option *ngFor="let p of pricingPlans" [ngValue]="p">{{p.title}}</option>
+      </select>
+      <div *ngIf="pricingPlan.invalid && (pricingPlan.dirty || pricingPlan.touched)">
+        <div *ngIf="pricingPlan.errors.required" class="text-muted">
+          You must select a pricing plan
+        </div>
+      </div>
+    </div>
+    <div class="p-2">
+      <button type="submit" class="btn btn-success" [disabled]="!registerForm.valid">Register</button>
+    </div>
+  </form>
+</div>

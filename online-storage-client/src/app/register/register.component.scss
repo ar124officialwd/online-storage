@@ -1,0 +1,22 @@
+#register {
+  position: absolute;
+  top: 15%;
+  left: 33.33vw;
+  background: white;
+  width: 33vw;
+  height: 75vh;
+  padding: 15px;
+  border: 1px solid rgba(230, 230, 230, 1);
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px 1px black;
+  overflow: auto;
+}
+
+.title {
+  text-align: center;
+}
+
+.hidden {
+  visibility: 0;
+  display: none;
+}

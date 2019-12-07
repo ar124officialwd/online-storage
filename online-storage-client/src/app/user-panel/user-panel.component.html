@@ -1,0 +1,136 @@
+
+<div *ngIf="triggers.createDirectory">
+  <app-create-directory (directory)="createDirectory($event)"
+    [currentDirectory]="currentDirectory"></app-create-directory>
+</div>
+<div *ngIf="triggers.uploadFile">
+  <app-upload-file (fileEvent)="uploadFile($event)"
+    [location]="currentDirectory.location">
+  </app-upload-file>
+</div>
+
+<!-- File Manager Header -->
+<div class="item alert alert-sm alert-success">
+  <div class="item-header">
+    <input class="btn btn-sm btn-light m-1" title="Select All"
+      type="checkbox" id="selectAll" (change)="select(null, $event)">
+  </div>
+  <div class="item-content">
+    <span class="text-bold">Current Location: </span> {{ currentDirectory.location | minifyPath:40 }}
+    <span class="ml-2 text-bold">Usage: </span> {{ usagePercent | to4Precision }}%
+    <ngb-progressbar [value]="usagePercent"
+      class="getUsageClass()"></ngb-progressbar>
+  </div>
+  <div class="item-actions">
+    <div class="d-flex flex-row">
+      <button class="btn btn-sm btn-light m-1" title="Go Back"
+        [disabled]="!backwardStack.length"
+        (click)="previousDirectory()">
+        <fa-icon [icon]="faArrowCircleLeft"></fa-icon>
+      </button>
+      <button class="btn btn-sm btn-light m-1" title="Go Forward"
+        [disabled]="!forwardStack.length"
+        (click)="reopenDirectory()">
+        <fa-icon [icon]="faArrowCircleRight"></fa-icon>
+      </button>
+      <button class="btn btn-sm btn-light m-1"
+        (click)="trigger('createDirectory')" title="Create Directory">
+        <fa-icon [icon]="faFolderPlus"></fa-icon>
+      </button>
+      <button class="btn btn-sm btn-light m-1" title="Upload File"
+        (click)="trigger('uploadFile')">
+        <fa-icon [icon]="faFileUpload"></fa-icon>
+      </button>
+      <button [class]="!clipboard.length || !keep ? 'btn btn-sm btn-light m-1' :
+        'btn btn-sm btn-secondary m-1'"
+        title="Copy" (click)="copyEntries()" [disabled]="!selected.length">
+        <fa-icon [icon]="faCopy"></fa-icon>
+      </button>
+      <button [class]="!clipboard.length || keep ? 'btn btn-sm btn-light m-1' :
+        'btn btn-sm btn-secondary m-1'"
+        title="Cut" (click)="cutEntries()" [disabled]="!selected.length">
+        <fa-icon [icon]="faCut"></fa-icon>
+      </button>
+      <button class="btn btn-sm btn-light m-1" title="Paste"
+        (click)="pasteEntries()" [disabled]="!clipboard.length ||
+          (!this.backwardStack.length && !this.forwardStack.length)">
+        <fa-icon [icon]="faPaste"></fa-icon>
+      </button>
+      <button class="btn btn-sm btn-light m-1" title="Delete"
+        (click)="deleteEntries()" [disabled]="!selected.length">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- No files or directories are there -->
+<div *ngIf="!currentDirectory.contents.files.length &&
+  !currentDirectory.contents.directories.length" class="p-5">
+  <h3 class="text-muted">
+    There is nothing here
+  </h3>
+</div>
+
+<!-- There is/are one/some files/directories -->
+<div *ngIf="currentDirectory.contents.files.length ||
+  currentDirectory.contents.directories.length">
+  <div *ngIf="message" class="alert alert-sm alert-primary">
+    {{message}}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-sm alert-danger">
+    {{errorMessage}}
+  </div>
+
+  <div *ngFor="let e of currentDirectory.contents.directories" class="item"
+    (click)="openDirectory(e)">
+    <div class="item-header">
+      <input type="checkbox" (change)="select(e, $event)"
+        (click)="$event.stopPropagation();">
+      <a (click)="openDirectory(e)">
+        <img src="/images/folder.png">
+      </a>
+    </div>
+    <div class="item-content">
+      <span class="item-name" contenteditable="true" spellcheck="false"
+        (click)="$event.stopPropagation();"
+        (blur)="renameEntry(e, $event.target.innerText)"
+        (keypress)="checkInputCharacter($event)">{{e.name}}</span>
+    </div>
+    <div class="item-actions">
+      <div>
+        <button (click)="deleteEntry(e)"
+          class="btn btn-sm btn-light m-1">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let e of currentDirectory.contents.files" class="item">
+    <div class="item-header">
+      <input type="checkbox" (change)="select(e, $event)">
+      <a href="#">
+        <img src="/images/file.png">
+      </a>
+    </div>
+    <div class="item-content">
+      <span class="item-name" contenteditable="true" spellcheck="false"
+        (blur)="renameEntry(e, $event.target.innerText)">{{e.name}}</span>
+      <span>{{e.extension}}</span>
+    </div>
+    <div class="item-actions">
+      <div>
+        <button (click)="deleteEntry(e)" class="btn btn-sm btn-light mr-1">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </button>
+      </div>
+      <div>
+        <button (click)="downloadFile(e.name, e.location)"
+          class="btn btn-sm btn-light mr-1">
+          <fa-icon [icon]="faDownload"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

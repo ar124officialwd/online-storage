@@ -1,0 +1,49 @@
+<div class="uploadFile">
+  <div *ngIf="uploading" class="m-5">
+    <h3 class="text-primary">Uploading {{progress}}</h3>
+    <p>Please wait while file is being uploaded</p>
+  </div>
+  <div id="main">
+    <div class="d-flex flex-row-reverse p-1">
+      <button class="btn btn-sm">
+        <fa-icon [icon]="faWindowClose"
+          (click)="cancelUpload()"></fa-icon>
+      </button>
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{errorMessage}}
+    </div>
+
+    <h4>Upload a new file</h4>
+    <form (ngSumbit)="upload()" #form="ngForm" id="uploadForm">
+      <div class="form-group">
+        <label for="file">File</label>
+        <input type="file" name="file" id="file" class="form-control"
+          [(ngModel)]="file" #fileModel="ngModel" required>
+        <div *ngIf="fileModel.invalid && (fileModel.dirty && fileModel.touched)"
+          class="text-muted">
+          <div *ngIf="fileModel.errors.required">
+              Please choose a file
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="targetName">Target Name</label>
+        <input type="text" name="targetName" class="form-control"
+          [(ngModel)]="fileName" #filename="ngModel">
+        <div *ngIf="!(filename.dirty || filename.touched)">
+          Please enter a name to save as a new name
+        </div>
+        <div *ngIf="!validateFileName() && (filename.dirty || filename.touched)"
+          class="alert alert-danger">
+          <div *ngIf="!validateFileName()">
+            File name is not valid, try another
+          </div>
+        </div>
+      </div>
+      <input (click)="upload()" type="submit" class="btn btn-sm btn-success ml-1"
+        [disabled]="!form.valid || (fileName && !validateFileName())"
+        value="Upload">
+    </form>
+  </div>
+</div>
