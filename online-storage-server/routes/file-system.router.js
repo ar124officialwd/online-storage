@@ -83,11 +83,11 @@ fileSystemRouter.get('/fileSystem', async (req, res, next) => {
 })
 
 let upload = multer({
-  dest: path.join('../uploads')
+  dest: path.join(path.join(__dirname, '..', '/uploads'))
 })
 
 // Request of creating directories or uploading files
-fileSystemRouter.post('/fileSystem', upload.single('file'), async (req, res, next) => {
+fileSystemRouter.post('/fileSystem', upload.array('file[]', 20), async (req, res, next) => {
   let responce = []
 
   // request is about creating directories
@@ -107,33 +107,31 @@ fileSystemRouter.post('/fileSystem', upload.single('file'), async (req, res, nex
     }
   } else {
     // perhaps an unknown request
-    if (!req.file) {
-      res.status(401).end();
+    if (!req.files) {
+      res.status(400).end();
     }
 
     // request is about uploading files
     try {
-      let filename = req.file.originalname
-      if (req.body.targetName) {
-        await fs.promises.rename(req.file.path,
-          path.join(req.storagePath, req.body.location, req.body.targetName +
-            path.extname(filename)))
-        filename = req.body.targetName + path.extname(filename)
-      } else {
-        await fs.promises.rename(req.file.path,
-          path.join(req.storagePath, req.body.location, filename))
+      for (let i = 0; i < req.files.length; i++) {
+        await fs.promises.rename(req.files[i].path, path.join(req.storagePath,
+          req.body.location, req.body.name[i]))
+
+        const file = new File(req.body.name[i],
+          path.join(req.storagePath, req.body.location, req.body.name[i]))
+
+        const stats = await fs.promises.stat(file.location)
+        file.size = stats.size;
+        file.exists = true;
+        file.mediaType = await getFileType(file.location)
+        file.location = file.location.replace(req.storagePath, '/')
+
+        responce.push(file)
+
+        if (i == req.files.length - 1) {
+          res.json(responce)
+        }
       }
-
-      let file = new File(filename,
-        path.join(req.storagePath, req.body.location, filename))
-
-      const stats = await fs.promises.stat(file.location);
-      file.size = stats.size;
-      file.exists = true;
-      file.mediaType = await getFileType(file.location)
-      file.location = file.location.replace(req.storagePath, '/');
-
-      res.json(file);
     } catch(err) {
       Logger.log(err)
       res.status(500).end()

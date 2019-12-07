@@ -86,7 +86,7 @@ export class FileSystemService {
     });
   }
 
-  uploadFile(formData): Observable<any> {
+  uploadFiles(formData): Observable<any> {
     return this.http.post('/fileSystem', formData, {
       headers: {
         Authorization: this.auth

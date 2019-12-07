@@ -5,7 +5,7 @@
 </div>
 <div *ngIf="triggers.uploadFile">
   <app-upload-file (fileEvent)="uploadFile($event)"
-    [location]="currentDirectory.location">
+    [location]="currentDirectory.location" [existingNames]="getExistingNames()">
   </app-upload-file>
 </div>
 

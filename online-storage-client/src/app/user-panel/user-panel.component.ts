@@ -257,15 +257,6 @@ export class UserPanelComponent implements OnInit {
   /************************************************************************** */
   // FILE LEVEL OPERATIONS
 
-  uploadFile(file) {
-    this.triggers.uploadFile = false;
-    if (file) {
-      this.currentDirectory.contents.files.push(file);
-      this.usage += file.size;
-      this.usagePercent = (this.usage * 100) / this.maxStorage;
-    }
-  }
-
   private downloadFile(name, location) {
     this.fs.downloadFile(location).subscribe(
       (res: Blob) => {
@@ -281,6 +272,16 @@ export class UserPanelComponent implements OnInit {
     );
   }
 
+  uploadFile(file) {
+    if (file) {
+      this.currentDirectory.contents.files.push(file);
+      this.usage += file.size;
+      this.usagePercent = (this.usage * 100) / this.maxStorage;
+    } else {
+      this.triggers.uploadFile = false;
+    }
+  }
+
   /************************************************************************** */
   // CLASS LEVEL OPERATIONS
 
@@ -289,6 +290,20 @@ export class UserPanelComponent implements OnInit {
     if (!str.match(/[a-zA-Z0-9\.-_]/)) {
       return false;
     }
+  }
+
+  private getExistingNames() {
+    const existingNames = [];
+
+    for (const d of this.currentDirectory.contents.directories) {
+      existingNames.push(d.name);
+    }
+
+    for (const f of this.currentDirectory.contents.files) {
+      existingNames.push(f.name + f.extension);
+    }
+
+    return existingNames;
   }
 
   private getUsageClass() {

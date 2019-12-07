@@ -2,7 +2,7 @@
 
   <div *ngIf="uploading" class="m-5">
     <h3 class="text-primary">Uploading {{progress}}</h3>
-    <p>Please wait while file is being uploaded</p>
+    <p>Please wait while files are being uploaded</p>
   </div>
 
   <div id="main">
@@ -18,7 +18,7 @@
     </div>
 
     <div *ngIf="!help">
-      <div *ngIf="errorMessage" class="alert alert-danger">
+      <div id="error" [class.hidden]="!errorMessage" class="alert alert-danger">
         {{errorMessage}}
       </div>
 
@@ -27,7 +27,8 @@
         <div class="form-group">
           <label for="file">File</label>
           <input type="file" name="file" id="file" class="form-control"
-            [(ngModel)]="file" #fileModel="ngModel" required>
+            [(ngModel)]="file" (change)="fileName = ''"
+            #fileModel="ngModel" required>
           <div *ngIf="fileModel.invalid && (fileModel.dirty && fileModel.touched)"
             class="text-muted">
             <div *ngIf="fileModel.errors.required">
@@ -49,12 +50,22 @@
             </div>
           </div>
         </div>
+        <button type="button" class="btn btn-sm btn-primary ml-1"
+          (click)="addSelectedFile()" [disabled]="!fileModel.valid">
+          Add File</button>
         <input (click)="upload()" type="submit" class="btn btn-sm btn-success ml-1"
           [disabled]="!form.valid || (fileName && !validateFileName())"
-          value="Upload">
+          value="Upload Selected">
       </form>
-      <div class="alert alert-secondary p-1">
-        <h6>Selected files: </h6>
+      <h4>Selected Files: </h4>
+      <div *ngIf="selectedFiles.length"
+        class="alert alert-primary m-1 p-1 d-flex flex-row flex-wrap">
+        <div *ngFor="let s of selectedFiles"
+          class="alert alert-sm alert-light m-1">
+          <span>{{s.newName}}</span>
+          <button class="btn btn-sm btn-outline-secondary m-1"
+            (click)="removeFile(s)">X</button>
+        </div>
       </div>
     </div>
 
@@ -62,11 +73,12 @@
       <ul>
         <li>Upload file window let you upload one or more files.</li>
         <li>To upload a file, use 'Select File' input box.</li>
-        <li>One you select a file, it is added to selected file.
-          Now you can choose another!</li>
-        <li>Select files are always there at bottom, so you may remove one
+        <li>Now type an appropriate name for file and click 'Add file'</li>
+        <li>To add another file, repeat above two.</li>
+        <li>Selected files are always there at bottom, so you may remove one
           or more of them, if you wish to cancel them.
         </li>
+        <li>Click 'Upload Selected' to upload selected files</li>
       </ul>
       <p class="alert-warning p-2">Click on info button again to close help.</p>
     </div>

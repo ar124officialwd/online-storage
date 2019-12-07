@@ -191,7 +191,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"uploadFile\">\n  <div *ngIf=\"uploading\" class=\"m-5\">\n    <h3 class=\"text-primary\">Uploading {{progress}}</h3>\n    <p>Please wait while file is being uploaded</p>\n  </div>\n  <div id=\"main\">\n    <div class=\"d-flex flex-row-reverse p-1\">\n      <button class=\"btn btn-sm\">\n        <fa-icon [icon]=\"faWindowClose\"\n          (click)=\"cancelUpload()\"></fa-icon>\n      </button>\n    </div>\n    <div *ngIf=\"errorMessage\" class=\"alert alert-danger\">\n      {{errorMessage}}\n    </div>\n\n    <h4>Upload a new file</h4>\n    <form (ngSumbit)=\"upload()\" #form=\"ngForm\" id=\"uploadForm\">\n      <div class=\"form-group\">\n        <label for=\"file\">File</label>\n        <input type=\"file\" name=\"file\" id=\"file\" class=\"form-control\"\n          [(ngModel)]=\"file\" #fileModel=\"ngModel\" required>\n        <div *ngIf=\"fileModel.invalid && (fileModel.dirty && fileModel.touched)\"\n          class=\"text-muted\">\n          <div *ngIf=\"fileModel.errors.required\">\n              Please choose a file\n          </div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"targetName\">Target Name</label>\n        <input type=\"text\" name=\"targetName\" class=\"form-control\"\n          [(ngModel)]=\"fileName\" #filename=\"ngModel\">\n        <div *ngIf=\"!(filename.dirty || filename.touched)\">\n          Please enter a name to save as a new name\n        </div>\n        <div *ngIf=\"!validateFileName() && (filename.dirty || filename.touched)\"\n          class=\"alert alert-danger\">\n          <div *ngIf=\"!validateFileName()\">\n            File name is not valid, try another\n          </div>\n        </div>\n      </div>\n      <input (click)=\"upload()\" type=\"submit\" class=\"btn btn-sm btn-success ml-1\"\n        [disabled]=\"!form.valid || (fileName && !validateFileName())\"\n        value=\"Upload\">\n    </form>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"uploadFile\">\n\n  <div *ngIf=\"uploading\" class=\"m-5\">\n    <h3 class=\"text-primary\">Uploading {{progress}}</h3>\n    <p>Please wait while files are being uploaded</p>\n  </div>\n\n  <div id=\"main\">\n    <div class=\"d-flex flex-row-reverse p-1\">\n      <button class=\"btn btn-sm btn-secondary ml-1\"\n        (click)=\"closeModel()\">\n        <fa-icon [icon]=\"faWindowClose\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-secondary ml-1\"\n        (click)=\"toggleHelp()\">\n        <fa-icon [icon]=\"faInfo\"></fa-icon>\n      </button>\n    </div>\n\n    <div *ngIf=\"!help\">\n      <div id=\"error\" [class.hidden]=\"!errorMessage\" class=\"alert alert-danger\">\n        {{errorMessage}}\n      </div>\n\n      <h4>Upload a new file</h4>\n      <form (ngSumbit)=\"upload()\" #form=\"ngForm\" id=\"uploadForm\">\n        <div class=\"form-group\">\n          <label for=\"file\">File</label>\n          <input type=\"file\" name=\"file\" id=\"file\" class=\"form-control\"\n            [(ngModel)]=\"file\" (change)=\"fileName = ''\"\n            #fileModel=\"ngModel\" required>\n          <div *ngIf=\"fileModel.invalid && (fileModel.dirty && fileModel.touched)\"\n            class=\"text-muted\">\n            <div *ngIf=\"fileModel.errors.required\">\n                Please choose a file\n            </div>\n          </div>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"targetName\">Target Name</label>\n          <input type=\"text\" name=\"targetName\" class=\"form-control\"\n            [(ngModel)]=\"fileName\" #filename=\"ngModel\">\n          <div *ngIf=\"!(filename.dirty || filename.touched)\">\n            Please enter a name to save as a new name\n          </div>\n          <div *ngIf=\"!validateFileName() && (filename.dirty || filename.touched)\"\n            class=\"alert alert-danger\">\n            <div *ngIf=\"!validateFileName()\">\n              File name is not valid, try another\n            </div>\n          </div>\n        </div>\n        <button type=\"button\" class=\"btn btn-sm btn-primary ml-1\"\n          (click)=\"addSelectedFile()\" [disabled]=\"!fileModel.valid\">\n          Add File</button>\n        <input (click)=\"upload()\" type=\"submit\" class=\"btn btn-sm btn-success ml-1\"\n          [disabled]=\"!form.valid || (fileName && !validateFileName())\"\n          value=\"Upload Selected\">\n      </form>\n      <h4>Selected Files: </h4>\n      <div *ngIf=\"selectedFiles.length\"\n        class=\"alert alert-primary m-1 p-1 d-flex flex-row flex-wrap\">\n        <div *ngFor=\"let s of selectedFiles\"\n          class=\"alert alert-sm alert-light m-1\">\n          <span>{{s.newName}}</span>\n          <button class=\"btn btn-sm btn-outline-secondary m-1\"\n            (click)=\"removeFile(s)\">X</button>\n        </div>\n      </div>\n    </div>\n\n    <div *ngIf=\"help\" class=\"p-2\">\n      <ul>\n        <li>Upload file window let you upload one or more files.</li>\n        <li>To upload a file, use 'Select File' input box.</li>\n        <li>Now type an appropriate name for file and click 'Add file'</li>\n        <li>To add another file, repeat above two.</li>\n        <li>Selected files are always there at bottom, so you may remove one\n          or more of them, if you wish to cancel them.\n        </li>\n        <li>Click 'Upload Selected' to upload selected files</li>\n      </ul>\n      <p class=\"alert-warning p-2\">Click on info button again to close help.</p>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -217,7 +217,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n<div *ngIf=\"triggers.createDirectory\">\n  <app-create-directory (directory)=\"createDirectory($event)\"\n    [currentDirectory]=\"currentDirectory\"></app-create-directory>\n</div>\n<div *ngIf=\"triggers.uploadFile\">\n  <app-upload-file (fileEvent)=\"uploadFile($event)\"\n    [location]=\"currentDirectory.location\">\n  </app-upload-file>\n</div>\n\n<!-- File Manager Header -->\n<div class=\"item alert alert-sm alert-success\">\n  <div class=\"item-header\">\n    <input class=\"btn btn-sm btn-light m-1\" title=\"Select All\"\n      type=\"checkbox\" id=\"selectAll\" (change)=\"select(null, $event)\">\n  </div>\n  <div class=\"item-content\">\n    <span class=\"text-bold\">Current Location: </span> {{ currentDirectory.location | minifyPath:40 }}\n    <span class=\"ml-2 text-bold\">Usage: </span> {{ usagePercent | to4Precision }}%\n    <ngb-progressbar [value]=\"usagePercent\"\n      class=\"getUsageClass()\"></ngb-progressbar>\n  </div>\n  <div class=\"item-actions\">\n    <div class=\"d-flex flex-row\">\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Go Back\"\n        [disabled]=\"!backwardStack.length\"\n        (click)=\"previousDirectory()\">\n        <fa-icon [icon]=\"faArrowCircleLeft\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Go Forward\"\n        [disabled]=\"!forwardStack.length\"\n        (click)=\"reopenDirectory()\">\n        <fa-icon [icon]=\"faArrowCircleRight\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\"\n        (click)=\"trigger('createDirectory')\" title=\"Create Directory\">\n        <fa-icon [icon]=\"faFolderPlus\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Upload File\"\n        (click)=\"trigger('uploadFile')\">\n        <fa-icon [icon]=\"faFileUpload\"></fa-icon>\n      </button>\n      <button [class]=\"!clipboard.length || !keep ? 'btn btn-sm btn-light m-1' :\n        'btn btn-sm btn-secondary m-1'\"\n        title=\"Copy\" (click)=\"copyEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faCopy\"></fa-icon>\n      </button>\n      <button [class]=\"!clipboard.length || keep ? 'btn btn-sm btn-light m-1' :\n        'btn btn-sm btn-secondary m-1'\"\n        title=\"Cut\" (click)=\"cutEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faCut\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Paste\"\n        (click)=\"pasteEntries()\" [disabled]=\"!clipboard.length ||\n          (!this.backwardStack.length && !this.forwardStack.length)\">\n        <fa-icon [icon]=\"faPaste\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Delete\"\n        (click)=\"deleteEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faTrash\"></fa-icon>\n      </button>\n    </div>\n  </div>\n</div>\n\n<!-- No files or directories are there -->\n<div *ngIf=\"!currentDirectory.contents.files.length &&\n  !currentDirectory.contents.directories.length\" class=\"p-5\">\n  <h3 class=\"text-muted\">\n    There is nothing here\n  </h3>\n</div>\n\n<!-- There is/are one/some files/directories -->\n<div *ngIf=\"currentDirectory.contents.files.length ||\n  currentDirectory.contents.directories.length\">\n  <div *ngIf=\"message\" class=\"alert alert-sm alert-primary\">\n    {{message}}\n  </div>\n  <div *ngIf=\"errorMessage\" class=\"alert alert-sm alert-danger\">\n    {{errorMessage}}\n  </div>\n\n  <div *ngFor=\"let e of currentDirectory.contents.directories\" class=\"item\"\n    (click)=\"openDirectory(e)\">\n    <div class=\"item-header\">\n      <input type=\"checkbox\" (change)=\"select(e, $event)\"\n        (click)=\"$event.stopPropagation();\">\n      <a (click)=\"openDirectory(e)\">\n        <img src=\"/images/folder.png\">\n      </a>\n    </div>\n    <div class=\"item-content\">\n      <span class=\"item-name\" contenteditable=\"true\" spellcheck=\"false\"\n        (click)=\"$event.stopPropagation();\"\n        (blur)=\"renameEntry(e, $event.target.innerText)\"\n        (keypress)=\"checkInputCharacter($event)\">{{e.name}}</span>\n    </div>\n    <div class=\"item-actions\">\n      <div>\n        <button (click)=\"deleteEntry(e)\"\n          class=\"btn btn-sm btn-light m-1\">\n          <fa-icon [icon]=\"faTrash\"></fa-icon>\n        </button>\n      </div>\n    </div>\n  </div>\n\n  <div *ngFor=\"let e of currentDirectory.contents.files\" class=\"item\">\n    <div class=\"item-header\">\n      <input type=\"checkbox\" (change)=\"select(e, $event)\">\n      <a href=\"#\">\n        <img src=\"/images/file.png\">\n      </a>\n    </div>\n    <div class=\"item-content\">\n      <span class=\"item-name\" contenteditable=\"true\" spellcheck=\"false\"\n        (blur)=\"renameEntry(e, $event.target.innerText)\">{{e.name}}</span>\n      <span>{{e.extension}}</span>\n    </div>\n    <div class=\"item-actions\">\n      <div>\n        <button (click)=\"deleteEntry(e)\" class=\"btn btn-sm btn-light mr-1\">\n          <fa-icon [icon]=\"faTrash\"></fa-icon>\n        </button>\n      </div>\n      <div>\n        <button (click)=\"downloadFile(e.name, e.location)\"\n          class=\"btn btn-sm btn-light mr-1\">\n          <fa-icon [icon]=\"faDownload\"></fa-icon>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\n<div *ngIf=\"triggers.createDirectory\">\n  <app-create-directory (directory)=\"createDirectory($event)\"\n    [currentDirectory]=\"currentDirectory\"></app-create-directory>\n</div>\n<div *ngIf=\"triggers.uploadFile\">\n  <app-upload-file (fileEvent)=\"uploadFile($event)\"\n    [location]=\"currentDirectory.location\" [existingNames]=\"getExistingNames()\">\n  </app-upload-file>\n</div>\n\n<!-- File Manager Header -->\n<div class=\"item alert alert-sm alert-success\">\n  <div class=\"item-header\">\n    <input class=\"btn btn-sm btn-light m-1\" title=\"Select All\"\n      type=\"checkbox\" id=\"selectAll\" (change)=\"select(null, $event)\">\n  </div>\n  <div class=\"item-content\">\n    <span class=\"text-bold\">Current Location: </span> {{ currentDirectory.location | minifyPath:40 }}\n    <span class=\"ml-2 text-bold\">Usage: </span> {{ usagePercent | to4Precision }}%\n    <ngb-progressbar [value]=\"usagePercent\"\n      class=\"getUsageClass()\"></ngb-progressbar>\n  </div>\n  <div class=\"item-actions\">\n    <div class=\"d-flex flex-row\">\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Go Back\"\n        [disabled]=\"!backwardStack.length\"\n        (click)=\"previousDirectory()\">\n        <fa-icon [icon]=\"faArrowCircleLeft\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Go Forward\"\n        [disabled]=\"!forwardStack.length\"\n        (click)=\"reopenDirectory()\">\n        <fa-icon [icon]=\"faArrowCircleRight\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\"\n        (click)=\"trigger('createDirectory')\" title=\"Create Directory\">\n        <fa-icon [icon]=\"faFolderPlus\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Upload File\"\n        (click)=\"trigger('uploadFile')\">\n        <fa-icon [icon]=\"faFileUpload\"></fa-icon>\n      </button>\n      <button [class]=\"!clipboard.length || !keep ? 'btn btn-sm btn-light m-1' :\n        'btn btn-sm btn-secondary m-1'\"\n        title=\"Copy\" (click)=\"copyEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faCopy\"></fa-icon>\n      </button>\n      <button [class]=\"!clipboard.length || keep ? 'btn btn-sm btn-light m-1' :\n        'btn btn-sm btn-secondary m-1'\"\n        title=\"Cut\" (click)=\"cutEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faCut\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Paste\"\n        (click)=\"pasteEntries()\" [disabled]=\"!clipboard.length ||\n          (!this.backwardStack.length && !this.forwardStack.length)\">\n        <fa-icon [icon]=\"faPaste\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Delete\"\n        (click)=\"deleteEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faTrash\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Logout\"\n        (click)=\"logout()\">\n        <fa-icon [icon]=\"faPowerOff\"></fa-icon>\n      </button>\n    </div>\n  </div>\n</div>\n\n<!-- No files or directories are there -->\n<div *ngIf=\"!currentDirectory.contents.files.length &&\n  !currentDirectory.contents.directories.length\" class=\"p-5\">\n  <h3 class=\"text-muted\">\n    There is nothing here\n  </h3>\n</div>\n\n<!-- There is/are one/some files/directories -->\n<div *ngIf=\"currentDirectory.contents.files.length ||\n  currentDirectory.contents.directories.length\">\n  <div *ngIf=\"message\" class=\"alert alert-sm alert-primary\">\n    {{message}}\n  </div>\n  <div *ngIf=\"errorMessage\" class=\"alert alert-sm alert-danger\">\n    {{errorMessage}}\n  </div>\n\n  <div *ngFor=\"let e of currentDirectory.contents.directories\" class=\"item\"\n    (click)=\"openDirectory(e)\">\n    <div class=\"item-header\">\n      <input type=\"checkbox\" (change)=\"select(e, $event)\"\n        (click)=\"$event.stopPropagation();\">\n      <a (click)=\"openDirectory(e)\">\n        <img src=\"/images/folder.png\">\n      </a>\n    </div>\n    <div class=\"item-content\">\n      <span class=\"item-name\" contenteditable=\"true\" spellcheck=\"false\"\n        (click)=\"$event.stopPropagation();\"\n        (blur)=\"renameEntry(e, $event.target.innerText)\"\n        (keypress)=\"checkInputCharacter($event)\">{{e.name}}</span>\n    </div>\n    <div class=\"item-actions\">\n      <div>\n        <button (click)=\"deleteEntry(e)\"\n          class=\"btn btn-sm btn-light m-1\">\n          <fa-icon [icon]=\"faTrash\"></fa-icon>\n        </button>\n      </div>\n    </div>\n  </div>\n\n  <div *ngFor=\"let e of currentDirectory.contents.files\" class=\"item\">\n    <div class=\"item-header\">\n      <input type=\"checkbox\" (change)=\"select(e, $event)\">\n      <a href=\"#\">\n        <img src=\"/images/file.png\">\n      </a>\n    </div>\n    <div class=\"item-content\">\n      <span class=\"item-name\" contenteditable=\"true\" spellcheck=\"false\"\n        (blur)=\"renameEntry(e, $event.target.innerText)\">{{e.name}}</span>\n      <span>{{e.extension}}</span>\n    </div>\n    <div class=\"item-actions\">\n      <div>\n        <button (click)=\"deleteEntry(e)\" class=\"btn btn-sm btn-light mr-1\">\n          <fa-icon [icon]=\"faTrash\"></fa-icon>\n        </button>\n      </div>\n      <div>\n        <button (click)=\"downloadFile(e.name, e.location)\"\n          class=\"btn btn-sm btn-light mr-1\">\n          <fa-icon [icon]=\"faDownload\"></fa-icon>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -871,7 +871,7 @@ let FileSystemService = class FileSystemService {
             responseType: 'blob'
         });
     }
-    uploadFile(formData) {
+    uploadFiles(formData) {
         return this.http.post('/fileSystem', formData, {
             headers: {
                 Authorization: this.auth
@@ -1186,7 +1186,7 @@ To4PrecisionPipe = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".uploadFile {\n  position: absolute;\n  background: white;\n  top: 2vh;\n  left: 25vw;\n  width: 50vw;\n  height: 60vh;\n  padding: 1vh 1vw;\n  border: 0.1px solid gray;\n  border-radius: 10px;\n  z-index: 100;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kaXNrL3Byb2plY3RzL29ubGluZS1zdG9yYWdlL29ubGluZS1zdG9yYWdlLWNsaWVudC9zcmMvYXBwL3VwbG9hZC1maWxlL3VwbG9hZC1maWxlLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC91cGxvYWQtZmlsZS91cGxvYWQtZmlsZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFBO0VBQ0EsaUJBQUE7RUFDQSxRQUFBO0VBQ0EsVUFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsZ0JBQUE7RUFDQSx3QkFBQTtFQUNBLG1CQUFBO0VBQ0EsWUFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvdXBsb2FkLWZpbGUvdXBsb2FkLWZpbGUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudXBsb2FkRmlsZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIHRvcDogMnZoO1xuICBsZWZ0OiAyNXZ3O1xuICB3aWR0aDogNTB2dztcbiAgaGVpZ2h0OiA2MHZoO1xuICBwYWRkaW5nOiAxdmggMXZ3O1xuICBib3JkZXI6IDAuMXB4IHNvbGlkIGdyYXk7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIHotaW5kZXg6IDEwMDtcbn1cbiIsIi51cGxvYWRGaWxlIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgdG9wOiAydmg7XG4gIGxlZnQ6IDI1dnc7XG4gIHdpZHRoOiA1MHZ3O1xuICBoZWlnaHQ6IDYwdmg7XG4gIHBhZGRpbmc6IDF2aCAxdnc7XG4gIGJvcmRlcjogMC4xcHggc29saWQgZ3JheTtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgei1pbmRleDogMTAwO1xufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".uploadFile {\n  position: absolute;\n  background: white;\n  top: 2vh;\n  left: 20vw;\n  width: 60vw;\n  height: 75vh;\n  padding: 1vh 1vw;\n  border: 0.1px solid gray;\n  border-radius: 10px;\n  z-index: 100;\n  overflow: auto;\n}\n\n.hidden {\n  visibility: hidden;\n  display: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kaXNrL3Byb2plY3RzL29ubGluZS1zdG9yYWdlL29ubGluZS1zdG9yYWdlLWNsaWVudC9zcmMvYXBwL3VwbG9hZC1maWxlL3VwbG9hZC1maWxlLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC91cGxvYWQtZmlsZS91cGxvYWQtZmlsZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFBO0VBQ0EsaUJBQUE7RUFDQSxRQUFBO0VBQ0EsVUFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsZ0JBQUE7RUFDQSx3QkFBQTtFQUNBLG1CQUFBO0VBQ0EsWUFBQTtFQUNBLGNBQUE7QUNDRjs7QURFQTtFQUNFLGtCQUFBO0VBQ0EsYUFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvdXBsb2FkLWZpbGUvdXBsb2FkLWZpbGUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudXBsb2FkRmlsZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIHRvcDogMnZoO1xuICBsZWZ0OiAyMHZ3O1xuICB3aWR0aDogNjB2dztcbiAgaGVpZ2h0OiA3NXZoO1xuICBwYWRkaW5nOiAxdmggMXZ3O1xuICBib3JkZXI6IDAuMXB4IHNvbGlkIGdyYXk7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIHotaW5kZXg6IDEwMDtcbiAgb3ZlcmZsb3c6IGF1dG87XG59XG5cbi5oaWRkZW4ge1xuICB2aXNpYmlsaXR5OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG59XG4iLCIudXBsb2FkRmlsZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIHRvcDogMnZoO1xuICBsZWZ0OiAyMHZ3O1xuICB3aWR0aDogNjB2dztcbiAgaGVpZ2h0OiA3NXZoO1xuICBwYWRkaW5nOiAxdmggMXZ3O1xuICBib3JkZXI6IDAuMXB4IHNvbGlkIGdyYXk7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIHotaW5kZXg6IDEwMDtcbiAgb3ZlcmZsb3c6IGF1dG87XG59XG5cbi5oaWRkZW4ge1xuICB2aXNpYmlsaXR5OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG59Il19 */");
 
 /***/ }),
 
@@ -1212,24 +1212,86 @@ let UploadFileComponent = class UploadFileComponent {
     constructor(fs) {
         this.fs = fs;
         this.faWindowClose = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faWindowClose"];
+        this.faInfo = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faInfo"];
         this.fileEvent = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.errorMessage = undefined;
         this.fileName = '';
+        this.selectedFiles = [];
         this.uploading = false;
+        this.help = false;
         this.progress = '';
         this.progressCount = 1;
     }
     ngOnInit() {
     }
-    validateFileName() {
-        const matches = this.fileName.match(/[0-9a-zA-Z-_\.]*/g);
-        return matches.length <= 2;
+    addSelectedFile() {
+        console.log(this.existingNames);
+        this.errorMessage = '';
+        const fileElement = document.getElementById('file');
+        const file = fileElement.files.item(0);
+        file.newName = this.fileName || file.name;
+        const parts = file.name.split('.');
+        if (parts.length > 1) {
+            file.newName += '.' + parts[parts.length - 1];
+        }
+        // skip adding if file is already there
+        let index = this.selectedFiles.findIndex((f) => {
+            return f === file;
+        });
+        if (index > 0) {
+            return;
+        }
+        index = this.existingNames.findIndex((n) => {
+            return n === file.newName;
+        });
+        if (index > 0) {
+            this.errorMessage = 'A file with same name exist in current directory.' +
+                ' Try with new name.';
+            return;
+        }
+        // try to rename file if a file with same name is already there
+        let matches = 0;
+        // tslint:disable-next-line: prefer-for-of
+        for (let i = 0; i < this.selectedFiles.length; i++) {
+            const value = this.selectedFiles.find((f) => {
+                return f.newName === file.newName;
+            }, i);
+            if (value) {
+                matches++;
+            }
+        }
+        if (matches) {
+            const parts = file.newName.split('.');
+            if (parts.length < 2) {
+                file.newName += `(${matches})`;
+            }
+            else {
+                parts[parts.length - 2] += `(${matches})`;
+                file.newName = parts.join('.');
+            }
+        }
+        this.selectedFiles.push(file);
     }
-    cancelUpload() {
+    closeModel() {
         this.fileEvent.emit(null);
+    }
+    removeFile(s) {
+        const index = this.selectedFiles.findIndex((f) => {
+            return f === s;
+        });
+        this.selectedFiles.splice(index, 1);
+    }
+    toggleHelp() {
+        if (this.help) {
+            this.help = false;
+        }
+        else {
+            this.help = true;
+        }
     }
     upload() {
         const mainElement = document.getElementById('main');
+        mainElement.style.opacity = '0.1';
         this.uploading = true;
         const interval = setInterval(() => {
             this.progressCount = (this.progressCount + 1) % 6;
@@ -1239,17 +1301,30 @@ let UploadFileComponent = class UploadFileComponent {
             }
         }, 1000);
         const formData = new FormData();
-        mainElement.style.opacity = '0.1';
-        const fileElement = document.getElementById('file');
-        formData.append('file', fileElement.files[0]);
+        const names = [];
+        for (const s of this.selectedFiles) {
+            formData.append('file[]', s);
+            formData.append('name[]', s.newName);
+        }
         formData.append('location', this.location);
-        formData.append('targetName', this.fileName);
-        this.fs.uploadFile(formData).subscribe((res) => {
+        this.fs.uploadFiles(formData).subscribe((res) => {
             clearInterval(interval);
-            this.fileEvent.emit(res);
+            for (const r of res) {
+                this.fileEvent.emit(r);
+            }
+            this.fileEvent.emit(null);
         }, (err) => {
-            this.errorMessage = 'Some kind of error occured while upload file';
+            clearInterval(interval);
+            this.errorMessage = 'Some kind of error occured while upload files';
+            mainElement.style.opacity = '1';
+            this.uploading = false;
+            const offsetTop = document.getElementById('error').offsetTop;
+            mainElement.scrollTop = offsetTop;
         });
+    }
+    validateFileName() {
+        const matches = this.fileName.match(/[0-9a-zA-Z-_\.]*/g);
+        return matches.length <= 2;
     }
 };
 UploadFileComponent.ctorParameters = () => [
@@ -1261,6 +1336,9 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], UploadFileComponent.prototype, "location", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], UploadFileComponent.prototype, "existingNames", void 0);
 UploadFileComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-upload-file',
@@ -1373,6 +1451,7 @@ let UserPanelComponent = class UserPanelComponent {
         this.faCut = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faCut"];
         this.faPaste = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faPaste"];
         this.faTrash = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faTrash"];
+        this.faPowerOff = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faPowerOff"];
         this.faArrowCircleUp = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faArrowCircleUp"];
         this.faArrowCircleRight = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faArrowCircleRight"];
         this.faArrowCircleLeft = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faArrowCircleLeft"];
@@ -1550,14 +1629,6 @@ let UserPanelComponent = class UserPanelComponent {
     }
     /************************************************************************** */
     // FILE LEVEL OPERATIONS
-    uploadFile(file) {
-        this.triggers.uploadFile = false;
-        if (file) {
-            this.currentDirectory.contents.files.push(file);
-            this.usage += file.size;
-            this.usagePercent = (this.usage * 100) / this.maxStorage;
-        }
-    }
     downloadFile(name, location) {
         this.fs.downloadFile(location).subscribe((res) => {
             const link = document.createElement('a');
@@ -1569,6 +1640,16 @@ let UserPanelComponent = class UserPanelComponent {
             this.errorHandler('Downlaod File', err);
         });
     }
+    uploadFile(file) {
+        if (file) {
+            this.currentDirectory.contents.files.push(file);
+            this.usage += file.size;
+            this.usagePercent = (this.usage * 100) / this.maxStorage;
+        }
+        else {
+            this.triggers.uploadFile = false;
+        }
+    }
     /************************************************************************** */
     // CLASS LEVEL OPERATIONS
     checkInputCharacter(event) {
@@ -1576,6 +1657,16 @@ let UserPanelComponent = class UserPanelComponent {
         if (!str.match(/[a-zA-Z0-9\.-_]/)) {
             return false;
         }
+    }
+    getExistingNames() {
+        const existingNames = [];
+        for (const d of this.currentDirectory.contents.directories) {
+            existingNames.push(d.name);
+        }
+        for (const f of this.currentDirectory.contents.files) {
+            existingNames.push(f.name + f.extension);
+        }
+        return existingNames;
     }
     getUsageClass() {
         if (this.usage < 25) {
@@ -1593,7 +1684,10 @@ let UserPanelComponent = class UserPanelComponent {
     }
     logout() {
         this.cookieService.delete('login');
-        this.router.navigateByUrl('/user-entry');
+        this.cookieService.delete('firstName');
+        this.cookieService.delete('secondName');
+        this.cookieService.delete('maxStorage');
+        this.router.navigateByUrl('/login');
     }
     select(entry, event) {
         if (event.target.id === 'selectAll') {
