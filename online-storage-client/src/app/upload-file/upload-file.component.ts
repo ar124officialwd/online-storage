@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faWindowClose, faInfo } from '@fortawesome/free-solid-svg-icons';
 import { FileSystemService } from '../file-system.service';
 import { File } from 'api';
 
@@ -10,6 +10,7 @@ import { File } from 'api';
 })
 export class UploadFileComponent implements OnInit {
   faWindowClose = faWindowClose;
+  faInfo = faInfo;
 
   @Output() fileEvent = new EventEmitter<any>();
   @Input() location;
@@ -17,6 +18,7 @@ export class UploadFileComponent implements OnInit {
   file: any;
   fileName = '';
   uploading = false;
+  help = false;
   progress = '';
   progressCount = 1;
 
@@ -25,13 +27,12 @@ export class UploadFileComponent implements OnInit {
   ngOnInit() {
   }
 
-  validateFileName() {
-    const matches = this.fileName.match(/[0-9a-zA-Z-_\.]*/g);
-    return matches.length <= 2;
+  closeModel() {
+    this.fileEvent.emit(null);
   }
 
-  cancelUpload() {
-    this.fileEvent.emit(null);
+  toggleHelp() {
+    this.help = !this.help;
   }
 
   upload() {
@@ -61,4 +62,10 @@ export class UploadFileComponent implements OnInit {
       this.errorMessage = 'Some kind of error occured while upload file';
     });
   }
+
+  validateFileName() {
+    const matches = this.fileName.match(/[0-9a-zA-Z-_\.]*/g);
+    return matches.length <= 2;
+  }
+
 }
