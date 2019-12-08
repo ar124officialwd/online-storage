@@ -207,6 +207,9 @@ export class UserPanelComponent implements OnInit {
               this.clipboardDirectory.contents.files.splice(index, 1);
             }
           }
+
+          this.clipboard = [];
+          this.keep = true;
         },
         err => {
           if (this.keep) {
@@ -216,6 +219,9 @@ export class UserPanelComponent implements OnInit {
             this.errorMessage =
               'Some kind of error occured while moving files!';
           }
+
+          this.clipboard = [];
+          this.keep = true;
         }
       );
   }
