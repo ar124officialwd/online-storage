@@ -114,21 +114,40 @@ export class UserPanelComponent implements OnInit {
   }
 
   private deleteEntries() {
-    this.fs.deleteEntries(this.selected).subscribe((res: any) => {
-      if (res.mediaType === 'directory') {
-        const index = this.currentDirectory.contents.directories.findIndex(
-          e => {
-            return e.location === res.location;
+    let locations = '';
+    for (const s of this.selected) {
+      locations += s.location + ':' + s.mediaType + ';';
+    }
+    const locationsParts = locations.split(';');
+    locations = locationsParts.slice(0, locationsParts.length - 1).join(';');
+
+    this.fs.deleteEntries(locations).subscribe((res) => {
+      for (const r of res) {
+        if (r.mediaType === 'directory') {
+          const index = this.currentDirectory.contents.directories.findIndex(
+            e => {
+              return e.location === r.location;
+            }
+          );
+
+          if (index >= 0) {
+            this.currentDirectory.contents.directories.splice(index, 1);
           }
-        );
-        this.currentDirectory.contents.directories.splice(index, 1);
-      } else {
-        const index = this.currentDirectory.contents.files.findIndex(e => {
-          return e.location === res.location;
-        });
-        this.currentDirectory.contents.files.splice(index, 1);
+
+        } else {
+          const index = this.currentDirectory.contents.files.findIndex(
+            e => {
+              return e.location === r.location;
+            }
+          );
+
+          if (index >= 0) {
+            this.currentDirectory.contents.files.splice(index, 1);
+          }
+        }
       }
     });
+
     this.selected = [];
   }
 

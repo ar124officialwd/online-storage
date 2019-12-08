@@ -200,29 +200,40 @@ fileSystemRouter.put('/fileSystem', async (req, res, next) => {
 })
 
 fileSystemRouter.delete('/fileSystem', async (req, res, next) => {
+  let locations = req.get('locations')
+  locations = locations.split(';')
+  const locationsPairs = []
+  const responce = []
+
+  for (let i = 0; i < locations.length; i++) {
+    locationPair = locations[i].split(':')
+    locationsPairs.push({
+      location: locationPair[0],
+      mediaType: locationPair[1]
+    })
+  }
+
   try {
 
-    // first try entry as a Directory
-    fs.promises.rmdir(path.join(req.storagePath,
-          req.get('Location')))
-      .then(() => {
-        res.end(req.get('Location'))
-      })
-      .catch(async (err) => {
+    for (const l of locationsPairs) {
 
-        // try copy as file
-        if (err.errno === -20) {
-          await fs.promises.unlink(path.join(req.storagePath,
-            req.get('Location')))
-          res.end(req.get('Location'))
-        }
+      if (l.mediaType === 'directory') {
+        await fs.promises.rmdir(path.join(req.storagePath, l.location))
+        responce.push(l)
 
-        throw err;
-      })
+      } else {
+        await fs.promises.unlink(path.join(req.storagePath, l.location))
+        responce.push(l)
+      }
+    }
+
   } catch(err) {
-    Logger.log(err)
+    Logger.log(err);
     res.status(500).end()
+  } finally {
+    res.json(responce)
   }
+
 })
 
 module.exports = fileSystemRouter
