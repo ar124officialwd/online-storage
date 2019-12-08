@@ -5,7 +5,15 @@
     </button>
   </div>
   <div id="mediaWindow">
-
+    <div *ngIf="notSupported" class="p-2">
+      <h4>Not Supported</h4>
+      <p>Sorry, but viewing/playing this file is not supported.
+          But you should not worry, you may download file and view it
+          in an application on your device that support it.
+      </p>
+    </div>
+    <p [class.hidden]="!notSupported" class="p-2">
+      Click <a id="download">here</a> to download file</p>
   </div>
   <div id="mediaInfo" class="p-1">
 

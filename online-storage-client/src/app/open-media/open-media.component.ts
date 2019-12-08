@@ -14,6 +14,7 @@ export class OpenMediaComponent implements OnInit, OnChanges {
   faWindowClose = faWindowClose;
   @Output() mediaClose = new EventEmitter<any>();
   @Input() media: ExtendedFile;
+  notSupported = false;
 
   constructor(private ms: MimeTypesService,
               private fs: FileSystemService) { }
@@ -45,8 +46,9 @@ export class OpenMediaComponent implements OnInit, OnChanges {
         } else if (this.ms.text.includes(this.media.mediaType)) {
           const reader = document.createElement('pre');
           reader.setAttribute('style',
-            'max-width: 98vw; max-height: 78vh; padding: 1vh 1vw; ' +
-            'overflow: scroll;');
+            'width: 96vw; height: 76vh; padding: 1vh 1vw; margin: 1vh 1vw;' +
+            'border: 1px solid black; border-radius: 10px;' +
+            'overflow: auto;');
           reader.setAttribute('class', 'textReader');
           reader.setAttribute('contentEditable', 'true');
           reader.setAttribute('spellCheck', 'false');
@@ -83,8 +85,18 @@ export class OpenMediaComponent implements OnInit, OnChanges {
             'width: 98vw; height: 78vh; padding: 1vh 1vw; ');
           appView.src = appViewSource;
           mediaWindow.appendChild(appView);
-          mediaInfo.innerHTML = `<b>View File</b>: ${this.media.name}`;
+          mediaInfo.innerHTML = `<b>Viewing File</b>: ${this.media.name}`;
           mediaWindow.appendChild(mediaInfo);
+        } else {
+          this.notSupported = true;
+          const downloadElement =
+            document.getElementById('download') as HTMLAnchorElement;
+          const sourceUrl = URL.createObjectURL(file);
+          downloadElement.href = sourceUrl;
+          downloadElement.onclick = (() => {
+            window.location.href = sourceUrl;
+            URL.revokeObjectURL(sourceUrl);
+          });
         }
       }, (err) => {
         const elem = document.getElementById('error');

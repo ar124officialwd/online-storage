@@ -23,8 +23,8 @@
       type="checkbox" id="selectAll" (change)="select(null, $event)">
   </div>
   <div class="item-content">
-    <span class="text-bold">Current Location: </span> {{ currentDirectory.location | minifyPath:40 }}
-    <span class="ml-2 text-bold">Usage: </span> {{ usagePercent | to4Precision }}%
+    <b>Current Location: </b> {{ currentDirectory.location | minifyPath:40 }}
+    <b class="ml-2">Usage: </b> {{ usagePercent | to4Precision }}%
     <ngb-progressbar [value]="usagePercent"
       class="getUsageClass()"></ngb-progressbar>
   </div>
