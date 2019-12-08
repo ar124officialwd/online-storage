@@ -54,7 +54,7 @@
           (click)="addSelectedFile()" [disabled]="!fileModel.valid">
           Add File</button>
         <input (click)="upload()" type="submit" class="btn btn-sm btn-success ml-1"
-          [disabled]="!form.valid || (fileName && !validateFileName())"
+          [disabled]="!this.selectedFiles.length"
           value="Upload Selected">
       </form>
       <h4>Selected Files: </h4>

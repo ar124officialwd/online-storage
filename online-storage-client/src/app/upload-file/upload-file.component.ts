@@ -37,10 +37,15 @@ export class UploadFileComponent implements OnInit {
 
     const fileElement = document.getElementById('file') as HTMLInputElement;
     const file = fileElement.files.item(0) as CustomFile;
-    file.newName = this.fileName || file.name;
-    const parts = file.name.split('.');
-    if (parts.length > 1) {
-      file.newName += '.' +  parts[parts.length - 1];
+
+    if (this.fileName !== '') {
+      file.newName = this.fileName;
+      const parts = file.name.split('.');
+      if (parts.length > 1) {
+        file.newName += '.' +  parts[parts.length - 1];
+      }
+    } else {
+      file.newName = file.name;
     }
 
     // skip adding if file is already there
