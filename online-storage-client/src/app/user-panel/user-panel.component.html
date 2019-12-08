@@ -111,28 +111,44 @@
     </div>
   </div>
 
-  <div *ngFor="let e of currentDirectory.contents.files" class="item">
+  <div *ngFor="let e of currentDirectory.contents.files" class="item"
+    (click)="openFile(e)">
+
     <div class="item-header">
-      <input type="checkbox" (change)="select(e, $event)">
+      <input type="checkbox" (change)="select(e, $event)"
+        (click)="$event.stopPropagation();">
       <a href="#">
         <img src="/images/file.png">
       </a>
     </div>
-    <div class="item-content">
+
+    <div [class.hidden]="playingAudio === e.id" class="item-content">
       <span class="item-name" contenteditable="true" spellcheck="false"
-        (blur)="renameEntry(e, $event.target.innerText)">{{e.name}}</span>
+        (blur)="renameEntry(e, $event.target.innerText)"
+        (click)="stopEventPropagation()">{{e.name}}</span>
       <span>{{e.extension}}</span>
     </div>
+    <div [id]="e.id" [class.hidden]="!playingAudio"
+      class="item-content d-flex"></div>
+
     <div class="item-actions">
       <div>
-        <button (click)="deleteEntry(e)" class="btn btn-sm btn-light mr-1">
+        <button (click)="deleteEntry(e); stopEventPropagation($event)"
+          class="btn btn-sm btn-light mr-1">
           <fa-icon [icon]="faTrash"></fa-icon>
         </button>
       </div>
       <div>
-        <button (click)="downloadFile(e.name, e.location)"
-          class="btn btn-sm btn-light mr-1">
+        <button class="btn btn-sm btn-light mr-1"
+          (click)="downloadFile(e.name, e.location);
+            stopEventPropagation($event)">
           <fa-icon [icon]="faDownload"></fa-icon>
+        </button>
+      </div>
+      <div>
+        <button class="btn btn-sm btn-primary mr-1"
+          (click)="stopEventPropagation($event)" disabled>
+          {{e.mediaType}}
         </button>
       </div>
     </div>

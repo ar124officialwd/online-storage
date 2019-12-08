@@ -1,3 +1,5 @@
+import { ExtendedDirectory } from './../extended-directory';
+import { ExtendedFile } from './../extended-file';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
@@ -24,6 +26,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import { FileSystemService } from '../file-system.service';
+import { MimeTypesService } from '../mime-types.service';
 
 @Component({
   selector: 'app-user-panel',
@@ -53,8 +56,8 @@ export class UserPanelComponent implements OnInit {
     uploadFile: false
   };
 
-  root = new Directory();
-  currentDirectory = new Directory();
+  root = new ExtendedDirectory();
+  currentDirectory = new ExtendedDirectory();
   forwardStack: Directory[] = [];
   backwardStack: Directory[] = [];
 
@@ -67,6 +70,8 @@ export class UserPanelComponent implements OnInit {
   clipboardDirectory = null;
   keep = true;
 
+  playingAudio = null;
+
   message = null;
   errorMessage = null;
 
@@ -74,7 +79,8 @@ export class UserPanelComponent implements OnInit {
     private cookieService: CookieService,
     private http: HttpClient,
     private router: Router,
-    private fs: FileSystemService
+    private fs: FileSystemService,
+    private ms: MimeTypesService
   ) {}
 
   ngOnInit() {
@@ -85,9 +91,9 @@ export class UserPanelComponent implements OnInit {
     this.maxStorage = Number(this.cookieService.get('maxStorage'));
 
     this.fs.getEntries().subscribe((res: Directory) => {
-      this.root = res;
+      this.root = res as ExtendedDirectory;
+      this.setIds(this.root);
       this.currentDirectory = this.root;
-
       this.usage = Number(this.root.size);
       this.usagePercent = (this.usage * 100) / this.maxStorage;
     });
@@ -244,7 +250,7 @@ export class UserPanelComponent implements OnInit {
             return (e.location = targetEntry.location);
           });
           this.currentDirectory.contents.files.splice(index, 1);
-          this.currentDirectory.contents.files.push(res[0] as File);
+          this.currentDirectory.contents.files.push(res[0] as ExtendedFile);
         } else {
           const index = this.currentDirectory.contents.directories.findIndex(
             e => {
@@ -278,7 +284,7 @@ export class UserPanelComponent implements OnInit {
   private previousDirectory() {
     if (this.backwardStack.length) {
       const ref = this.currentDirectory;
-      this.currentDirectory = this.backwardStack.pop();
+      this.currentDirectory = this.backwardStack.pop() as ExtendedDirectory;
       this.forwardStack.push(ref);
       this.selected = [];
     }
@@ -287,7 +293,7 @@ export class UserPanelComponent implements OnInit {
   private reopenDirectory() {
     if (this.forwardStack.length) {
       const ref = this.currentDirectory;
-      this.currentDirectory = this.forwardStack.pop();
+      this.currentDirectory = this.forwardStack.pop() as ExtendedDirectory;
       this.backwardStack.push(ref);
       this.selected = [];
     }
@@ -295,6 +301,10 @@ export class UserPanelComponent implements OnInit {
 
   /************************************************************************** */
   // FILE LEVEL OPERATIONS
+
+  private closeFile(file) {
+
+  }
 
   private downloadFile(name, location) {
     this.fs.downloadFile(location).subscribe(
@@ -309,6 +319,69 @@ export class UserPanelComponent implements OnInit {
         this.errorHandler('Downlaod File', err);
       }
     );
+  }
+
+  openFile(file) {
+    if (this.ms.audio.includes(file.mediaType)) {
+      this.playingAudio = '';
+      const target =
+        document.querySelector(`#${file.id}.item-content`);
+      target.innerHTML = '';
+
+      // purge other files if there are
+      const audios = Array.from(document.getElementsByTagName('audio'));
+      const contents = Array.from(document.getElementsByClassName('item-content'));
+      for (const a of audios) {
+        for (const c of contents) {
+          if (c.contains(a)) {
+            c.innerHTML = '';
+          }
+        }
+      }
+
+      // Audio Container
+      const audioContainer = document.createElement('div');
+      const buttonContainer = document.createElement('div');
+      audioContainer.setAttribute('class', 'flex-grow');
+
+      // Audio Element
+      let audioSrc;
+      const audioElement = document.createElement('audio');
+      audioElement.setAttribute('type', file.mediaType);
+      audioElement.controls = true;
+      audioElement.loop = false;
+
+      const end = (function(event) {
+        event.stopPropagation();
+        URL.revokeObjectURL(audioSrc);
+        target.innerHTML = '';
+        this.playingAudio = '';
+      }).bind(this);
+
+      audioElement.setAttribute('style', 'display: inline-block;');
+      audioElement.addEventListener('complete', end);
+
+      // Audio Close Element
+      const audioCloseElement = document.createElement('button');
+      audioCloseElement.innerText = 'x';
+      audioCloseElement.addEventListener('click', end);
+      audioCloseElement.setAttribute('style', 'display: inline-block;');
+      audioCloseElement.setAttribute('class', 'btn btn-sm btn-secondary mx-1');
+
+      this.fs.downloadFile(file.location)
+        .subscribe((res: Blob) => {
+          this.playingAudio = file.id;
+          audioSrc = URL.createObjectURL(res);
+          audioElement.src = audioSrc;
+          audioContainer.appendChild(audioElement);
+          buttonContainer.appendChild(audioCloseElement);
+          target.appendChild(audioContainer);
+          target.appendChild(buttonContainer);
+          console.log(this.playingAudio);
+        }, (err) => {
+          return;
+        });
+    }
   }
 
   uploadFile(file) {
@@ -401,6 +474,26 @@ export class UserPanelComponent implements OnInit {
         this.selected.splice(index, 1);
       }
     }
+  }
+
+  setIds(directory: ExtendedDirectory) {
+    const setFileIds = (files: ExtendedFile[]) => {
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < files.length; i++) {
+        files[i] = files[i] as ExtendedFile;
+        files[i].id = 'File' + files[i].name.replace(/\./g, '');
+      }
+    };
+
+    setFileIds(directory.contents.files);
+
+    for (const d of directory.contents.directories) {
+      this.setIds(d as ExtendedDirectory);
+    }
+  }
+
+  stopEventPropagation(event) {
+    event.stopPropagation();
   }
 
   private trigger(name) {
