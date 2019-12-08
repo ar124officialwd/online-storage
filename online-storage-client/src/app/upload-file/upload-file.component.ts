@@ -32,7 +32,6 @@ export class UploadFileComponent implements OnInit {
   }
 
   addSelectedFile() {
-    console.log(this.existingNames);
     this.errorMessage = '';
 
     const fileElement = document.getElementById('file') as HTMLInputElement;
