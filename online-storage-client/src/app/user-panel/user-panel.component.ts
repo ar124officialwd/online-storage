@@ -117,15 +117,17 @@ export class UserPanelComponent implements OnInit {
   }
 
   private deleteEntry(entry) {
-    this.clipboard = [entry];
+    this.selected = [entry];
     this.deleteEntries();
   }
 
   private deleteEntries() {
     let locations = '';
+
     for (const s of this.selected) {
       locations += s.location + ':' + s.mediaType + ';';
     }
+
     const locationsParts = locations.split(';');
     locations = locationsParts.slice(0, locationsParts.length - 1).join(';');
 
@@ -138,10 +140,7 @@ export class UserPanelComponent implements OnInit {
             }
           );
 
-          if (index >= 0) {
-            this.currentDirectory.contents.directories.splice(index, 1);
-          }
-
+          this.currentDirectory.contents.directories.splice(index, 1);
         } else {
           const index = this.currentDirectory.contents.files.findIndex(
             e => {
@@ -149,9 +148,7 @@ export class UserPanelComponent implements OnInit {
             }
           );
 
-          if (index >= 0) {
-            this.currentDirectory.contents.files.splice(index, 1);
-          }
+          this.currentDirectory.contents.files.splice(index, 1);
         }
       }
     });

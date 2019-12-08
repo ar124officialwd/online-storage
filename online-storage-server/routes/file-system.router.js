@@ -214,19 +214,15 @@ fileSystemRouter.delete('/fileSystem', async (req, res, next) => {
   }
 
   try {
-
     for (const l of locationsPairs) {
-
       if (l.mediaType === 'directory') {
         await fs.promises.rmdir(path.join(req.storagePath, l.location))
         responce.push(l)
-
       } else {
         await fs.promises.unlink(path.join(req.storagePath, l.location))
         responce.push(l)
       }
     }
-
   } catch(err) {
     Logger.log(err);
     res.status(500).end()
