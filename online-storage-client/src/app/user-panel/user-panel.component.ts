@@ -273,6 +273,7 @@ export class UserPanelComponent implements OnInit {
       this.triggers.createDirectory = false;
     } else {
       this.currentDirectory.contents.directories.push(directory);
+      this.usage += directory.size;
       this.triggers.createDirectory = false;
     }
   }

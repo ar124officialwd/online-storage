@@ -1,7 +1,8 @@
 
 <div *ngIf="triggers.createDirectory">
   <app-create-directory (directory)="createDirectory($event)"
-    [currentDirectory]="currentDirectory"></app-create-directory>
+    [currentDirectory]="currentDirectory" [existingNames]="getExistingNames()">
+  </app-create-directory>
 </div>
 
 <div *ngIf="triggers.uploadFile">

@@ -1,10 +1,12 @@
+import { ExtendedDirectoryContents } from './../extended-directory-contents';
 import { element } from 'protractor';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Directory } from 'api';
 import { HttpClient } from '@angular/common/http';
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faInfo, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { FileSystemService } from '../file-system.service';
 import { join } from 'path';
+import { ExtendedDirectory } from '../extended-directory';
 
 @Component({
   selector: 'app-create-directory',
@@ -13,10 +15,13 @@ import { join } from 'path';
 })
 export class CreateDirectoryComponent implements OnInit {
   faWindowClose = faWindowClose;
+  faInfo = faInfo;
 
   model = '';
-  @Output() directory = new EventEmitter<string>();
+  @Output() directory = new EventEmitter<ExtendedDirectory>();
   @Input() currentDirectory;
+  @Input() existingNames;
+  help = false;
   que: string[] = [];
   errorMessage: string;
 
@@ -26,57 +31,65 @@ export class CreateDirectoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  validateDirectory() {
-    const matches = this.model.match(/[\w\.-]*/g);
-    return matches.length === 2;
+  addDirectory() {
+    const index = this.existingNames.findIndex(e => {
+      return e.name === this.model;
+    });
+
+    if (index > 0) {
+      this.errorMessage = 'A file or directory exist in current direcory' +
+        ' with same name as you choosen. Please use another name.';
+      return;
+    }
+
+    this.errorMessage = '';
+    this.que.push(this.model);
+
+    const divElement = document.createElement('div');
+    const buttonElement = document.createElement('button');
+
+    buttonElement.setAttribute('class', 'btn btn-sm btn-secondary ml-1');
+    buttonElement.setAttribute('directoryName', this.model);
+    buttonElement.innerText = 'x';
+    buttonElement.onclick = ((event) => {
+      const target = event.target as HTMLElement;
+      document.getElementById('directoryQue').removeChild(target.parentElement);
+
+      const index = this.que.findIndex(i => {
+        return i === target.getAttribute('directoryName');
+      });
+
+      this.que.splice(index, 1);
+    }).bind(this);
+
+    divElement.setAttribute('class', 'alert alert-sm alert-light mr-1');
+    divElement.innerText = this.model;
+    divElement.appendChild(buttonElement);
+    document.getElementById('directoryQue').appendChild(divElement);
+
+    this.model = '';
   }
 
   checkInputCharacter(event) {
     const str = String.fromCharCode(event.charCode);
-
-    if (str.match(/;/)) {
-      this.que.push(this.model);
-
-      const buttonElement = document.createElement('button');
-      buttonElement.setAttribute('class', 'btn btn-sm btn-light ml-1');
-      buttonElement.innerText = 'x';
-      buttonElement.onclick = (function(this, ev) {
-        const target = ev.target as HTMLElement;
-        this.removeDirectory(target.innerText);
-        const element = document.getElementById(target.innerText);
-        document.getElementById('directoryQue').removeChild(element);
-      }).bind(this);
-
-      const divElement = document.createElement('div');
-      divElement.setAttribute('class', 'alert alert-sm alert-secondary mr-1');
-      divElement.setAttribute('id', this.model);
-      divElement.innerText = this.model;
-
-      divElement.appendChild(buttonElement);
-      document.getElementById('directoryQue').appendChild(divElement);
-
-      this.model = '';
-      return false;
-    } else if (!str.match(/[\.a-zA-Z0-9_-]/)) {
+    if (!str.match(/[\.a-zA-Z0-9_-]/)) {
       return false;
     }
   }
 
-  cancelCreateDirectory() {
+  closeModel() {
     this.directory.emit(null);
   }
 
-  createDirectory() {
-    if (this.model !== '') {
-      this.que.push(this.model);
-    }
-
+  createDirectories() {
     const directories = []; // directory objects holding name and location
     const locations = []; // locations to be created
 
     for (const q of this.que) {
       const object = {
-        location: this.currentDirectory.location + '/' + q,
+        location: this.currentDirectory.location === '/' ?
+          this.currentDirectory.location + q :
+          this.currentDirectory.location + '/' + q,
         name: q
       };
 
@@ -86,20 +99,28 @@ export class CreateDirectoryComponent implements OnInit {
 
     this.fs.createDirectory({
       locations
-    })
-      .subscribe((responceLocations: string[]) => {
-        // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < responceLocations.length; i++) {
-          const directory = JSON.parse(JSON.stringify(this.currentDirectory));
-          directory.location = responceLocations[i];
-          directory.name = directories.find((d) => {
-            return d.location = responceLocations[i];
-          }).name;
-          this.directory.emit(directory);
-        }
-      }, (err) => {
-        this.errorMessage = 'Some kind of error occured while creating directory.';
-      });
+    }).subscribe((responceLocations: string[]) => {
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < responceLocations.length; i++) {
+        const newDirectory: ExtendedDirectory = new ExtendedDirectory();
+
+        newDirectory.location = responceLocations[i];
+        newDirectory.name = directories.find((d) => {
+          return d.location === responceLocations[i];
+        }).name;
+        newDirectory.size = 4096;
+        newDirectory.files = 0;
+        newDirectory.subDirectories = 0;
+        newDirectory.contents = {
+          files: [],
+          directories: []
+        };
+
+        this.directory.emit(newDirectory);
+      }
+    }, (err) => {
+      this.errorMessage = 'Some kind of error occured while creating directory.';
+    });
   }
 
   removeDirectory(name) {
@@ -108,5 +129,13 @@ export class CreateDirectoryComponent implements OnInit {
     });
 
     this.que.splice(index, 1);
+  }
+
+  toggleHelp() {
+    if (this.help) {
+      this.help = false;
+    } else {
+      this.help = true;
+    }
   }
 }
