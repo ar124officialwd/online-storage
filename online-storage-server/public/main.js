@@ -191,7 +191,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"uploadFile\">\n\n  <div *ngIf=\"uploading\" class=\"m-5\">\n    <h3 class=\"text-primary\">Uploading {{progress}}</h3>\n    <p>Please wait while files are being uploaded</p>\n  </div>\n\n  <div id=\"main\">\n    <div class=\"d-flex flex-row-reverse p-1\">\n      <button class=\"btn btn-sm btn-secondary ml-1\"\n        (click)=\"closeModel()\">\n        <fa-icon [icon]=\"faWindowClose\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-secondary ml-1\"\n        (click)=\"toggleHelp()\">\n        <fa-icon [icon]=\"faInfo\"></fa-icon>\n      </button>\n    </div>\n\n    <div *ngIf=\"!help\">\n      <div id=\"error\" [class.hidden]=\"!errorMessage\" class=\"alert alert-danger\">\n        {{errorMessage}}\n      </div>\n\n      <h4>Upload a new file</h4>\n      <form (ngSumbit)=\"upload()\" #form=\"ngForm\" id=\"uploadForm\">\n        <div class=\"form-group\">\n          <label for=\"file\">File</label>\n          <input type=\"file\" name=\"file\" id=\"file\" class=\"form-control\"\n            [(ngModel)]=\"file\" (change)=\"fileName = ''\"\n            #fileModel=\"ngModel\" required>\n          <div *ngIf=\"fileModel.invalid && (fileModel.dirty && fileModel.touched)\"\n            class=\"text-muted\">\n            <div *ngIf=\"fileModel.errors.required\">\n                Please choose a file\n            </div>\n          </div>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"targetName\">Target Name</label>\n          <input type=\"text\" name=\"targetName\" class=\"form-control\"\n            [(ngModel)]=\"fileName\" #filename=\"ngModel\">\n          <div *ngIf=\"!(filename.dirty || filename.touched)\">\n            Please enter a name to save as a new name\n          </div>\n          <div *ngIf=\"!validateFileName() && (filename.dirty || filename.touched)\"\n            class=\"alert alert-danger\">\n            <div *ngIf=\"!validateFileName()\">\n              File name is not valid, try another\n            </div>\n          </div>\n        </div>\n        <button type=\"button\" class=\"btn btn-sm btn-primary ml-1\"\n          (click)=\"addSelectedFile()\" [disabled]=\"!fileModel.valid\">\n          Add File</button>\n        <input (click)=\"upload()\" type=\"submit\" class=\"btn btn-sm btn-success ml-1\"\n          [disabled]=\"!form.valid || (fileName && !validateFileName())\"\n          value=\"Upload Selected\">\n      </form>\n      <h4>Selected Files: </h4>\n      <div *ngIf=\"selectedFiles.length\"\n        class=\"alert alert-primary m-1 p-1 d-flex flex-row flex-wrap\">\n        <div *ngFor=\"let s of selectedFiles\"\n          class=\"alert alert-sm alert-light m-1\">\n          <span>{{s.newName}}</span>\n          <button class=\"btn btn-sm btn-outline-secondary m-1\"\n            (click)=\"removeFile(s)\">X</button>\n        </div>\n      </div>\n    </div>\n\n    <div *ngIf=\"help\" class=\"p-2\">\n      <ul>\n        <li>Upload file window let you upload one or more files.</li>\n        <li>To upload a file, use 'Select File' input box.</li>\n        <li>Now type an appropriate name for file and click 'Add file'</li>\n        <li>To add another file, repeat above two.</li>\n        <li>Selected files are always there at bottom, so you may remove one\n          or more of them, if you wish to cancel them.\n        </li>\n        <li>Click 'Upload Selected' to upload selected files</li>\n      </ul>\n      <p class=\"alert-warning p-2\">Click on info button again to close help.</p>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"uploadFile\">\n\n  <div *ngIf=\"uploading\" class=\"m-5\">\n    <h3 class=\"text-primary\">Uploading {{progress}}</h3>\n    <p>Please wait while files are being uploaded</p>\n  </div>\n\n  <div id=\"main\">\n    <div class=\"d-flex flex-row-reverse p-1\">\n      <button class=\"btn btn-sm btn-secondary ml-1\"\n        (click)=\"closeModel()\">\n        <fa-icon [icon]=\"faWindowClose\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-secondary ml-1\"\n        (click)=\"toggleHelp()\">\n        <fa-icon [icon]=\"faInfo\"></fa-icon>\n      </button>\n    </div>\n\n    <div *ngIf=\"!help\">\n      <div id=\"error\" [class.hidden]=\"!errorMessage\" class=\"alert alert-danger\">\n        {{errorMessage}}\n      </div>\n\n      <h4>Upload a new file</h4>\n      <form (ngSumbit)=\"upload()\" #form=\"ngForm\" id=\"uploadForm\">\n        <div class=\"form-group\">\n          <label for=\"file\">File</label>\n          <input type=\"file\" name=\"file\" id=\"file\" class=\"form-control\"\n            [(ngModel)]=\"file\" (change)=\"fileName = ''\"\n            #fileModel=\"ngModel\" required>\n          <div *ngIf=\"fileModel.invalid && (fileModel.dirty && fileModel.touched)\"\n            class=\"text-muted\">\n            <div *ngIf=\"fileModel.errors.required\">\n                Please choose a file\n            </div>\n          </div>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"targetName\">Target Name</label>\n          <input type=\"text\" name=\"targetName\" class=\"form-control\"\n            [(ngModel)]=\"fileName\" #filename=\"ngModel\">\n          <div *ngIf=\"!(filename.dirty || filename.touched)\">\n            Please enter a name to save as a new name\n          </div>\n          <div *ngIf=\"!validateFileName() && (filename.dirty || filename.touched)\"\n            class=\"alert alert-danger\">\n            <div *ngIf=\"!validateFileName()\">\n              File name is not valid, try another\n            </div>\n          </div>\n        </div>\n        <button type=\"button\" class=\"btn btn-sm btn-primary ml-1\"\n          (click)=\"addSelectedFile()\" [disabled]=\"!fileModel.valid\">\n          Add File</button>\n        <input (click)=\"upload()\" type=\"submit\" class=\"btn btn-sm btn-success ml-1\"\n          [disabled]=\"!this.selectedFiles.length\"\n          value=\"Upload Selected\">\n      </form>\n      <h4>Selected Files: </h4>\n      <div *ngIf=\"selectedFiles.length\"\n        class=\"alert alert-primary m-1 p-1 d-flex flex-row flex-wrap\">\n        <div *ngFor=\"let s of selectedFiles\"\n          class=\"alert alert-sm alert-light m-1\">\n          <span>{{s.newName}}</span>\n          <button class=\"btn btn-sm btn-outline-secondary m-1\"\n            (click)=\"removeFile(s)\">X</button>\n        </div>\n      </div>\n    </div>\n\n    <div *ngIf=\"help\" class=\"p-2\">\n      <ul>\n        <li>Upload file window let you upload one or more files.</li>\n        <li>To upload a file, use 'Select File' input box.</li>\n        <li>Now type an appropriate name for file and click 'Add file'</li>\n        <li>To add another file, repeat above two.</li>\n        <li>Selected files are always there at bottom, so you may remove one\n          or more of them, if you wish to cancel them.\n        </li>\n        <li>Click 'Upload Selected' to upload selected files</li>\n      </ul>\n      <p class=\"alert-warning p-2\">Click on info button again to close help.</p>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -792,8 +792,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var buffer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! buffer */ "./node_modules/buffer/index.js");
 /* harmony import */ var buffer__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(buffer__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-
 
 
 
@@ -825,21 +823,12 @@ let FileSystemService = class FileSystemService {
             });
         }
     }
-    deleteEntries(entries) {
-        const responces = [];
+    deleteEntries(locations) {
         // tslint:disable-next-line: deprecation
-        return rxjs__WEBPACK_IMPORTED_MODULE_5__["Observable"].create((observer) => {
-            for (const e of entries) {
-                this.http.delete('/fileSystem', {
-                    headers: {
-                        Authorization: this.auth,
-                        Location: e.location,
-                    }
-                }).subscribe((r) => {
-                    if (r === e.location) {
-                        observer.next(e);
-                    }
-                });
+        return this.http.delete('/fileSystem', {
+            headers: {
+                Authorization: this.auth,
+                locations
             }
         });
     }
@@ -1225,14 +1214,18 @@ let UploadFileComponent = class UploadFileComponent {
     ngOnInit() {
     }
     addSelectedFile() {
-        console.log(this.existingNames);
         this.errorMessage = '';
         const fileElement = document.getElementById('file');
         const file = fileElement.files.item(0);
-        file.newName = this.fileName || file.name;
-        const parts = file.name.split('.');
-        if (parts.length > 1) {
-            file.newName += '.' + parts[parts.length - 1];
+        if (this.fileName !== '') {
+            file.newName = this.fileName;
+            const parts = file.name.split('.');
+            if (parts.length > 1) {
+                file.newName += '.' + parts[parts.length - 1];
+            }
+        }
+        else {
+            file.newName = file.name;
         }
         // skip adding if file is already there
         let index = this.selectedFiles.findIndex((f) => {
@@ -1471,6 +1464,7 @@ let UserPanelComponent = class UserPanelComponent {
         this.usagePercent = 0;
         this.selected = [];
         this.clipboard = [];
+        this.clipboardDirectory = null;
         this.keep = true;
         this.message = null;
         this.errorMessage = null;
@@ -1491,10 +1485,12 @@ let UserPanelComponent = class UserPanelComponent {
     // ENTRY LEVEL OPERATIONS
     copyEntries() {
         this.clipboard = this.selected;
+        this.clipboardDirectory = this.currentDirectory;
         this.keep = true;
     }
     cutEntries() {
         this.clipboard = this.selected;
+        this.clipboardDirectory = this.currentDirectory;
         this.keep = false;
     }
     deleteEntry(entry) {
@@ -1502,18 +1498,30 @@ let UserPanelComponent = class UserPanelComponent {
         this.deleteEntries();
     }
     deleteEntries() {
-        this.fs.deleteEntries(this.selected).subscribe((res) => {
-            if (res.mediaType === 'directory') {
-                const index = this.currentDirectory.contents.directories.findIndex(e => {
-                    return e.location === res.location;
-                });
-                this.currentDirectory.contents.directories.splice(index, 1);
-            }
-            else {
-                const index = this.currentDirectory.contents.files.findIndex(e => {
-                    return e.location === res.location;
-                });
-                this.currentDirectory.contents.files.splice(index, 1);
+        let locations = '';
+        for (const s of this.selected) {
+            locations += s.location + ':' + s.mediaType + ';';
+        }
+        const locationsParts = locations.split(';');
+        locations = locationsParts.slice(0, locationsParts.length - 1).join(';');
+        this.fs.deleteEntries(locations).subscribe((res) => {
+            for (const r of res) {
+                if (r.mediaType === 'directory') {
+                    const index = this.currentDirectory.contents.directories.findIndex(e => {
+                        return e.location === r.location;
+                    });
+                    if (index >= 0) {
+                        this.currentDirectory.contents.directories.splice(index, 1);
+                    }
+                }
+                else {
+                    const index = this.currentDirectory.contents.files.findIndex(e => {
+                        return e.location === r.location;
+                    });
+                    if (index >= 0) {
+                        this.currentDirectory.contents.files.splice(index, 1);
+                    }
+                }
             }
         });
         this.selected = [];
@@ -1544,9 +1552,23 @@ let UserPanelComponent = class UserPanelComponent {
             for (const r of res) {
                 if (r.mediaType === 'directory') {
                     this.currentDirectory.contents.directories.push(r);
+                    const item = copyObjects.find((c) => {
+                        return c.to.name === r.name;
+                    });
+                    const index = this.clipboardDirectory.contents.directories.findIndex((d) => {
+                        return d.name === item.from.name;
+                    });
+                    this.clipboardDirectory.contents.directories.splice(index, 1);
                 }
                 else {
                     this.currentDirectory.contents.files.push(r);
+                    const item = copyObjects.find((c) => {
+                        return c.to.name === r.name;
+                    });
+                    const index = this.clipboardDirectory.contents.files.findIndex((d) => {
+                        return d.name === item.from.name;
+                    });
+                    this.clipboardDirectory.contents.files.splice(index, 1);
                 }
             }
         }, err => {
