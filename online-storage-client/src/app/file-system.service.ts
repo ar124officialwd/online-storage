@@ -1,3 +1,4 @@
+import { logging } from 'protractor';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -34,22 +35,12 @@ export class FileSystemService {
     }
   }
 
-  deleteEntries(entries): Observable<any> {
-    const responces = [];
-
+  deleteEntries(locations): Observable<any> {
     // tslint:disable-next-line: deprecation
-    return Observable.create((observer) => {
-      for (const e of entries) {
-        this.http.delete('/fileSystem', {
-          headers: {
-            Authorization: this.auth,
-            Location: e.location,
-          }
-        }).subscribe((r: string) => {
-          if (r === e.location) {
-            observer.next(e);
-          }
-        });
+    return this.http.delete('/fileSystem', {
+      headers: {
+        Authorization: this.auth,
+        locations
       }
     });
   }
