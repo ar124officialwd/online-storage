@@ -71,13 +71,20 @@ fileSystemRouter.get('/fileSystem', async (req, res, next) => {
       responce.location = '/'
     }
 
-    for (let f of responce.contents.files) {
-      f.location = f.location.replace(req.storagePath,'')
-    }
-    for (let d of responce.contents.directories) {
-      d.location = d.location.replace(req.storagePath,'')
+    const fixLocations = function(directory) {
+      for (let i = 0; i < directory.contents.directories.length; i++) {
+        directory.contents.directories[i].location = 
+          directory.contents.directories[i].location.replace(req.storagePath, '')
+        fixLocations(directory.contents.directories[i])
+      }
+
+      for (let i = 0; i < directory.contents.files.length; i++) {
+        directory.contents.files[i].location = 
+          directory.contents.files[i].location.replace(req.storagePath, '')
+      }
     }
 
+    fixLocations(responce)
     res.json(responce)
   }
 })

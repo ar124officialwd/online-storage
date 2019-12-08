@@ -15,25 +15,23 @@ async function readDirectory(dirToRead) {
     dir.size = dirToReadStats.size
 
 
-    let dirents = await fs.promises.readdir(dirToRead, {
-      withFileTypes: true
-    })
+    let dirents = await fs.promises.readdir(dirToRead)
 
     for (let d of dirents) {
-      const stat = await fs.promises.stat(path.join(dirToRead, d.name))
+      const stat = await fs.promises.stat(path.join(dirToRead, d))
       dir.size += stat.size;
 
       if (stat.isFile()) {
         dir.files++
-        let file = new File(d.name.replace(path.extname(d.name),''), 
-          path.join(dirToRead, d.name),
+        let file = new File(d.replace(path.extname(d),''), 
+          path.join(dirToRead, d),
           stat.size, '', true);
         file.mediaType = await getFileType(file.location)
-        file.extension = path.extname(d.name)
+        file.extension = path.extname(d)
         file.location = path.normalize(file.location)
         dir.contents.files.push(file)
       } else if (stat.isDirectory()) {
-        const subdir = await readDirectory(path.join(dirToRead, d.name));
+        const subdir = await readDirectory(path.join(dirToRead, d));
         dir.size += subdir.size;
         subdir.location = path.normalize(subdir.location)
 
