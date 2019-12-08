@@ -16,6 +16,7 @@ import { CreateDirectoryComponent } from './create-directory/create-directory.co
 import { To4PrecisionPipe } from './to4-precision.pipe';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { MinifyPathPipe } from './minify-path.pipe';
+import { OpenMediaComponent } from './open-media/open-media.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MinifyPathPipe } from './minify-path.pipe';
     CreateDirectoryComponent,
     To4PrecisionPipe,
     UploadFileComponent,
-    MinifyPathPipe
+    MinifyPathPipe,
+    OpenMediaComponent
   ],
   imports: [
     BrowserModule,

@@ -237,7 +237,8 @@ export class MimeTypesService {
     'video/vnd.uvvu.mp4',
     'video/vnd.youtube.yt',
     'video/vnd.vivo',
-    'video/VP8'
+    'video/VP8',
+    'video/x-matroska'
   ];
 
   readonly image = [

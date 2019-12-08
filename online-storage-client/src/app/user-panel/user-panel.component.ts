@@ -71,6 +71,8 @@ export class UserPanelComponent implements OnInit {
   keep = true;
 
   playingAudio = null;
+  media = null;
+  mediaOpened = false;
 
   message = null;
   errorMessage = null;
@@ -303,7 +305,8 @@ export class UserPanelComponent implements OnInit {
   // FILE LEVEL OPERATIONS
 
   private closeFile(file) {
-
+    this.mediaOpened = false;
+    this.media = null;
   }
 
   private downloadFile(name, location) {
@@ -381,6 +384,9 @@ export class UserPanelComponent implements OnInit {
         }, (err) => {
           return;
         });
+    } else {
+      this.media = file;
+      this.mediaOpened = true;
     }
   }
 

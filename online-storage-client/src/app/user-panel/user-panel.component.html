@@ -3,10 +3,16 @@
   <app-create-directory (directory)="createDirectory($event)"
     [currentDirectory]="currentDirectory"></app-create-directory>
 </div>
+
 <div *ngIf="triggers.uploadFile">
   <app-upload-file (fileEvent)="uploadFile($event)"
     [location]="currentDirectory.location" [existingNames]="getExistingNames()">
   </app-upload-file>
+</div>
+
+<div *ngIf="mediaOpened">
+  <app-open-media [media]="media" (mediaClose)="closeFile()">
+  </app-open-media>
 </div>
 
 <!-- File Manager Header -->
