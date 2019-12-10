@@ -1,0 +1,106 @@
+# User REST API 
+# API FOR SERVING USERS
+
+app = new http
+
+// get would validate user existance and credentials
+
+-> Method
+app.get('user/', (req, res) {
+  if (req has credentials) {
+    found = find user by credentials
+
+    if (found) {
+      if (req has password) {
+        validate = found.matchPassword(req.password)
+        if (match) {
+          response with true validation
+        } else {
+          response with false validation
+        }
+      } else {
+        response with true existance
+      }
+    } else {
+      res with false existance
+    }
+
+  } else {
+    discard request
+    send invalid reques response
+  }
+})
+
+
+
+
+
+// post would create a new user
+-> Method
+app.post('/user', (req, res) => {
+  validate = check user model 
+
+  if (validate) {
+    open database connection
+    result = try save user
+    
+    if (result) {
+      response with true registeration message
+    } else {
+      respone with false registeration message
+    }
+  } else {
+    response with invalid request error
+  }
+})
+
+
+
+
+// patch would update existing user
+-> Method
+app.patch('/user', (req, res) {
+  if (req has credentials) {
+    validate = validate user
+
+    if (validate) {
+      open database connection
+      patch = try user patch 
+
+      if (patch) {
+        response with true message
+      } else {
+        response with false message
+      }
+    } else {
+      response with false validation message
+    }
+  } else {
+    response with invalid request message
+  }
+})
+
+
+
+// delete would delete existing user
+-> Method
+app.delete('/user', (req, res) => {
+  if (req has credentials) {
+    validation = validate user 
+
+    if (validation) {
+      open database connection
+      result = try delete user
+
+      if (result) {
+        response with true deletion message
+      } else {
+        response with false deletion message
+      }
+    } else {
+      response with invalid credentials message
+    }
+  } else {
+    response with invalid request error
+  }
+})

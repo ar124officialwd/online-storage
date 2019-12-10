@@ -1,0 +1,30 @@
+# Registration Client Side
+
+input first name 
+input second name 
+input email 
+input password 
+input confirmation password 
+input pricing plan 
+
+valid = validateInputs()
+
+if (valid) {
+  responce = make http post request
+
+  if (responce is positive) {
+    registered = true
+  } else {
+    registered = false
+  }
+
+  if (registered) {
+    show confirmation
+    let user login
+  } else {
+    show error
+    let user retry
+  }
+} else {
+  let user retry
+}

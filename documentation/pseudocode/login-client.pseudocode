@@ -1,0 +1,25 @@
+# Login 
+
+input user email
+input user password
+validate inputs
+
+if (inputs are valid) {
+  responce = make http validation request(get)
+
+  if (responce is positive) {
+    valid = true 
+  } else {
+    valid = false;
+  }
+
+  if (valid) {
+    save user credentials
+    redirect user to user panel
+  } else {
+    display error message
+    GOTO 3
+  }
+} else {
+  GOTO 3
+}

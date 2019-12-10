@@ -1,0 +1,104 @@
+# FILESYSTEM REST API 
+# API FOR SERVING FILESYSTEM 
+
+app = new http app 
+
+// 'all' would parse each and every request to validate credentials
+-> Method
+app.all('/fileSystem', (req, res) {
+  if (req has credentials) {
+    valdiate = valdiate credentials 
+
+    if (valdiate) {
+      pass request
+    } else {
+      response with validation error
+    }
+  } else {
+    ask credentials
+  }
+})
+
+
+
+
+// 'get' would server directories and files 
+-> Method
+app.get('/fileSystem', (req, res) {
+  directory = root of user 
+
+  if (req has 'Directory' header) {
+    directory = req.headers.Directory
+  } else if (req has 'File' header) {
+    file = req.headers.file
+  }
+
+
+  if (directory) {
+    prepare directory contents 
+    responce with directory contents
+  } else {
+    responce with file
+  }
+})
+
+
+
+
+// 'post' would create directories and upload files 
+-> Method
+app.get('/fileSystem', (req, res) {
+  if (req has 'Create-Directories' header) {
+    directories = req.body.directories
+  } else {
+    files = req.body.files
+  }
+
+  if (directories) {
+    for (d in directories) {
+      create directory d
+    }
+
+    response with created directories
+  } else {
+    for (f in files) {
+      rename (f.path, t.targetPath)
+    }
+
+    response with uploaded file names
+  }
+})
+
+
+
+
+// 'put' would copy and rename files
+-> Method
+app.put('/fileSystem', (req, res) {
+  pairs = req.pairs 
+
+  if (req.body.keep) {
+    for (p in pairs) {
+      copy (p.from, p.to)
+    }
+  } else {
+    for (p in pairs) {
+      rename (p.from, p.to)
+    }
+  }
+
+  responce with pairs and keep boolean
+})
+
+
+
+
+// 'delete' would delete files and directories 
+-> Method
+app.delete('/fileSystem', (req, res) {
+  for (e in entries) {
+    delete (e)
+  }
+
+  responce with deleted files and directories
+})
