@@ -8,8 +8,10 @@ class Configuration {
   }
 
   static getDBName() {
-    if (process.env["NODE_ENV"] == "development") return "onlineStorageTest";
-    else return "onlineStorage";
+    if (process.env["NODE_ENV"] == "development") 
+      return "onlineStorageTest";
+      
+    return "onlineStorage";
   }
 
   static getMountRoot() {
