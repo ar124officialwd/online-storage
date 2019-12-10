@@ -152,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"createDirectory\">\n  <div class=\"d-flex flex-row-reverse p-1\">\n    <button class=\"btn btn-sm\">\n      <fa-icon [icon]=\"faWindowClose\"\n        (click)=\"cancelCreateDirectory()\"></fa-icon>\n    </button>\n  </div>\n  <div class=\"m-1\">\n    <h4>Create New Directories</h4>\n  </div>\n  <form (ngSubmit)=\"createDirectory()\" #form=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"directory\">Enter names for directories</label>\n      <input type=\"text\" name=\"directory\" class=\"form-control\" maxlength=\"128\"\n        [(ngModel)]=\"model\" #directory=\"ngModel\"\n        (keypress)=\"checkInputCharacter($event)\"\n        required>\n\n      <div *ngIf=\"!directory.dirty || !directory.touched\" class=\"text-muted\">\n          <p>Seperate multiple names by semi-colon ;</p>\n          <p>Allowed characters are 'a to z', 'A-Z', ., - and _</p>\n      </div>\n\n      <div *ngIf=\"directory.invalid && !que.length && (directory.dirty || directory.touched)\"\n          class=\"text-muted\">\n        <div *ngIf=\"directory.errors.required\">\n          Directory name is required\n        </div>\n      </div>\n    </div>\n\n    <input [disabled]=\"form.invalid && !que\" type=\"submit\" value=\"Create\"\n      class=\"btn btn-sm btn-success m-2 p-1\">\n  </form>\n  <div id=\"directoryQue\" class=\"m-1 d-flex flex-row\">\n\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"createDirectory\">\n  <div class=\"d-flex flex-row-reverse p-1\">\n    <button class=\"btn btn-sm\">\n      <fa-icon [icon]=\"faWindowClose\"\n        (click)=\"closeModel()\"></fa-icon>\n    </button>\n    <button class=\"btn btn-sm\">\n      <fa-icon [icon]=\"faInfo\"\n        (click)=\"toggleHelp()\"></fa-icon>\n    </button>\n  </div>\n\n  <div class=\"m-1\">\n    <h4>Create New Directories</h4>\n  </div>\n\n  <div *ngIf=\"!help\">\n    <form (ngSubmit)=\"createDirectories()\" #form=\"ngForm\">\n      <div class=\"form-group\">\n        <label for=\"directory\">Enter names for directories</label>\n        <input type=\"text\" name=\"directory\" class=\"form-control\" maxlength=\"128\"\n          [(ngModel)]=\"model\" #directory=\"ngModel\"\n          (keypress)=\"checkInputCharacter($event)\"\n          required>\n\n        <div *ngIf=\"!directory.dirty || !directory.touched\" class=\"text-muted\">\n          Allowed characters are 'a to z', 'A-Z', ., - and _\n        </div>\n\n        <div *ngIf=\"directory.invalid && !que.length && (directory.dirty || directory.touched)\"\n            class=\"text-muted\">\n          <div *ngIf=\"directory.errors.required\">\n            Directory name is required\n          </div>\n        </div>\n      </div>\n\n      <button type=\"button\" class=\"btn btn-sm btn-primary\"\n        (click)=\"addDirectory()\" [disabled]=\"!form.valid\">\n        Add Directory</button>\n\n      <input [disabled]=\"form.invalid && !que\" type=\"submit\"\n        value=\"Create Directories\" class=\"btn btn-sm btn-success m-2 p-1\">\n    </form>\n\n    <div>\n      <h6>Directories List</h6>\n    </div>\n    <div id=\"directoryQue\" class=\"alert alert-primary m-1 d-flex flex-row\"\n      [class.hidden]=\"!que.length\">\n    </div>\n  </div>\n\n  <div *ngIf=\"help\" class=\"p-2\">\n    <ul>\n      <li>Create Directory option let you create one or more directories</li>\n      <li>To create a directory, use Directory Name input field</li>\n      <li>Click 'Add Next' to add typed directory.</li>\n      <li>Click 'Create Directories' to create directories in\n        Directories list.</li>\n      <li>Selected directories are always there at bottom,\n        so you may remove one if you wish to cancel.</li>\n    </ul>\n    <div class=\"alert alert-warning p-2\">\n      Click 'Info' button at top again to close this help.\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -166,6 +166,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<div id=\"login\">\n  <h4 class=\"title\">Login</h4>\n\n  <div *ngIf=\"otherError\" class=\"text-muted\">\n    Some kind of error occured, please try again\n  </div>\n\n  <div *ngIf=\"loginFailed\" class=\"text-muted\">\n    Failed: Invalid email or password!\n  </div>\n\n  <form (ngSubmit)=\"createSession()\" #loginForm=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"email\">Email</label>\n      <input type=\"email\" name=\"email\" class=\"form-control\"\n        [(ngModel)]=\"model.email\" #email=\"ngModel\" required>\n      <div *ngIf=\"email.invalid && (email.dirty || email.touched)\">\n        <div *ngIf=\"email.errors.required\" class=\"text-muted\">\n          Email is required\n        </div>\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"password\">Password</label>\n      <input type=\"password\" name=\"password\" class=\"form-control\"\n        minlength=8 maxlength=64 [(ngModel)]=\"model.password\"\n        #password=\"ngModel\" required>\n      <div *ngIf=\"password.invalid && (password.dirty || password.touched)\">\n        <div *ngIf=\"password.errors.required\" class=\"text-muted\">\n          Password is required\n        </div>\n        <div *ngIf=\"password.errors.minlength\" class=\"text-muted\">\n          Password must be atleast 8 character long\n        </div>\n      </div>\n    </div>\n\n    <div>\n      <button type=\"submit\" class=\"btn btn-success\"\n        [disabled]=\"!loginForm.valid\">Login</button>\n    </div>\n  </form>\n  <div class=\"text-muted\">\n    Not yet registered? <a routerLink=\"/register\">Signup</a> now\n  </div>\n\n  <div *ngIf=\"loginSuccess\" class=\"text-muted\">\n    You have been logined successfully, Redirecting...!\n  </div>\n</div>\n");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/open-media/open-media.component.html":
+/*!********************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/open-media/open-media.component.html ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"media\">\n  <div class=\"controls d-flex flex-row-reverse p-1 px-3\">\n    <button class=\"btn btn-sm btn-secondary\" (click)=\"closeMedia()\">\n      <fa-icon [icon]=\"faWindowClose\"></fa-icon>\n    </button>\n  </div>\n  <div id=\"mediaWindow\">\n    <div *ngIf=\"notSupported\" class=\"p-2\">\n      <h4>Not Supported</h4>\n      <p>Sorry, but viewing/playing this file is not supported.\n          But you should not worry, you may download file and view it\n          in an application on your device that support it.\n      </p>\n    </div>\n    <p [class.hidden]=\"!notSupported\" class=\"p-2\">\n      Click <a id=\"download\">here</a> to download file</p>\n  </div>\n  <div id=\"mediaInfo\" class=\"p-1\">\n\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -217,7 +230,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n<div *ngIf=\"triggers.createDirectory\">\n  <app-create-directory (directory)=\"createDirectory($event)\"\n    [currentDirectory]=\"currentDirectory\"></app-create-directory>\n</div>\n<div *ngIf=\"triggers.uploadFile\">\n  <app-upload-file (fileEvent)=\"uploadFile($event)\"\n    [location]=\"currentDirectory.location\" [existingNames]=\"getExistingNames()\">\n  </app-upload-file>\n</div>\n\n<!-- File Manager Header -->\n<div class=\"item alert alert-sm alert-success\">\n  <div class=\"item-header\">\n    <input class=\"btn btn-sm btn-light m-1\" title=\"Select All\"\n      type=\"checkbox\" id=\"selectAll\" (change)=\"select(null, $event)\">\n  </div>\n  <div class=\"item-content\">\n    <span class=\"text-bold\">Current Location: </span> {{ currentDirectory.location | minifyPath:40 }}\n    <span class=\"ml-2 text-bold\">Usage: </span> {{ usagePercent | to4Precision }}%\n    <ngb-progressbar [value]=\"usagePercent\"\n      class=\"getUsageClass()\"></ngb-progressbar>\n  </div>\n  <div class=\"item-actions\">\n    <div class=\"d-flex flex-row\">\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Go Back\"\n        [disabled]=\"!backwardStack.length\"\n        (click)=\"previousDirectory()\">\n        <fa-icon [icon]=\"faArrowCircleLeft\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Go Forward\"\n        [disabled]=\"!forwardStack.length\"\n        (click)=\"reopenDirectory()\">\n        <fa-icon [icon]=\"faArrowCircleRight\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\"\n        (click)=\"trigger('createDirectory')\" title=\"Create Directory\">\n        <fa-icon [icon]=\"faFolderPlus\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Upload File\"\n        (click)=\"trigger('uploadFile')\">\n        <fa-icon [icon]=\"faFileUpload\"></fa-icon>\n      </button>\n      <button [class]=\"!clipboard.length || !keep ? 'btn btn-sm btn-light m-1' :\n        'btn btn-sm btn-secondary m-1'\"\n        title=\"Copy\" (click)=\"copyEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faCopy\"></fa-icon>\n      </button>\n      <button [class]=\"!clipboard.length || keep ? 'btn btn-sm btn-light m-1' :\n        'btn btn-sm btn-secondary m-1'\"\n        title=\"Cut\" (click)=\"cutEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faCut\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Paste\"\n        (click)=\"pasteEntries()\" [disabled]=\"!clipboard.length ||\n          (!this.backwardStack.length && !this.forwardStack.length)\">\n        <fa-icon [icon]=\"faPaste\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Delete\"\n        (click)=\"deleteEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faTrash\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Logout\"\n        (click)=\"logout()\">\n        <fa-icon [icon]=\"faPowerOff\"></fa-icon>\n      </button>\n    </div>\n  </div>\n</div>\n\n<!-- No files or directories are there -->\n<div *ngIf=\"!currentDirectory.contents.files.length &&\n  !currentDirectory.contents.directories.length\" class=\"p-5\">\n  <h3 class=\"text-muted\">\n    There is nothing here\n  </h3>\n</div>\n\n<!-- There is/are one/some files/directories -->\n<div *ngIf=\"currentDirectory.contents.files.length ||\n  currentDirectory.contents.directories.length\">\n  <div *ngIf=\"message\" class=\"alert alert-sm alert-primary\">\n    {{message}}\n  </div>\n  <div *ngIf=\"errorMessage\" class=\"alert alert-sm alert-danger\">\n    {{errorMessage}}\n  </div>\n\n  <div *ngFor=\"let e of currentDirectory.contents.directories\" class=\"item\"\n    (click)=\"openDirectory(e)\">\n    <div class=\"item-header\">\n      <input type=\"checkbox\" (change)=\"select(e, $event)\"\n        (click)=\"$event.stopPropagation();\">\n      <a (click)=\"openDirectory(e)\">\n        <img src=\"/images/folder.png\">\n      </a>\n    </div>\n    <div class=\"item-content\">\n      <span class=\"item-name\" contenteditable=\"true\" spellcheck=\"false\"\n        (click)=\"$event.stopPropagation();\"\n        (blur)=\"renameEntry(e, $event.target.innerText)\"\n        (keypress)=\"checkInputCharacter($event)\">{{e.name}}</span>\n    </div>\n    <div class=\"item-actions\">\n      <div>\n        <button (click)=\"deleteEntry(e)\"\n          class=\"btn btn-sm btn-light m-1\">\n          <fa-icon [icon]=\"faTrash\"></fa-icon>\n        </button>\n      </div>\n    </div>\n  </div>\n\n  <div *ngFor=\"let e of currentDirectory.contents.files\" class=\"item\">\n    <div class=\"item-header\">\n      <input type=\"checkbox\" (change)=\"select(e, $event)\">\n      <a href=\"#\">\n        <img src=\"/images/file.png\">\n      </a>\n    </div>\n    <div class=\"item-content\">\n      <span class=\"item-name\" contenteditable=\"true\" spellcheck=\"false\"\n        (blur)=\"renameEntry(e, $event.target.innerText)\">{{e.name}}</span>\n      <span>{{e.extension}}</span>\n    </div>\n    <div class=\"item-actions\">\n      <div>\n        <button (click)=\"deleteEntry(e)\" class=\"btn btn-sm btn-light mr-1\">\n          <fa-icon [icon]=\"faTrash\"></fa-icon>\n        </button>\n      </div>\n      <div>\n        <button (click)=\"downloadFile(e.name, e.location)\"\n          class=\"btn btn-sm btn-light mr-1\">\n          <fa-icon [icon]=\"faDownload\"></fa-icon>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\n<div *ngIf=\"triggers.createDirectory\">\n  <app-create-directory (directory)=\"createDirectory($event)\"\n    [currentDirectory]=\"currentDirectory\" [existingNames]=\"getExistingNames()\">\n  </app-create-directory>\n</div>\n\n<div *ngIf=\"triggers.uploadFile\">\n  <app-upload-file (fileEvent)=\"uploadFile($event)\"\n    [location]=\"currentDirectory.location\" [existingNames]=\"getExistingNames()\">\n  </app-upload-file>\n</div>\n\n<div *ngIf=\"mediaOpened\">\n  <app-open-media [media]=\"media\" (mediaClose)=\"closeFile()\">\n  </app-open-media>\n</div>\n\n<!-- File Manager Header -->\n<div class=\"item alert alert-sm alert-success\">\n  <div class=\"item-header\">\n    <input class=\"btn btn-sm btn-light m-1\" title=\"Select All\"\n      type=\"checkbox\" id=\"selectAll\" (change)=\"select(null, $event)\">\n  </div>\n  <div class=\"item-content\">\n    <b>Current Location: </b> {{ currentDirectory.location | minifyPath:40 }}\n    <b class=\"ml-2\">Usage: </b> {{ usagePercent | to4Precision }}%\n    <ngb-progressbar [value]=\"usagePercent\"\n      class=\"getUsageClass()\"></ngb-progressbar>\n  </div>\n  <div class=\"item-actions\">\n    <div class=\"d-flex flex-row\">\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Go Back\"\n        [disabled]=\"!backwardStack.length\"\n        (click)=\"previousDirectory()\">\n        <fa-icon [icon]=\"faArrowCircleLeft\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Go Forward\"\n        [disabled]=\"!forwardStack.length\"\n        (click)=\"reopenDirectory()\">\n        <fa-icon [icon]=\"faArrowCircleRight\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\"\n        (click)=\"trigger('createDirectory')\" title=\"Create Directory\">\n        <fa-icon [icon]=\"faFolderPlus\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Upload File\"\n        (click)=\"trigger('uploadFile')\">\n        <fa-icon [icon]=\"faFileUpload\"></fa-icon>\n      </button>\n      <button [class]=\"!clipboard.length || !keep ? 'btn btn-sm btn-light m-1' :\n        'btn btn-sm btn-secondary m-1'\"\n        title=\"Copy\" (click)=\"copyEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faCopy\"></fa-icon>\n      </button>\n      <button [class]=\"!clipboard.length || keep ? 'btn btn-sm btn-light m-1' :\n        'btn btn-sm btn-secondary m-1'\"\n        title=\"Cut\" (click)=\"cutEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faCut\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Paste\"\n        (click)=\"pasteEntries()\" [disabled]=\"!clipboard.length ||\n          (!this.backwardStack.length && !this.forwardStack.length)\">\n        <fa-icon [icon]=\"faPaste\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Delete\"\n        (click)=\"deleteEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faTrash\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Logout\"\n        (click)=\"logout()\">\n        <fa-icon [icon]=\"faPowerOff\"></fa-icon>\n      </button>\n    </div>\n  </div>\n</div>\n\n<!-- No files or directories are there -->\n<div *ngIf=\"!currentDirectory.contents.files.length &&\n  !currentDirectory.contents.directories.length\" class=\"p-5\">\n  <h3 class=\"text-muted\">\n    There is nothing here\n  </h3>\n</div>\n\n<!-- There is/are one/some files/directories -->\n<div *ngIf=\"currentDirectory.contents.files.length ||\n  currentDirectory.contents.directories.length\">\n  <div *ngIf=\"message\" class=\"alert alert-sm alert-primary\">\n    {{message}}\n  </div>\n  <div *ngIf=\"errorMessage\" class=\"alert alert-sm alert-danger\">\n    {{errorMessage}}\n  </div>\n\n  <div *ngFor=\"let e of currentDirectory.contents.directories\" class=\"item\"\n    (click)=\"openDirectory(e)\">\n    <div class=\"item-header\">\n      <input type=\"checkbox\" (change)=\"select(e, $event)\"\n        (click)=\"$event.stopPropagation();\">\n      <a (click)=\"openDirectory(e)\">\n        <img src=\"/images/folder.png\">\n      </a>\n    </div>\n    <div class=\"item-content\">\n      <span class=\"item-name\" contenteditable=\"true\" spellcheck=\"false\"\n        (click)=\"$event.stopPropagation();\"\n        (blur)=\"renameEntry(e, $event.target.innerText)\"\n        (keypress)=\"checkInputCharacter($event)\">{{e.name}}</span>\n    </div>\n    <div class=\"item-actions\">\n      <div>\n        <button (click)=\"deleteEntry(e)\"\n          class=\"btn btn-sm btn-light m-1\">\n          <fa-icon [icon]=\"faTrash\"></fa-icon>\n        </button>\n      </div>\n    </div>\n  </div>\n\n  <div *ngFor=\"let e of currentDirectory.contents.files\" class=\"item\"\n    (click)=\"openFile(e)\">\n\n    <div class=\"item-header\">\n      <input type=\"checkbox\" (change)=\"select(e, $event)\"\n        (click)=\"$event.stopPropagation();\">\n      <a href=\"#\">\n        <img src=\"/images/file.png\">\n      </a>\n    </div>\n\n    <div [class.hidden]=\"playingAudio === e.id\" class=\"item-content\">\n      <span class=\"item-name\" contenteditable=\"true\" spellcheck=\"false\"\n        (blur)=\"renameEntry(e, $event.target.innerText)\"\n        (click)=\"stopEventPropagation()\">{{e.name}}</span>\n      <span>{{e.extension}}</span>\n    </div>\n    <div [id]=\"e.id\" [class.hidden]=\"!playingAudio\"\n      class=\"item-content d-flex\"></div>\n\n    <div class=\"item-actions\">\n      <div>\n        <button (click)=\"deleteEntry(e); stopEventPropagation($event)\"\n          class=\"btn btn-sm btn-light mr-1\">\n          <fa-icon [icon]=\"faTrash\"></fa-icon>\n        </button>\n      </div>\n      <div>\n        <button class=\"btn btn-sm btn-light mr-1\"\n          (click)=\"downloadFile(e.name, e.location);\n            stopEventPropagation($event)\">\n          <fa-icon [icon]=\"faDownload\"></fa-icon>\n        </button>\n      </div>\n      <div>\n        <button class=\"btn btn-sm btn-primary mr-1\"\n          (click)=\"stopEventPropagation($event)\" disabled>\n          {{e.mediaType}}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n");
 
 /***/ }),
 
@@ -589,6 +602,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _to4_precision_pipe__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./to4-precision.pipe */ "./src/app/to4-precision.pipe.ts");
 /* harmony import */ var _upload_file_upload_file_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./upload-file/upload-file.component */ "./src/app/upload-file/upload-file.component.ts");
 /* harmony import */ var _minify_path_pipe__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./minify-path.pipe */ "./src/app/minify-path.pipe.ts");
+/* harmony import */ var _open_media_open_media_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./open-media/open-media.component */ "./src/app/open-media/open-media.component.ts");
+
 
 
 
@@ -620,7 +635,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _create_directory_create_directory_component__WEBPACK_IMPORTED_MODULE_14__["CreateDirectoryComponent"],
             _to4_precision_pipe__WEBPACK_IMPORTED_MODULE_15__["To4PrecisionPipe"],
             _upload_file_upload_file_component__WEBPACK_IMPORTED_MODULE_16__["UploadFileComponent"],
-            _minify_path_pipe__WEBPACK_IMPORTED_MODULE_17__["MinifyPathPipe"]
+            _minify_path_pipe__WEBPACK_IMPORTED_MODULE_17__["MinifyPathPipe"],
+            _open_media_open_media_component__WEBPACK_IMPORTED_MODULE_18__["OpenMediaComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -648,7 +664,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".createDirectory {\n  position: absolute;\n  background: white;\n  top: 2vh;\n  left: 25vw;\n  width: 50vw;\n  height: 75vh;\n  padding: 1vh 1vw;\n  border: 0.1px solid grey;\n  border-radius: 10px;\n  z-index: 100;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kaXNrL3Byb2plY3RzL29ubGluZS1zdG9yYWdlL29ubGluZS1zdG9yYWdlLWNsaWVudC9zcmMvYXBwL2NyZWF0ZS1kaXJlY3RvcnkvY3JlYXRlLWRpcmVjdG9yeS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY3JlYXRlLWRpcmVjdG9yeS9jcmVhdGUtZGlyZWN0b3J5LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFDQSxpQkFBQTtFQUNBLFFBQUE7RUFDQSxVQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7RUFDQSxnQkFBQTtFQUNBLHdCQUFBO0VBQ0EsbUJBQUE7RUFDQSxZQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC9jcmVhdGUtZGlyZWN0b3J5L2NyZWF0ZS1kaXJlY3RvcnkuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY3JlYXRlRGlyZWN0b3J5IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgdG9wOiAydmg7XG4gIGxlZnQ6IDI1dnc7XG4gIHdpZHRoOiA1MHZ3O1xuICBoZWlnaHQ6IDc1dmg7XG4gIHBhZGRpbmc6IDF2aCAxdnc7XG4gIGJvcmRlcjogMC4xcHggc29saWQgZ3JleTtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgei1pbmRleDogMTAwO1xufVxuIiwiLmNyZWF0ZURpcmVjdG9yeSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIHRvcDogMnZoO1xuICBsZWZ0OiAyNXZ3O1xuICB3aWR0aDogNTB2dztcbiAgaGVpZ2h0OiA3NXZoO1xuICBwYWRkaW5nOiAxdmggMXZ3O1xuICBib3JkZXI6IDAuMXB4IHNvbGlkIGdyZXk7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIHotaW5kZXg6IDEwMDtcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".createDirectory {\n  position: absolute;\n  background: white;\n  top: 2vh;\n  left: 20vw;\n  width: 60vw;\n  height: 75vh;\n  padding: 1vh 1vw;\n  border: 0.1px solid grey;\n  border-radius: 10px;\n  z-index: 100;\n  overflow: auto;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kaXNrL3Byb2plY3RzL29ubGluZS1zdG9yYWdlL29ubGluZS1zdG9yYWdlLWNsaWVudC9zcmMvYXBwL2NyZWF0ZS1kaXJlY3RvcnkvY3JlYXRlLWRpcmVjdG9yeS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY3JlYXRlLWRpcmVjdG9yeS9jcmVhdGUtZGlyZWN0b3J5LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFDQSxpQkFBQTtFQUNBLFFBQUE7RUFDQSxVQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7RUFDQSxnQkFBQTtFQUNBLHdCQUFBO0VBQ0EsbUJBQUE7RUFDQSxZQUFBO0VBQ0EsY0FBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvY3JlYXRlLWRpcmVjdG9yeS9jcmVhdGUtZGlyZWN0b3J5LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNyZWF0ZURpcmVjdG9yeSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIHRvcDogMnZoO1xuICBsZWZ0OiAyMHZ3O1xuICB3aWR0aDogNjB2dztcbiAgaGVpZ2h0OiA3NXZoO1xuICBwYWRkaW5nOiAxdmggMXZ3O1xuICBib3JkZXI6IDAuMXB4IHNvbGlkIGdyZXk7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIHotaW5kZXg6IDEwMDtcbiAgb3ZlcmZsb3c6IGF1dG87XG59XG4iLCIuY3JlYXRlRGlyZWN0b3J5IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgdG9wOiAydmg7XG4gIGxlZnQ6IDIwdnc7XG4gIHdpZHRoOiA2MHZ3O1xuICBoZWlnaHQ6IDc1dmg7XG4gIHBhZGRpbmc6IDF2aCAxdnc7XG4gIGJvcmRlcjogMC4xcHggc29saWQgZ3JleTtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgei1pbmRleDogMTAwO1xuICBvdmVyZmxvdzogYXV0bztcbn0iXX0= */");
 
 /***/ }),
 
@@ -667,6 +683,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 /* harmony import */ var _file_system_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../file-system.service */ "./src/app/file-system.service.ts");
+/* harmony import */ var _extended_directory__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../extended-directory */ "./src/app/extended-directory.ts");
+
 
 
 
@@ -677,54 +695,61 @@ let CreateDirectoryComponent = class CreateDirectoryComponent {
         this.http = http;
         this.fs = fs;
         this.faWindowClose = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faWindowClose"];
+        this.faInfo = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faInfo"];
         this.model = '';
         this.directory = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.help = false;
         this.que = [];
     }
     ngOnInit() {
     }
-    validateDirectory() {
-        const matches = this.model.match(/[\w\.-]*/g);
-        return matches.length === 2;
+    addDirectory() {
+        const index = this.existingNames.findIndex(e => {
+            return e.name === this.model;
+        });
+        if (index > 0) {
+            this.errorMessage = 'A file or directory exist in current direcory' +
+                ' with same name as you choosen. Please use another name.';
+            return;
+        }
+        this.errorMessage = '';
+        this.que.push(this.model);
+        const divElement = document.createElement('div');
+        const buttonElement = document.createElement('button');
+        buttonElement.setAttribute('class', 'btn btn-sm btn-secondary ml-1');
+        buttonElement.setAttribute('directoryName', this.model);
+        buttonElement.innerText = 'x';
+        buttonElement.onclick = ((event) => {
+            const target = event.target;
+            document.getElementById('directoryQue').removeChild(target.parentElement);
+            const index = this.que.findIndex(i => {
+                return i === target.getAttribute('directoryName');
+            });
+            this.que.splice(index, 1);
+        }).bind(this);
+        divElement.setAttribute('class', 'alert alert-sm alert-light mr-1');
+        divElement.innerText = this.model;
+        divElement.appendChild(buttonElement);
+        document.getElementById('directoryQue').appendChild(divElement);
+        this.model = '';
     }
     checkInputCharacter(event) {
         const str = String.fromCharCode(event.charCode);
-        if (str.match(/;/)) {
-            this.que.push(this.model);
-            const buttonElement = document.createElement('button');
-            buttonElement.setAttribute('class', 'btn btn-sm btn-light ml-1');
-            buttonElement.innerText = 'x';
-            buttonElement.onclick = (function (ev) {
-                const target = ev.target;
-                this.removeDirectory(target.innerText);
-                const element = document.getElementById(target.innerText);
-                document.getElementById('directoryQue').removeChild(element);
-            }).bind(this);
-            const divElement = document.createElement('div');
-            divElement.setAttribute('class', 'alert alert-sm alert-secondary mr-1');
-            divElement.setAttribute('id', this.model);
-            divElement.innerText = this.model;
-            divElement.appendChild(buttonElement);
-            document.getElementById('directoryQue').appendChild(divElement);
-            this.model = '';
-            return false;
-        }
-        else if (!str.match(/[\.a-zA-Z0-9_-]/)) {
+        if (!str.match(/[\.a-zA-Z0-9_-]/)) {
             return false;
         }
     }
-    cancelCreateDirectory() {
+    closeModel() {
         this.directory.emit(null);
     }
-    createDirectory() {
-        if (this.model !== '') {
-            this.que.push(this.model);
-        }
+    createDirectories() {
         const directories = []; // directory objects holding name and location
         const locations = []; // locations to be created
         for (const q of this.que) {
             const object = {
-                location: this.currentDirectory.location + '/' + q,
+                location: this.currentDirectory.location === '/' ?
+                    this.currentDirectory.location + q :
+                    this.currentDirectory.location + '/' + q,
                 name: q
             };
             directories.push(object);
@@ -732,16 +757,22 @@ let CreateDirectoryComponent = class CreateDirectoryComponent {
         }
         this.fs.createDirectory({
             locations
-        })
-            .subscribe((responceLocations) => {
+        }).subscribe((responceLocations) => {
             // tslint:disable-next-line: prefer-for-of
             for (let i = 0; i < responceLocations.length; i++) {
-                const directory = JSON.parse(JSON.stringify(this.currentDirectory));
-                directory.location = responceLocations[i];
-                directory.name = directories.find((d) => {
-                    return d.location = responceLocations[i];
+                const newDirectory = new _extended_directory__WEBPACK_IMPORTED_MODULE_5__["ExtendedDirectory"]();
+                newDirectory.location = responceLocations[i];
+                newDirectory.name = directories.find((d) => {
+                    return d.location === responceLocations[i];
                 }).name;
-                this.directory.emit(directory);
+                newDirectory.size = 4096;
+                newDirectory.files = 0;
+                newDirectory.subDirectories = 0;
+                newDirectory.contents = {
+                    files: [],
+                    directories: []
+                };
+                this.directory.emit(newDirectory);
             }
         }, (err) => {
             this.errorMessage = 'Some kind of error occured while creating directory.';
@@ -752,6 +783,14 @@ let CreateDirectoryComponent = class CreateDirectoryComponent {
             return e === name;
         });
         this.que.splice(index, 1);
+    }
+    toggleHelp() {
+        if (this.help) {
+            this.help = false;
+        }
+        else {
+            this.help = true;
+        }
     }
 };
 CreateDirectoryComponent.ctorParameters = () => [
@@ -764,6 +803,9 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
 ], CreateDirectoryComponent.prototype, "currentDirectory", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
+], CreateDirectoryComponent.prototype, "existingNames", void 0);
 CreateDirectoryComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-create-directory',
@@ -772,6 +814,26 @@ CreateDirectoryComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     })
 ], CreateDirectoryComponent);
 
+
+
+/***/ }),
+
+/***/ "./src/app/extended-directory.ts":
+/*!***************************************!*\
+  !*** ./src/app/extended-directory.ts ***!
+  \***************************************/
+/*! exports provided: ExtendedDirectory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExtendedDirectory", function() { return ExtendedDirectory; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! api */ "../api/dist/api.esm.js");
+
+
+class ExtendedDirectory extends api__WEBPACK_IMPORTED_MODULE_1__["Directory"] {
+}
 
 
 /***/ }),
@@ -997,6 +1059,421 @@ LoginComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/mime-types.service.ts":
+/*!***************************************!*\
+  !*** ./src/app/mime-types.service.ts ***!
+  \***************************************/
+/*! exports provided: MimeTypesService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MimeTypesService", function() { return MimeTypesService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let MimeTypesService = class MimeTypesService {
+    constructor() {
+        this.audio = [
+            'audio/1d-interleaved-parityfec',
+            'audio/32kadpcm',
+            'audio/3gpp',
+            'audio/3gpp2',
+            'audio/aac',
+            'audio/ac3',
+            'audio/AMR',
+            'audio/AMR-WB',
+            'audio/amr-wb+',
+            'audio/aptx',
+            'audio/asc',
+            'audio/ATRAC-ADVANCED-LOSSLESS',
+            'audio/ATRAC-X',
+            'audio/ATRAC3',
+            'audio/basic',
+            'audio/BV16',
+            'audio/BV32',
+            'audio/clearmode',
+            'audio/CN',
+            'audio/DAT12',
+            'audio/dls',
+            'audio/dsr-es201108',
+            'audio/dsr-es202050',
+            'audio/dsr-es202211',
+            'audio/dsr-es202212',
+            'audio/DV',
+            'audio/DVI4',
+            'audio/eac3',
+            'audio/encaprtp',
+            'audio/EVRC',
+            'audio/EVRC-QCP',
+            'audio/EVRC0',
+            'audio/EVRC1',
+            'audio/EVRCB',
+            'audio/EVRCB0',
+            'audio/EVRCB1',
+            'audio/EVRCNW',
+            'audio/EVRCNW0',
+            'audio/EVRCNW1',
+            'audio/EVRCWB',
+            'audio/EVRCWB0',
+            'audio/EVRCWB1',
+            'audio/EVS',
+            'audio/example',
+            'audio/flexfec',
+            'audio/fwdred',
+            'audio/G711-0',
+            'audio/G719',
+            'audio/G7221',
+            'audio/G722',
+            'audio/G723',
+            'audio/G726-16',
+            'audio/G726-24',
+            'audio/G726-32',
+            'audio/G726-40',
+            'audio/G728',
+            'audio/G729',
+            'audio/G729D',
+            'audio/G729E',
+            'audio/GSM',
+            'audio/GSM-EFR',
+            'audio/GSM-HR-08',
+            'audio/iLBC',
+            'audio/ip-mr_v2.5',
+            'audio/L8',
+            'audio/L16',
+            'audio/L20',
+            'audio/L24',
+            'audio/LPC',
+            'audio/MELP',
+            'audio/MELP600',
+            'audio/MELP1200',
+            'audio/MELP2400',
+            'audio/mobile-xmf',
+            'audio/MPA',
+            'audio/mp4',
+            'audio/MP4A-LATM',
+            'audio/mpa-robust',
+            'audio/mpeg',
+            'audio/mpeg4-generic',
+            'audio/ogg',
+            'audio/opus',
+            'audio/PCMA',
+            'audio/PCMA-WB',
+            'audio/PCMU',
+            'audio/PCMU-WB',
+            'audio/prs.sid',
+            'audio/raptorfec',
+            'audio/RED',
+            'audio/rtp-enc-aescm128',
+            'audio/rtploopback',
+            'audio/rtp-midi',
+            'audio/rtx',
+            'audio/SMV',
+            'audio/SMV0',
+            'audio/SMV-QCP',
+            'audio/sp-midi',
+            'audio/speex',
+            'audio/t140c',
+            'audio/t38',
+            'audio/telephone-event',
+            'audio/TETRA_ACELP',
+            'audio/tone',
+            'audio/UEMCLIP',
+            'audio/ulpfec',
+            'audio/usac',
+            'audio/VDVI',
+            'audio/VMR-WB',
+            'audio/vnd.3gpp.iufp',
+            'audio/vnd.4SB',
+            'audio/vnd.audiokoz',
+            'audio/vnd.CELP',
+            'audio/vnd.cisco.nse',
+            'audio/vnd.cmles.radio-events',
+            'audio/vnd.cns.anp1',
+            'audio/vnd.cns.inf1',
+            'audio/vnd.dece.audio',
+            'audio/vnd.digital-winds',
+            'audio/vnd.dlna.adts',
+            'audio/vnd.dolby.heaac.1',
+            'audio/vnd.dolby.heaac.2',
+            'audio/vnd.dolby.mlp',
+            'audio/vnd.dolby.mps',
+            'audio/vnd.dolby.pl2',
+            'audio/vnd.dolby.pl2x',
+            'audio/vnd.dolby.pl2z',
+            'audio/vnd.dolby.pulse.1',
+            'audio/vnd.dra',
+            'audio/vnd.dts',
+            'audio/vnd.dts.hd',
+            'audio/vnd.dts.uhd',
+            'audio/vnd.dvb.file',
+            'audio/vnd.everad.plj',
+            'audio/vnd.hns.audio',
+            'audio/vnd.lucent.voice',
+            'audio/vnd.ms-playready.media.pya',
+            'audio/vnd.nokia.mobile-xmf',
+            'audio/vnd.nortel.vbk',
+            'audio/vnd.nuera.ecelp4800',
+            'audio/vnd.nuera.ecelp7470',
+            'audio/vnd.nuera.ecelp9600',
+            'audio/vnd.octel.sbc',
+            'audio/vnd.presonus.multitrack',
+            'audio/vnd.qcelp',
+            'audio/vnd.rhetorex.32kadpcm',
+            'audio/vnd.rip',
+            'audio/vnd.sealedmedia.softseal.mpeg',
+            'audio/vnd.vmx.cvsd',
+            'audio/vorbis',
+            'audio/vorbis-config'
+        ];
+        this.video = [
+            'video/1d-interleaved-parityfec',
+            'video/3gpp',
+            'video/3gpp2',
+            'video/3gpp-tt',
+            'video/BMPEG',
+            'video/BT656',
+            'video/CelB',
+            'video/DV',
+            'video/encaprtp',
+            'video/example',
+            'video/flexfec',
+            'video/H261',
+            'video/H263',
+            'video/H263-1998',
+            'video/H263-2000',
+            'video/H264',
+            'video/H264-RCDO',
+            'video/H264-SVC',
+            'video/H265',
+            'video/iso.segment',
+            'video/JPEG',
+            'video/jpeg2000',
+            'video/mj2',
+            'video/MP1S',
+            'video/MP2P',
+            'video/MP2T',
+            'video/mp4',
+            'video/MP4V-ES',
+            'video/MPV', ,
+            'video/mpeg4-generic',
+            'video/nv',
+            'video/ogg', ,
+            'video/pointer',
+            'video/quicktime',
+            'video/raptorfec', ,
+            'video/rtp-enc-aescm128',
+            'video/rtploopback',
+            'video/rtx',
+            'video/smpte291',
+            'video/SMPTE292M',
+            'video/ulpfec',
+            'video/vc1',
+            'video/vc2',
+            'video/vnd.CCTV',
+            'video/vnd.dece.hd',
+            'video/vnd.dece.mobile',
+            'video/vnd.dece.mp4',
+            'video/vnd.dece.pd',
+            'video/vnd.dece.sd',
+            'video/vnd.dece.video',
+            'video/vnd.directv.mpeg',
+            'video/vnd.directv.mpeg-tts',
+            'video/vnd.dlna.mpeg-tts',
+            'video/vnd.dvb.file',
+            'video/vnd.fvt',
+            'video/vnd.hns.video',
+            'video/vnd.iptvforum.1dparityfec-1010',
+            'video/vnd.iptvforum.1dparityfec-2005',
+            'video/vnd.iptvforum.2dparityfec-1010',
+            'video/vnd.iptvforum.2dparityfec-2005',
+            'video/vnd.iptvforum.ttsavc',
+            'video/vnd.iptvforum.ttsmpeg2',
+            'video/vnd.motorola.video',
+            'video/vnd.motorola.videop',
+            'video/vnd.mpegurl',
+            'video/vnd.ms-playready.media.pyv',
+            'video/vnd.nokia.interleaved-multimedia',
+            'video/vnd.nokia.mp4vr',
+            'video/vnd.nokia.videovoip',
+            'video/vnd.objectvideo',
+            'video/vnd.radgamettools.bink',
+            'video/vnd.radgamettools.smacker',
+            'video/vnd.sealed.mpeg1',
+            'video/vnd.sealed.mpeg4',
+            'video/vnd.sealed.swf',
+            'video/vnd.sealedmedia.softseal.mov',
+            'video/vnd.uvvu.mp4',
+            'video/vnd.youtube.yt',
+            'video/vnd.vivo',
+            'video/VP8',
+            'video/x-matroska'
+        ];
+        this.image = [
+            'image/aces',
+            'image/avci',
+            'image/avcs',
+            'image/bmp',
+            'image/cgm',
+            'image/dicom-rle',
+            'image/emf',
+            'image/example',
+            'image/fits',
+            'image/g3fax',
+            'image/heic',
+            'image/heic-sequence',
+            'image/heif',
+            'image/heif-sequence',
+            'image/hej2k',
+            'image/hsj2',
+            'image/jls',
+            'image/jp2',
+            'image/jph',
+            'image/jphc',
+            'image/jpm',
+            'image/jpx',
+            'image/jxr',
+            'image/jxrA',
+            'image/jxrS',
+            'image/jxs',
+            'image/jxsc',
+            'image/jxsi',
+            'image/jxss',
+            'image/naplps',
+            'image/png',
+            'image/prs.btif',
+            'image/prs.pti',
+            'image/pwg-raster',
+            'image/t38',
+            'image/tiff',
+            'image/tiff-fx',
+            'image/vnd.adobe.photoshop',
+            'image/vnd.airzip.accelerator.azv',
+            'image/vnd.cns.inf2',
+            'image/vnd.dece.graphic',
+            'image/vnd.djvu',
+            'image/vnd.dwg',
+            'image/vnd.dxf',
+            'image/vnd.dvb.subtitle',
+            'image/vnd.fastbidsheet',
+            'image/vnd.fpx',
+            'image/vnd.fst',
+            'image/vnd.fujixerox.edmics-mmr',
+            'image/vnd.fujixerox.edmics-rlc',
+            'image/vnd.globalgraphics.pgb',
+            'image/vnd.microsoft.icon',
+            'image/vnd.mix',
+            'image/vnd.ms-modi',
+            'image/vnd.mozilla.apng',
+            'image/vnd.net-fpx',
+            'image/vnd.radiance',
+            'image/vnd.sealed.png',
+            'image/vnd.sealedmedia.softseal.gif',
+            'image/vnd.sealedmedia.softseal.jpg',
+            'image/vnd.svf',
+            'image/vnd.tencent.tap',
+            'image/vnd.valve.source.texture',
+            'image/vnd.wap.wbmp',
+            'image/vnd.xiff',
+            'image/vnd.zbrush.pcx',
+            'image/wmf',
+            'image/emf',
+            'image/wmf'
+        ];
+        this.application = [
+            'application/pdf'
+        ];
+        this.text = [
+            'text/1d-interleaved-parityfec',
+            'text/cache-manifest',
+            'text/calendar',
+            'text/css',
+            'text/csv',
+            'text/csv-schema',
+            'text/directory',
+            'text/dns',
+            'text/ecmascript',
+            'text/encaprtp',
+            'text/example',
+            'text/flexfec',
+            'text/fwdred',
+            'text/grammar-ref-list',
+            'text/html',
+            'text/javascript',
+            'text/jcr-cnd',
+            'text/markdown',
+            'text/mizar',
+            'text/n3',
+            'text/parameters',
+            'text/provenance-notation',
+            'text/prs.fallenstein.rst',
+            'text/prs.lines.tag',
+            'text/prs.prop.logic',
+            'text/raptorfec',
+            'text/RED',
+            'text/rfc822-headers',
+            'text/rtf',
+            'text/rtp-enc-aescm128',
+            'text/rtploopback',
+            'text/rtx',
+            'text/sgml',
+            'text/strings',
+            'text/t140',
+            'text/tab-separated-values',
+            'text/troff',
+            'text/turtle',
+            'text/ulpfec',
+            'text/uri-list',
+            'text/vcard',
+            'text/vnd.a',
+            'text/vnd.abc',
+            'text/vnd.ascii-art',
+            'text/vnd.curl',
+            'text/vnd.debian.copyright',
+            'text/vnd.DMClientScript',
+            'text/vnd.dvb.subtitle',
+            'text/vnd.esmertec.theme-descriptor',
+            'text/vnd.ficlab.flt',
+            'text/vnd.fly',
+            'text/vnd.fmi.flexstor',
+            'text/vnd.gml',
+            'text/vnd.graphviz',
+            'text/vnd.hgl',
+            'text/vnd.in3d.3dml',
+            'text/vnd.in3d.spot',
+            'text/vnd.IPTC.NewsML',
+            'text/vnd.IPTC.NITF',
+            'text/vnd.latex-z',
+            'text/vnd.motorola.reflex',
+            'text/vnd.ms-mediapackage',
+            'text/vnd.net2phone.commcenter.command',
+            'text/vnd.radisys.msml-basic-layout',
+            'text/vnd.senx.warpscript',
+            'text/vnd.si.uricatalogue',
+            'text/vnd.sun.j2me.app-descriptor',
+            'text/vnd.sosi',
+            'text/vnd.trolltech.linguist',
+            'text/vnd.wap.si',
+            'text/vnd.wap.sl',
+            'text/vnd.wap.wml',
+            'text/vnd.wap.wmlscript',
+            'text/vtt',
+            'text/xml',
+            'text/xml-external-parsed-entity'
+        ];
+    }
+};
+MimeTypesService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], MimeTypesService);
+
+
+
+/***/ }),
+
 /***/ "./src/app/minify-path.pipe.ts":
 /*!*************************************!*\
   !*** ./src/app/minify-path.pipe.ts ***!
@@ -1034,6 +1511,149 @@ MinifyPathPipe = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         name: 'minifyPath'
     })
 ], MinifyPathPipe);
+
+
+
+/***/ }),
+
+/***/ "./src/app/open-media/open-media.component.scss":
+/*!******************************************************!*\
+  !*** ./src/app/open-media/open-media.component.scss ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("#media {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vw;\n  background-color: white;\n  z-index: 100;\n}\n\n.controls {\n  max-height: 10vh;\n  z-index: 101;\n}\n\n#mediaWindow {\n  max-height: 80vh;\n  max-width: 100vw;\n  z-index: 101;\n}\n\n#mediaInfo {\n  z-index: 101;\n}\n\n.textReader {\n  border: 0.5 solid black;\n  border-radius: 3px;\n  overflow: auto;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kaXNrL3Byb2plY3RzL29ubGluZS1zdG9yYWdlL29ubGluZS1zdG9yYWdlLWNsaWVudC9zcmMvYXBwL29wZW4tbWVkaWEvb3Blbi1tZWRpYS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvb3Blbi1tZWRpYS9vcGVuLW1lZGlhLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFDQSxNQUFBO0VBQ0EsT0FBQTtFQUNBLFlBQUE7RUFDQSxhQUFBO0VBQ0EsdUJBQUE7RUFDQSxZQUFBO0FDQ0Y7O0FERUE7RUFDRSxnQkFBQTtFQUNBLFlBQUE7QUNDRjs7QURFQTtFQUNFLGdCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxZQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0FDQ0Y7O0FERUE7RUFDRSx1QkFBQTtFQUNBLGtCQUFBO0VBQ0EsY0FBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvb3Blbi1tZWRpYS9vcGVuLW1lZGlhLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI21lZGlhIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiAxMDB2dztcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIHotaW5kZXg6IDEwMDtcbn1cblxuLmNvbnRyb2xzIHtcbiAgbWF4LWhlaWdodDogMTB2aDtcbiAgei1pbmRleDogMTAxO1xufVxuXG4jbWVkaWFXaW5kb3cge1xuICBtYXgtaGVpZ2h0OiA4MHZoO1xuICBtYXgtd2lkdGg6IDEwMHZ3O1xuICB6LWluZGV4OiAxMDE7XG59XG5cbiNtZWRpYUluZm8ge1xuICB6LWluZGV4OiAxMDE7XG59XG5cbi50ZXh0UmVhZGVyIHtcbiAgYm9yZGVyOiAwLjUgc29saWQgYmxhY2s7XG4gIGJvcmRlci1yYWRpdXM6IDNweDtcbiAgb3ZlcmZsb3c6IGF1dG87XG59XG4iLCIjbWVkaWEge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgd2lkdGg6IDEwMHZ3O1xuICBoZWlnaHQ6IDEwMHZ3O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgei1pbmRleDogMTAwO1xufVxuXG4uY29udHJvbHMge1xuICBtYXgtaGVpZ2h0OiAxMHZoO1xuICB6LWluZGV4OiAxMDE7XG59XG5cbiNtZWRpYVdpbmRvdyB7XG4gIG1heC1oZWlnaHQ6IDgwdmg7XG4gIG1heC13aWR0aDogMTAwdnc7XG4gIHotaW5kZXg6IDEwMTtcbn1cblxuI21lZGlhSW5mbyB7XG4gIHotaW5kZXg6IDEwMTtcbn1cblxuLnRleHRSZWFkZXIge1xuICBib3JkZXI6IDAuNSBzb2xpZCBibGFjaztcbiAgYm9yZGVyLXJhZGl1czogM3B4O1xuICBvdmVyZmxvdzogYXV0bztcbn0iXX0= */");
+
+/***/ }),
+
+/***/ "./src/app/open-media/open-media.component.ts":
+/*!****************************************************!*\
+  !*** ./src/app/open-media/open-media.component.ts ***!
+  \****************************************************/
+/*! exports provided: OpenMediaComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OpenMediaComponent", function() { return OpenMediaComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _mime_types_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../mime-types.service */ "./src/app/mime-types.service.ts");
+/* harmony import */ var _file_system_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../file-system.service */ "./src/app/file-system.service.ts");
+
+
+
+
+
+let OpenMediaComponent = class OpenMediaComponent {
+    constructor(ms, fs) {
+        this.ms = ms;
+        this.fs = fs;
+        this.faWindowClose = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_1__["faWindowClose"];
+        this.mediaClose = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"]();
+        this.notSupported = false;
+    }
+    ngOnInit() {
+    }
+    ngOnChanges() {
+        this.fs.downloadFile(this.media.location)
+            .subscribe(res => {
+            const file = res;
+            const mediaWindow = document.getElementById('mediaWindow');
+            const mediaInfo = document.getElementById('mediaInfo');
+            mediaInfo.setAttribute('style', 'text-align: center');
+            let documentView;
+            let documentSource;
+            if (this.ms.image.includes(this.media.mediaType)) {
+                documentView = document.createElement('img');
+                documentView.setAttribute('style', 'max-width: 98vw; max-height: 78vh; padding: 1vh 1vw;');
+                documentSource = URL.createObjectURL(file);
+                documentView.src = documentSource;
+                mediaWindow.appendChild(documentView);
+                mediaInfo.innerHTML = `<b>Viewing File</b>: ${this.media.name}`;
+                mediaWindow.appendChild(mediaInfo);
+            }
+            else if (this.ms.text.includes(this.media.mediaType)) {
+                const reader = document.createElement('pre');
+                reader.setAttribute('style', 'width: 96vw; height: 76vh; padding: 1vh 1vw; margin: 1vh 1vw;' +
+                    'border: 1px solid black; border-radius: 10px;' +
+                    'overflow: auto;');
+                reader.setAttribute('class', 'textReader');
+                reader.setAttribute('contentEditable', 'true');
+                reader.setAttribute('spellCheck', 'false');
+                file.text().then((text) => {
+                    reader.innerText = text;
+                    mediaWindow.appendChild(reader);
+                    mediaInfo.innerHTML = `<b>Viewing File</b>: ${this.media.name}`;
+                    mediaWindow.appendChild(mediaInfo);
+                });
+            }
+            else if (this.ms.video.includes(this.media.mediaType)) {
+                const video = document.createElement('video');
+                video.setAttribute('style', 'width: 98vw; height: 78vh; padding: 1vh 1vw; ');
+                const videoSource = document.createElement('source');
+                const videoSourceURL = URL.createObjectURL(file);
+                videoSource.src = videoSourceURL;
+                videoSource.type = this.media.mediaType;
+                video.controls = true;
+                video.appendChild(videoSource);
+                mediaWindow.appendChild(video);
+                mediaInfo.innerHTML = `<b>Playing File</b>: ${this.media.name}`;
+                mediaWindow.appendChild(mediaInfo);
+                // URL.revokeObjectURL(videoSourceURL);
+            }
+            else if (this.ms.application.includes(this.media.mediaType)) {
+                const appView = document.createElement('iframe');
+                const appViewSource = URL.createObjectURL(file);
+                appView.setAttribute('style', 'width: 98vw; height: 78vh; padding: 1vh 1vw; ');
+                appView.src = appViewSource;
+                mediaWindow.appendChild(appView);
+                mediaInfo.innerHTML = `<b>Viewing File</b>: ${this.media.name}`;
+                mediaWindow.appendChild(mediaInfo);
+            }
+            else {
+                this.notSupported = true;
+                const downloadElement = document.getElementById('download');
+                const sourceUrl = URL.createObjectURL(file);
+                downloadElement.href = sourceUrl;
+                downloadElement.onclick = (() => {
+                    window.location.href = sourceUrl;
+                    URL.revokeObjectURL(sourceUrl);
+                });
+            }
+        }, (err) => {
+            const elem = document.getElementById('error');
+            const errElem = document.createElement('div');
+            errElem.setAttribute('class', 'alert alert-danger');
+            errElem.innerHTML = '<p><b>Error</b>: Some kind of error occured' +
+                ' while downloading file.</p>';
+        });
+    }
+    closeMedia() {
+        this.mediaClose.emit(null);
+    }
+};
+OpenMediaComponent.ctorParameters = () => [
+    { type: _mime_types_service__WEBPACK_IMPORTED_MODULE_3__["MimeTypesService"] },
+    { type: _file_system_service__WEBPACK_IMPORTED_MODULE_4__["FileSystemService"] }
+];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Output"])()
+], OpenMediaComponent.prototype, "mediaClose", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Input"])()
+], OpenMediaComponent.prototype, "media", void 0);
+OpenMediaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+        selector: 'app-open-media',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./open-media.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/open-media/open-media.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./open-media.component.scss */ "./src/app/open-media/open-media.component.scss")).default]
+    })
+], OpenMediaComponent);
 
 
 
@@ -1412,14 +2032,16 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserPanelComponent", function() { return UserPanelComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/ngx-cookie-service.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! api */ "../api/dist/api.esm.js");
+/* harmony import */ var _extended_directory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../extended-directory */ "./src/app/extended-directory.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/ngx-cookie-service.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _hru__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hru */ "./src/app/hru.ts");
 /* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
 /* harmony import */ var _file_system_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../file-system.service */ "./src/app/file-system.service.ts");
+/* harmony import */ var _mime_types_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../mime-types.service */ "./src/app/mime-types.service.ts");
+
 
 
 
@@ -1430,11 +2052,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let UserPanelComponent = class UserPanelComponent {
-    constructor(cookieService, http, router, fs) {
+    constructor(cookieService, http, router, fs, ms) {
         this.cookieService = cookieService;
         this.http = http;
         this.router = router;
         this.fs = fs;
+        this.ms = ms;
         this.faFolder = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faFolder"];
         this.faFile = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faFile"];
         this.faFolderPlus = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faFolderPlus"];
@@ -1455,8 +2078,8 @@ let UserPanelComponent = class UserPanelComponent {
             createDirectory: false,
             uploadFile: false
         };
-        this.root = new api__WEBPACK_IMPORTED_MODULE_5__["Directory"]();
-        this.currentDirectory = new api__WEBPACK_IMPORTED_MODULE_5__["Directory"]();
+        this.root = new _extended_directory__WEBPACK_IMPORTED_MODULE_1__["ExtendedDirectory"]();
+        this.currentDirectory = new _extended_directory__WEBPACK_IMPORTED_MODULE_1__["ExtendedDirectory"]();
         this.forwardStack = [];
         this.backwardStack = [];
         this.maxStorage = 0;
@@ -1466,6 +2089,9 @@ let UserPanelComponent = class UserPanelComponent {
         this.clipboard = [];
         this.clipboardDirectory = null;
         this.keep = true;
+        this.playingAudio = null;
+        this.media = null;
+        this.mediaOpened = false;
         this.message = null;
         this.errorMessage = null;
     }
@@ -1476,6 +2102,7 @@ let UserPanelComponent = class UserPanelComponent {
         this.maxStorage = Number(this.cookieService.get('maxStorage'));
         this.fs.getEntries().subscribe((res) => {
             this.root = res;
+            this.setIds(this.root);
             this.currentDirectory = this.root;
             this.usage = Number(this.root.size);
             this.usagePercent = (this.usage * 100) / this.maxStorage;
@@ -1494,7 +2121,7 @@ let UserPanelComponent = class UserPanelComponent {
         this.keep = false;
     }
     deleteEntry(entry) {
-        this.clipboard = [entry];
+        this.selected = [entry];
         this.deleteEntries();
     }
     deleteEntries() {
@@ -1510,17 +2137,13 @@ let UserPanelComponent = class UserPanelComponent {
                     const index = this.currentDirectory.contents.directories.findIndex(e => {
                         return e.location === r.location;
                     });
-                    if (index >= 0) {
-                        this.currentDirectory.contents.directories.splice(index, 1);
-                    }
+                    this.currentDirectory.contents.directories.splice(index, 1);
                 }
                 else {
                     const index = this.currentDirectory.contents.files.findIndex(e => {
                         return e.location === r.location;
                     });
-                    if (index >= 0) {
-                        this.currentDirectory.contents.files.splice(index, 1);
-                    }
+                    this.currentDirectory.contents.files.splice(index, 1);
                 }
             }
         });
@@ -1571,6 +2194,8 @@ let UserPanelComponent = class UserPanelComponent {
                     this.clipboardDirectory.contents.files.splice(index, 1);
                 }
             }
+            this.clipboard = [];
+            this.keep = true;
         }, err => {
             if (this.keep) {
                 this.errorMessage =
@@ -1580,6 +2205,8 @@ let UserPanelComponent = class UserPanelComponent {
                 this.errorMessage =
                     'Some kind of error occured while moving files!';
             }
+            this.clipboard = [];
+            this.keep = true;
         });
     }
     renameEntry(entry, newName) {
@@ -1625,6 +2252,7 @@ let UserPanelComponent = class UserPanelComponent {
         }
         else {
             this.currentDirectory.contents.directories.push(directory);
+            this.usage += directory.size;
             this.triggers.createDirectory = false;
         }
     }
@@ -1651,6 +2279,10 @@ let UserPanelComponent = class UserPanelComponent {
     }
     /************************************************************************** */
     // FILE LEVEL OPERATIONS
+    closeFile(file) {
+        this.mediaOpened = false;
+        this.media = null;
+    }
     downloadFile(name, location) {
         this.fs.downloadFile(location).subscribe((res) => {
             const link = document.createElement('a');
@@ -1661,6 +2293,64 @@ let UserPanelComponent = class UserPanelComponent {
         }, err => {
             this.errorHandler('Downlaod File', err);
         });
+    }
+    openFile(file) {
+        if (this.ms.audio.includes(file.mediaType)) {
+            this.playingAudio = '';
+            const target = document.querySelector(`#${file.id}.item-content`);
+            target.innerHTML = '';
+            // purge other files if there are
+            const audios = Array.from(document.getElementsByTagName('audio'));
+            const contents = Array.from(document.getElementsByClassName('item-content'));
+            for (const a of audios) {
+                for (const c of contents) {
+                    if (c.contains(a)) {
+                        c.innerHTML = '';
+                    }
+                }
+            }
+            // Audio Container
+            const audioContainer = document.createElement('div');
+            const buttonContainer = document.createElement('div');
+            audioContainer.setAttribute('class', 'flex-grow');
+            // Audio Element
+            let audioSrc;
+            const audioElement = document.createElement('audio');
+            audioElement.setAttribute('type', file.mediaType);
+            audioElement.controls = true;
+            audioElement.loop = false;
+            const end = (function (event) {
+                event.stopPropagation();
+                URL.revokeObjectURL(audioSrc);
+                target.innerHTML = '';
+                this.playingAudio = '';
+            }).bind(this);
+            audioElement.setAttribute('style', 'display: inline-block;');
+            audioElement.addEventListener('complete', end);
+            // Audio Close Element
+            const audioCloseElement = document.createElement('button');
+            audioCloseElement.innerText = 'x';
+            audioCloseElement.addEventListener('click', end);
+            audioCloseElement.setAttribute('style', 'display: inline-block;');
+            audioCloseElement.setAttribute('class', 'btn btn-sm btn-secondary mx-1');
+            this.fs.downloadFile(file.location)
+                .subscribe((res) => {
+                this.playingAudio = file.id;
+                audioSrc = URL.createObjectURL(res);
+                audioElement.src = audioSrc;
+                audioContainer.appendChild(audioElement);
+                buttonContainer.appendChild(audioCloseElement);
+                target.appendChild(audioContainer);
+                target.appendChild(buttonContainer);
+                console.log(this.playingAudio);
+            }, (err) => {
+                return;
+            });
+        }
+        else {
+            this.media = file;
+            this.mediaOpened = true;
+        }
     }
     uploadFile(file) {
         if (file) {
@@ -1743,6 +2433,22 @@ let UserPanelComponent = class UserPanelComponent {
             }
         }
     }
+    setIds(directory) {
+        const setFileIds = (files) => {
+            // tslint:disable-next-line: prefer-for-of
+            for (let i = 0; i < files.length; i++) {
+                files[i] = files[i];
+                files[i].id = 'File' + files[i].name.replace(/\./g, '');
+            }
+        };
+        setFileIds(directory.contents.files);
+        for (const d of directory.contents.directories) {
+            this.setIds(d);
+        }
+    }
+    stopEventPropagation(event) {
+        event.stopPropagation();
+    }
     trigger(name) {
         this.triggers.createDirectory = false;
         this.triggers.uploadFile = false;
@@ -1773,13 +2479,14 @@ let UserPanelComponent = class UserPanelComponent {
     }
 };
 UserPanelComponent.ctorParameters = () => [
-    { type: ngx_cookie_service__WEBPACK_IMPORTED_MODULE_3__["CookieService"] },
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
-    { type: _file_system_service__WEBPACK_IMPORTED_MODULE_8__["FileSystemService"] }
+    { type: ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__["CookieService"] },
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+    { type: _file_system_service__WEBPACK_IMPORTED_MODULE_8__["FileSystemService"] },
+    { type: _mime_types_service__WEBPACK_IMPORTED_MODULE_9__["MimeTypesService"] }
 ];
 UserPanelComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         selector: 'app-user-panel',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./user-panel.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/user-panel/user-panel.component.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./user-panel.component.scss */ "./src/app/user-panel/user-panel.component.scss")).default]
