@@ -4,8 +4,7 @@ const fs = require("fs");
 
 class Configuration {
   static getEnv() {
-    if (process.env["NODE_ENV"] == "development") return "development";
-    else return "production";
+    return process.env["NODE_ENV"]
   }
 
   static getDBName() {
@@ -15,8 +14,14 @@ class Configuration {
 
   static getMountRoot() {
     if (process.env["NODE_ENV"] == "development") {
+      if (process.platform === 'win32')
+        return "D:\\projects\\online-storage\\mounts"
+
       return "/disk/projects/online-storage/mounts"
     } else {
+      if (process.platform === 'win32')
+        return "D:\\mounts"
+
       return "/disk/mounts"
     }
   }

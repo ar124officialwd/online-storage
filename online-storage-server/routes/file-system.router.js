@@ -90,7 +90,7 @@ fileSystemRouter.get('/fileSystem', async (req, res, next) => {
 })
 
 let upload = multer({
-  dest: path.join(path.join(__dirname, '..', '/uploads'))
+  dest: path.join(path.join('..', '/uploads'))
 })
 
 // Request of creating directories or uploading files
