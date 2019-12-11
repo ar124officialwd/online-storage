@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Directory, File, FileSystemEntry } from 'api';
 import { hru } from '../hru';
+import * as path from 'path';
 
 import {
   faFolder,
@@ -108,16 +109,32 @@ export class UserPanelComponent implements OnInit {
     this.clipboard = this.selected;
     this.clipboardDirectory = this.currentDirectory;
     this.keep = true;
+
+    this.selected = [];
+    const checkboxs = Array.from(
+      document.querySelectorAll('input[type=checkbox]')
+    );
+    for (const e of checkboxs) {
+      e.removeAttribute('checked');
+    }
   }
 
   private cutEntries() {
     this.clipboard = this.selected;
     this.clipboardDirectory = this.currentDirectory;
     this.keep = false;
+
+    this.selected = [];
+    const checkboxs = Array.from(
+      document.querySelectorAll('input[type=checkbox]')
+    );
+    for (const e of checkboxs) {
+      e.removeAttribute('checked');
+    }
   }
 
   private deleteEntry(entry) {
-    this.selected = [entry];
+    this.selected = [entry]; // array of one element
     this.deleteEntries();
   }
 
@@ -156,6 +173,27 @@ export class UserPanelComponent implements OnInit {
     this.selected = [];
   }
 
+  private isCut(entry) {
+    const index = this.clipboard.findIndex(c => {
+      return c.name === entry.name;
+    })
+    return !this.keep && index >= 0;
+  }
+
+  private isCopied(entry) {
+    const index = this.clipboard.findIndex(c => {
+      return c.name === entry.name;
+    })
+    return this.keep && index >= 0;
+  }
+
+  private isSelected(entry) {
+    const index = this.selected.findIndex(s => {
+      return s.name === entry.name;
+    })
+    return index >= 0;
+  }
+
   private pasteEntries() {
     this.errorMessage = '';
     this.message = '';
@@ -169,7 +207,12 @@ export class UserPanelComponent implements OnInit {
       to.mediaType = from.mediaType;
       to.size = from.size;
       to.extension = from.extension || undefined;
-      to.location = to.location + '/' + from.name + from.extension || '';
+      if (from.mediaType !== 'directory') {
+        to.location = to.location + path.sep + from.name + from.extension;
+      } else {
+        to.location = to.location + path.sep + from.name
+      }
+
       copyObjects.push({
         from,
         to
@@ -226,16 +269,55 @@ export class UserPanelComponent implements OnInit {
       );
   }
 
+  private select(entry, event) {
+    if (event.target.id === 'selectAll') {
+      if (event.target.checked) {
+        this.selected = JSON.parse(
+          JSON.stringify(this.currentDirectory.contents.directories)
+        );
+        for (const f of this.currentDirectory.contents.files) {
+          this.selected.push(JSON.parse(JSON.stringify(f)));
+        }
+
+        const checkboxs = Array.from(
+          document.querySelectorAll('input[type=checkbox]')
+        );
+        for (const e of checkboxs) {
+          e.setAttribute('checked', 'true');
+        }
+
+      } else {
+        this.selected = [];
+        const checkboxs = Array.from(
+          document.querySelectorAll('input[type=checkbox]')
+        );
+        for (const e of checkboxs) {
+          e.removeAttribute('checked');
+        }
+      }
+
+    } else {
+      if (event.target.checked) {
+        this.selected.push(entry);
+      } else {
+        const index = this.selected.findIndex(s => {
+          return s.name === entry.name;
+        });
+        this.selected.splice(index, 1);
+      }
+    }
+  }
+
   renameEntry(entry, newName) {
     if (entry.name === newName) {
       return;
     }
 
-    const targetEntry = entry;
-    const newEntry = JSON.parse(JSON.stringify(targetEntry));
+    const sourceEntry = entry;
+    const newEntry = JSON.parse(JSON.stringify(sourceEntry));
     newEntry.name = newName.match(/[\w\.-]*/g).join('');
     newEntry.location = newEntry.location.replace(
-      targetEntry.name,
+      sourceEntry.name,
       newEntry.name
     );
 
@@ -243,27 +325,28 @@ export class UserPanelComponent implements OnInit {
       .copy({
         pairs: [
           {
-            from: targetEntry,
+            from: sourceEntry,
             to: newEntry
           }
         ],
         keep: false
       })
       .subscribe((res: FileSystemEntry[]) => {
-        if (entry.mediaType !== 'directory') {
+        if (sourceEntry.mediaType !== 'directory') {
           const index = this.currentDirectory.contents.files.findIndex(e => {
-            return (e.location = targetEntry.location);
+            return (e.location === sourceEntry.location);
           });
           this.currentDirectory.contents.files.splice(index, 1);
           this.currentDirectory.contents.files.push(res[0] as ExtendedFile);
         } else {
           const index = this.currentDirectory.contents.directories.findIndex(
             e => {
-              return (e.location = targetEntry.location);
+              return (e.location === sourceEntry.location);
             }
           );
           this.currentDirectory.contents.directories.splice(index, 1);
-          this.currentDirectory.contents.directories.push(res[0] as Directory);
+          this.currentDirectory.contents.directories.push(
+            res[0] as ExtendedDirectory);
         }
       });
   }
@@ -448,45 +531,7 @@ export class UserPanelComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
-  private select(entry, event) {
-    if (event.target.id === 'selectAll') {
-      if (event.target.checked) {
-        this.selected = JSON.parse(
-          JSON.stringify(this.currentDirectory.contents.directories)
-        );
-        for (const f of this.currentDirectory.contents.files) {
-          this.selected.push(JSON.parse(JSON.stringify(f)));
-        }
-
-        const checkboxs = Array.from(
-          document.querySelectorAll('input[type=checkbox]')
-        );
-        for (const e of checkboxs) {
-          e.setAttribute('checked', 'true');
-        }
-      } else {
-        this.selected = [];
-
-        const checkboxs = Array.from(
-          document.querySelectorAll('input[type=checkbox]')
-        );
-        for (const e of checkboxs) {
-          e.removeAttribute('checked');
-        }
-      }
-    } else {
-      if (event.target.checked) {
-        this.selected.push(entry);
-      } else {
-        const index = this.selected.findIndex(i => {
-          return i === entry;
-        });
-        this.selected.splice(index, 1);
-      }
-    }
-  }
-
-  setIds(directory: ExtendedDirectory) {
+  private setIds(directory: ExtendedDirectory) {
     const setFileIds = (files: ExtendedFile[]) => {
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < files.length; i++) {

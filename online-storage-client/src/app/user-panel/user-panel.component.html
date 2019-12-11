@@ -93,7 +93,9 @@
     {{errorMessage}}
   </div>
 
-  <div *ngFor="let e of currentDirectory.contents.directories" class="item"
+  <div *ngFor="let e of currentDirectory.contents.directories"
+    class="alert item" [class.alert-light]="isSelected(e)"
+    [class.alert-warning]="isCopied(e)" [class.alert-danger]="isCut(e)"
     (click)="openDirectory(e)">
     <div class="item-header">
       <input type="checkbox" (change)="select(e, $event)"
@@ -110,7 +112,7 @@
     </div>
     <div class="item-actions">
       <div>
-        <button (click)="deleteEntry(e)"
+        <button (click)="deleteEntry(e); stopEventPropagation($event)"
           class="btn btn-sm btn-light m-1">
           <fa-icon [icon]="faTrash"></fa-icon>
         </button>
@@ -118,8 +120,9 @@
     </div>
   </div>
 
-  <div *ngFor="let e of currentDirectory.contents.files" class="item"
-    (click)="openFile(e)">
+  <div *ngFor="let e of currentDirectory.contents.files" class="alert item"
+    [class.alert-light]="isSelected(e)" [class.alert-warning]="isCopied(e)"
+    [class.alert-danger]="isCut(e)" (click)="openFile(e)">
 
     <div class="item-header">
       <input type="checkbox" (change)="select(e, $event)"
