@@ -1558,7 +1558,9 @@ let OpenMediaComponent = class OpenMediaComponent {
     ngOnChanges() {
         this.fs.downloadFile(this.media.location)
             .subscribe(res => {
+            window.scrollTo(0, 0);
             const file = res;
+            const media = document.getElementById('media');
             const mediaWindow = document.getElementById('mediaWindow');
             const mediaInfo = document.getElementById('mediaInfo');
             mediaInfo.setAttribute('style', 'text-align: center');
@@ -1618,7 +1620,7 @@ let OpenMediaComponent = class OpenMediaComponent {
                 downloadElement.href = sourceUrl;
                 downloadElement.onclick = (() => {
                     window.location.href = sourceUrl;
-                    URL.revokeObjectURL(sourceUrl);
+                    //URL.revokeObjectURL(sourceUrl);
                 });
             }
         }, (err) => {
