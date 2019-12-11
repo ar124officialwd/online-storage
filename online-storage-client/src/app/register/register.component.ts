@@ -38,6 +38,9 @@ export class RegisterComponent implements OnInit {
   }
 
   save() {
+    this.registerFailed = false;
+    this.registerSuccess = false;
+
     const auth = 'Basic ' + Buffer.Buffer.from(this.model.email).toString('base64');
 
     this.http.get('/user', {
@@ -45,22 +48,24 @@ export class RegisterComponent implements OnInit {
         Authorization: auth
       }
     }).subscribe((responce: User) => {
-      this.userExist = (responce.email === this.model.email);
+      this.userExist = responce.email === this.model.email;
+
+      if (this.userExist) {
+        const offsetTop = document.getElementById('email').offsetTop;
+        document.getElementById('register').scrollTop = offsetTop;
+        return;
+      }
+    }, (err) => {
+      this.http.post('/user', this.model)
+        .subscribe((user: User) => {
+          this.registerSuccess = true;
+          const offsetTop = document.getElementById('success').offsetTop;
+          document.getElementById('register').scrollTop = offsetTop;
+        }, (err: HttpErrorResponse) => {
+          this.registerFailed = true;
+          const offsetTop = document.getElementById('failed').offsetTop;
+          document.getElementById('register').scrollTop = offsetTop;
+        });
     });
-
-    if (this.userExist) {
-      return;
-    }
-
-    this.http.post('/user', this.model)
-      .subscribe((user: User) => {
-        this.registerSuccess = true;
-        const offsetTop = document.getElementById('success').offsetTop;
-        document.getElementById('register').scrollTop = offsetTop;
-      }, (err: HttpErrorResponse) => {
-        this.registerFailed = true;
-        const offsetTop = document.getElementById('failed').offsetTop;
-        document.getElementById('register').scrollTop = offsetTop;
-      });
   }
 }

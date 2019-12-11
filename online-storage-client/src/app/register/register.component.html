@@ -34,7 +34,7 @@
 
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" name="email" class="form-control" maxlength="256" [(ngModel)]="model.email" #email="ngModel"
+      <input id="email" type="email" name="email" class="form-control" maxlength="256" [(ngModel)]="model.email" #email="ngModel"
         required>
       <div *ngIf="(!validateEmail(email.value) && (email.dirty || email.touched)) || userExist" class="text-muted">
         <div *ngIf="!validateEmail(email.value)">
