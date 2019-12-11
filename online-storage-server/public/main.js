@@ -139,7 +139,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<router-outlet></router-outlet>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<router-outlet></router-outlet>\r\n");
 
 /***/ }),
 
@@ -152,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"createDirectory\">\n  <div class=\"d-flex flex-row-reverse p-1\">\n    <button class=\"btn btn-sm\">\n      <fa-icon [icon]=\"faWindowClose\"\n        (click)=\"closeModel()\"></fa-icon>\n    </button>\n    <button class=\"btn btn-sm\">\n      <fa-icon [icon]=\"faInfo\"\n        (click)=\"toggleHelp()\"></fa-icon>\n    </button>\n  </div>\n\n  <div class=\"m-1\">\n    <h4>Create New Directories</h4>\n  </div>\n\n  <div *ngIf=\"!help\">\n    <form (ngSubmit)=\"createDirectories()\" #form=\"ngForm\">\n      <div class=\"form-group\">\n        <label for=\"directory\">Enter names for directories</label>\n        <input type=\"text\" name=\"directory\" class=\"form-control\" maxlength=\"128\"\n          [(ngModel)]=\"model\" #directory=\"ngModel\"\n          (keypress)=\"checkInputCharacter($event)\"\n          required>\n\n        <div *ngIf=\"!directory.dirty || !directory.touched\" class=\"text-muted\">\n          Allowed characters are 'a to z', 'A-Z', ., - and _\n        </div>\n\n        <div *ngIf=\"directory.invalid && !que.length && (directory.dirty || directory.touched)\"\n            class=\"text-muted\">\n          <div *ngIf=\"directory.errors.required\">\n            Directory name is required\n          </div>\n        </div>\n      </div>\n\n      <button type=\"button\" class=\"btn btn-sm btn-primary\"\n        (click)=\"addDirectory()\" [disabled]=\"!form.valid\">\n        Add Directory</button>\n\n      <input [disabled]=\"form.invalid && !que\" type=\"submit\"\n        value=\"Create Directories\" class=\"btn btn-sm btn-success m-2 p-1\">\n    </form>\n\n    <div>\n      <h6>Directories List</h6>\n    </div>\n    <div id=\"directoryQue\" class=\"alert alert-primary m-1 d-flex flex-row\"\n      [class.hidden]=\"!que.length\">\n    </div>\n  </div>\n\n  <div *ngIf=\"help\" class=\"p-2\">\n    <ul>\n      <li>Create Directory option let you create one or more directories</li>\n      <li>To create a directory, use Directory Name input field</li>\n      <li>Click 'Add Next' to add typed directory.</li>\n      <li>Click 'Create Directories' to create directories in\n        Directories list.</li>\n      <li>Selected directories are always there at bottom,\n        so you may remove one if you wish to cancel.</li>\n    </ul>\n    <div class=\"alert alert-warning p-2\">\n      Click 'Info' button at top again to close this help.\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"createDirectory\">\r\n  <div class=\"d-flex flex-row-reverse p-1\">\r\n    <button class=\"btn btn-sm\">\r\n      <fa-icon [icon]=\"faWindowClose\"\r\n        (click)=\"closeModel()\"></fa-icon>\r\n    </button>\r\n    <button class=\"btn btn-sm\">\r\n      <fa-icon [icon]=\"faInfo\"\r\n        (click)=\"toggleHelp()\"></fa-icon>\r\n    </button>\r\n  </div>\r\n\r\n  <div class=\"m-1\">\r\n    <h4>Create New Directories</h4>\r\n  </div>\r\n\r\n  <div *ngIf=\"!help\">\r\n    <form (ngSubmit)=\"createDirectories()\" #form=\"ngForm\">\r\n      <div class=\"form-group\">\r\n        <label for=\"directory\">Enter names for directories</label>\r\n        <input type=\"text\" name=\"directory\" class=\"form-control\" maxlength=\"128\"\r\n          [(ngModel)]=\"model\" #directory=\"ngModel\"\r\n          (keypress)=\"checkInputCharacter($event)\"\r\n          required>\r\n\r\n        <div *ngIf=\"!directory.dirty || !directory.touched\" class=\"text-muted\">\r\n          Allowed characters are 'a to z', 'A-Z', ., - and _\r\n        </div>\r\n\r\n        <div *ngIf=\"directory.invalid && !que.length && (directory.dirty || directory.touched)\"\r\n            class=\"text-muted\">\r\n          <div *ngIf=\"directory.errors.required\">\r\n            Directory name is required\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <button type=\"button\" class=\"btn btn-sm btn-primary\"\r\n        (click)=\"addDirectory()\" [disabled]=\"!form.valid\">\r\n        Add Directory</button>\r\n\r\n      <input [disabled]=\"form.invalid && !que\" type=\"submit\"\r\n        value=\"Create Directories\" class=\"btn btn-sm btn-success m-2 p-1\">\r\n    </form>\r\n\r\n    <div>\r\n      <h6>Directories List</h6>\r\n    </div>\r\n    <div id=\"directoryQue\" [class.hidden]=\"!que.length\"\r\n      class=\"alert alert-primary m-1 d-flex flex-row flex-wrap\">\r\n    </div>\r\n  </div>\r\n\r\n  <div *ngIf=\"help\" class=\"p-2\">\r\n    <ul>\r\n      <li>Create Directory option let you create one or more directories</li>\r\n      <li>To create a directory, use Directory Name input field</li>\r\n      <li>Click 'Add Next' to add typed directory.</li>\r\n      <li>Click 'Create Directories' to create directories in\r\n        Directories list.</li>\r\n      <li>Selected directories are always there at bottom,\r\n        so you may remove one if you wish to cancel.</li>\r\n    </ul>\r\n    <div class=\"alert alert-warning p-2\">\r\n      Click 'Info' button at top again to close this help.\r\n    </div>\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -165,7 +165,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"login\">\n  <h4 class=\"title\">Login</h4>\n\n  <div *ngIf=\"otherError\" class=\"text-muted\">\n    Some kind of error occured, please try again\n  </div>\n\n  <div *ngIf=\"loginFailed\" class=\"text-muted\">\n    Failed: Invalid email or password!\n  </div>\n\n  <form (ngSubmit)=\"createSession()\" #loginForm=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"email\">Email</label>\n      <input type=\"email\" name=\"email\" class=\"form-control\"\n        [(ngModel)]=\"model.email\" #email=\"ngModel\" required>\n      <div *ngIf=\"email.invalid && (email.dirty || email.touched)\">\n        <div *ngIf=\"email.errors.required\" class=\"text-muted\">\n          Email is required\n        </div>\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"password\">Password</label>\n      <input type=\"password\" name=\"password\" class=\"form-control\"\n        minlength=8 maxlength=64 [(ngModel)]=\"model.password\"\n        #password=\"ngModel\" required>\n      <div *ngIf=\"password.invalid && (password.dirty || password.touched)\">\n        <div *ngIf=\"password.errors.required\" class=\"text-muted\">\n          Password is required\n        </div>\n        <div *ngIf=\"password.errors.minlength\" class=\"text-muted\">\n          Password must be atleast 8 character long\n        </div>\n      </div>\n    </div>\n\n    <div>\n      <button type=\"submit\" class=\"btn btn-success\"\n        [disabled]=\"!loginForm.valid\">Login</button>\n    </div>\n  </form>\n  <div class=\"text-muted\">\n    Not yet registered? <a routerLink=\"/register\">Signup</a> now\n  </div>\n\n  <div *ngIf=\"loginSuccess\" class=\"text-muted\">\n    You have been logined successfully, Redirecting...!\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"login\">\r\n  <h4 class=\"title\">Login</h4>\r\n\r\n  <div *ngIf=\"otherError\" class=\"text-muted\">\r\n    Some kind of error occured, please try again\r\n  </div>\r\n\r\n  <div *ngIf=\"loginFailed\" class=\"text-muted\">\r\n    Failed: Invalid email or password!\r\n  </div>\r\n\r\n  <form (ngSubmit)=\"createSession()\" #loginForm=\"ngForm\">\r\n    <div class=\"form-group\">\r\n      <label for=\"email\">Email</label>\r\n      <input type=\"email\" name=\"email\" class=\"form-control\"\r\n        [(ngModel)]=\"model.email\" #email=\"ngModel\" required>\r\n      <div *ngIf=\"email.invalid && (email.dirty || email.touched)\">\r\n        <div *ngIf=\"email.errors.required\" class=\"text-muted\">\r\n          Email is required\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"password\">Password</label>\r\n      <input type=\"password\" name=\"password\" class=\"form-control\"\r\n        minlength=8 maxlength=64 [(ngModel)]=\"model.password\"\r\n        #password=\"ngModel\" required>\r\n      <div *ngIf=\"password.invalid && (password.dirty || password.touched)\">\r\n        <div *ngIf=\"password.errors.required\" class=\"text-muted\">\r\n          Password is required\r\n        </div>\r\n        <div *ngIf=\"password.errors.minlength\" class=\"text-muted\">\r\n          Password must be atleast 8 character long\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div>\r\n      <button type=\"submit\" class=\"btn btn-success\"\r\n        [disabled]=\"!loginForm.valid\">Login</button>\r\n    </div>\r\n  </form>\r\n  <div class=\"text-muted\">\r\n    Not yet registered? <a routerLink=\"/register\">Signup</a> now\r\n  </div>\r\n\r\n  <div *ngIf=\"loginSuccess\" class=\"text-muted\">\r\n    You have been logined successfully, Redirecting...!\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -178,7 +178,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"media\">\n  <div class=\"controls d-flex flex-row-reverse p-1 px-3\">\n    <button class=\"btn btn-sm btn-secondary\" (click)=\"closeMedia()\">\n      <fa-icon [icon]=\"faWindowClose\"></fa-icon>\n    </button>\n  </div>\n  <div id=\"mediaWindow\">\n    <div *ngIf=\"notSupported\" class=\"p-2\">\n      <h4>Not Supported</h4>\n      <p>Sorry, but viewing/playing this file is not supported.\n          But you should not worry, you may download file and view it\n          in an application on your device that support it.\n      </p>\n    </div>\n    <p [class.hidden]=\"!notSupported\" class=\"p-2\">\n      Click <a id=\"download\">here</a> to download file</p>\n  </div>\n  <div id=\"mediaInfo\" class=\"p-1\">\n\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"media\">\r\n  <div class=\"controls d-flex flex-row-reverse p-1 px-3\">\r\n    <button class=\"btn btn-sm btn-secondary\" (click)=\"closeMedia()\">\r\n      <fa-icon [icon]=\"faWindowClose\"></fa-icon>\r\n    </button>\r\n  </div>\r\n  <div id=\"mediaWindow\">\r\n    <div *ngIf=\"notSupported\" class=\"p-2\">\r\n      <h4>Not Supported</h4>\r\n      <p>Sorry, but viewing/playing this file is not supported.\r\n          But you should not worry, you may download file and view it\r\n          in an application on your device that support it.\r\n      </p>\r\n    </div>\r\n    <p [class.hidden]=\"!notSupported\" class=\"p-2\">\r\n      Click <a id=\"download\">here</a> to download file</p>\r\n  </div>\r\n  <div id=\"mediaInfo\" class=\"p-1\">\r\n\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -191,7 +191,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n<div id=\"register\">\n  <h4 class=\"title\">Signup</h4>\n\n  <div id=\"failed\" [class.hidden]=\"!registerFailed\" class=\"alert alert-danger\">\n    Error while registering!\n  </div>\n  <div id=\"success\" [class.hidden]=\"!registerSuccess\" class=\"alert alert-success\">\n    You've been registered successfully! <a routerLink=\"/login\">Login</a> now.\n  </div>\n\n  <form (ngSubmit)=\"save()\" #registerForm=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"firstName\">First Name</label>\n      <input [(ngModel)]=\"model.firstName\" #firstName=\"ngModel\" type=\"text\" name=\"firstName\" class=\"form-control\"\n        maxlength=\"128\" required>\n      <div *ngIf=\"firstName.invalid && (firstName.dirty || firstName.touched)\" class=\"text-muted\">\n        <div *ngIf=\"firstName.errors.required\">\n          First Name is required.\n        </div>\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"secondName\">Second Name</label>\n      <input type=\"text\" name=\"secondName\" class=\"form-control\" maxlength=\"128\" [(ngModel)]=\"model.secondName\"\n        #secondName=\"ngModel\">\n      <div *ngIf=\"secondName.invalid && (secondName.dirty || secondName.touched)\" class=\"text-muted\">\n        <div *ngIf=\"secondName.errors.required\">\n          Second Name is required.\n        </div>\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"email\">Email</label>\n      <input type=\"email\" name=\"email\" class=\"form-control\" maxlength=\"256\" [(ngModel)]=\"model.email\" #email=\"ngModel\"\n        required>\n      <div *ngIf=\"(!validateEmail(email.value) && (email.dirty || email.touched)) || userExist\" class=\"text-muted\">\n        <div *ngIf=\"!validateEmail(email.value)\">\n          Email is invalid.\n        </div>\n        <div *ngIf=\"userExist\">\n          Email is already registered, try another one\n        </div>\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"password\">Password</label>\n      <input type=\"password\" name=\"password\" class=\"form-control\" minlength=8 maxlength=\"64\"\n        [(ngModel)]=\"model.password\" #password=\"ngModel\">\n      <div *ngIf=\"password.invalid && (password.dirty || password.touched)\" class=\"text-muted\">\n        <div *ngIf=\"password.errors.required\">\n          Password is required.\n        </div>\n        <div *ngIf=\"password.errors.minlength\">\n          Password must be atleast 8 character long\n        </div>\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"repeatPassword\">Repeat Password</label>\n      <input type=\"password\" name=\"repeatPassword\" class=\"form-control\" maxlength=\"64\" [(ngModel)]=\"passwordRepeat\"\n        #repeatPassword=\"ngModel\" required>\n      <div *ngIf=\"repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)\" class=\"text-muted\">\n        <div *ngIf=\"repeatPassword.errors.required\">\n          Reapeat Password is required\n        </div>\n        <div *ngIf=\"repeatPassword.errors.minlength\">\n          Password must be atleast 8 character long\n        </div>\n      </div>\n      <div *ngIf=\"(repeatPassword.dirty || repeatPassword.touched)\" class=\"text-muted\">\n        <div *ngIf=\"(password.value != repeatPassword.value)\">\n          Passwords do not match\n        </div>\n      </div>\n    </div>\n    <div>\n      <label for=\"pricingPlans\">Pricing Plans</label>\n      <select name=\"pricingPlan\" class=\"form-control\"\n        [(ngModel)]=\"model.pricingPlan\" #pricingPlan=\"ngModel\" required>\n        <option *ngFor=\"let p of pricingPlans\" [ngValue]=\"p\">{{p.title}}</option>\n      </select>\n      <div *ngIf=\"pricingPlan.invalid && (pricingPlan.dirty || pricingPlan.touched)\">\n        <div *ngIf=\"pricingPlan.errors.required\" class=\"text-muted\">\n          You must select a pricing plan\n        </div>\n      </div>\n    </div>\n    <div class=\"p-2\">\n      <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!registerForm.valid\">Register</button>\n    </div>\n  </form>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\r\n<div id=\"register\">\r\n  <h4 class=\"title\">Signup</h4>\r\n\r\n  <div id=\"failed\" [class.hidden]=\"!registerFailed\" class=\"alert alert-danger\">\r\n    Error while registering!\r\n  </div>\r\n  <div id=\"success\" [class.hidden]=\"!registerSuccess\" class=\"alert alert-success\">\r\n    You've been registered successfully! <a routerLink=\"/login\">Login</a> now.\r\n  </div>\r\n\r\n  <form (ngSubmit)=\"save()\" #registerForm=\"ngForm\">\r\n    <div class=\"form-group\">\r\n      <label for=\"firstName\">First Name</label>\r\n      <input [(ngModel)]=\"model.firstName\" #firstName=\"ngModel\" type=\"text\" name=\"firstName\" class=\"form-control\"\r\n        maxlength=\"128\" required>\r\n      <div *ngIf=\"firstName.invalid && (firstName.dirty || firstName.touched)\" class=\"text-muted\">\r\n        <div *ngIf=\"firstName.errors.required\">\r\n          First Name is required.\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"secondName\">Second Name</label>\r\n      <input type=\"text\" name=\"secondName\" class=\"form-control\" maxlength=\"128\" [(ngModel)]=\"model.secondName\"\r\n        #secondName=\"ngModel\">\r\n      <div *ngIf=\"secondName.invalid && (secondName.dirty || secondName.touched)\" class=\"text-muted\">\r\n        <div *ngIf=\"secondName.errors.required\">\r\n          Second Name is required.\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"email\">Email</label>\r\n      <input id=\"email\" type=\"email\" name=\"email\" class=\"form-control\" maxlength=\"256\" [(ngModel)]=\"model.email\" #email=\"ngModel\"\r\n        required>\r\n      <div *ngIf=\"(!validateEmail(email.value) && (email.dirty || email.touched)) || userExist\" class=\"text-muted\">\r\n        <div *ngIf=\"!validateEmail(email.value)\">\r\n          Email is invalid.\r\n        </div>\r\n        <div *ngIf=\"userExist\">\r\n          Email is already registered, try another one\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"password\">Password</label>\r\n      <input type=\"password\" name=\"password\" class=\"form-control\" minlength=8 maxlength=\"64\"\r\n        [(ngModel)]=\"model.password\" #password=\"ngModel\">\r\n      <div *ngIf=\"password.invalid && (password.dirty || password.touched)\" class=\"text-muted\">\r\n        <div *ngIf=\"password.errors.required\">\r\n          Password is required.\r\n        </div>\r\n        <div *ngIf=\"password.errors.minlength\">\r\n          Password must be atleast 8 character long\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <label for=\"repeatPassword\">Repeat Password</label>\r\n      <input type=\"password\" name=\"repeatPassword\" class=\"form-control\" maxlength=\"64\" [(ngModel)]=\"passwordRepeat\"\r\n        #repeatPassword=\"ngModel\" required>\r\n      <div *ngIf=\"repeatPassword.invalid && (repeatPassword.dirty || repeatPassword.touched)\" class=\"text-muted\">\r\n        <div *ngIf=\"repeatPassword.errors.required\">\r\n          Reapeat Password is required\r\n        </div>\r\n        <div *ngIf=\"repeatPassword.errors.minlength\">\r\n          Password must be atleast 8 character long\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"(repeatPassword.dirty || repeatPassword.touched)\" class=\"text-muted\">\r\n        <div *ngIf=\"(password.value != repeatPassword.value)\">\r\n          Passwords do not match\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div>\r\n      <label for=\"pricingPlans\">Pricing Plans</label>\r\n      <select name=\"pricingPlan\" class=\"form-control\"\r\n        [(ngModel)]=\"model.pricingPlan\" #pricingPlan=\"ngModel\" required>\r\n        <option *ngFor=\"let p of pricingPlans\" [ngValue]=\"p\">{{p.title}}</option>\r\n      </select>\r\n      <div *ngIf=\"pricingPlan.invalid && (pricingPlan.dirty || pricingPlan.touched)\">\r\n        <div *ngIf=\"pricingPlan.errors.required\" class=\"text-muted\">\r\n          You must select a pricing plan\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"p-2\">\r\n      <button type=\"submit\" class=\"btn btn-success\" [disabled]=\"!registerForm.valid\">Register</button>\r\n    </div>\r\n  </form>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -204,7 +204,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"uploadFile\">\n\n  <div *ngIf=\"uploading\" class=\"m-5\">\n    <h3 class=\"text-primary\">Uploading {{progress}}</h3>\n    <p>Please wait while files are being uploaded</p>\n  </div>\n\n  <div id=\"main\">\n    <div class=\"d-flex flex-row-reverse p-1\">\n      <button class=\"btn btn-sm btn-secondary ml-1\"\n        (click)=\"closeModel()\">\n        <fa-icon [icon]=\"faWindowClose\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-secondary ml-1\"\n        (click)=\"toggleHelp()\">\n        <fa-icon [icon]=\"faInfo\"></fa-icon>\n      </button>\n    </div>\n\n    <div *ngIf=\"!help\">\n      <div id=\"error\" [class.hidden]=\"!errorMessage\" class=\"alert alert-danger\">\n        {{errorMessage}}\n      </div>\n\n      <h4>Upload a new file</h4>\n      <form (ngSumbit)=\"upload()\" #form=\"ngForm\" id=\"uploadForm\">\n        <div class=\"form-group\">\n          <label for=\"file\">File</label>\n          <input type=\"file\" name=\"file\" id=\"file\" class=\"form-control\"\n            [(ngModel)]=\"file\" (change)=\"fileName = ''\"\n            #fileModel=\"ngModel\" required>\n          <div *ngIf=\"fileModel.invalid && (fileModel.dirty && fileModel.touched)\"\n            class=\"text-muted\">\n            <div *ngIf=\"fileModel.errors.required\">\n                Please choose a file\n            </div>\n          </div>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"targetName\">Target Name</label>\n          <input type=\"text\" name=\"targetName\" class=\"form-control\"\n            [(ngModel)]=\"fileName\" #filename=\"ngModel\">\n          <div *ngIf=\"!(filename.dirty || filename.touched)\">\n            Please enter a name to save as a new name\n          </div>\n          <div *ngIf=\"!validateFileName() && (filename.dirty || filename.touched)\"\n            class=\"alert alert-danger\">\n            <div *ngIf=\"!validateFileName()\">\n              File name is not valid, try another\n            </div>\n          </div>\n        </div>\n        <button type=\"button\" class=\"btn btn-sm btn-primary ml-1\"\n          (click)=\"addSelectedFile()\" [disabled]=\"!fileModel.valid\">\n          Add File</button>\n        <input (click)=\"upload()\" type=\"submit\" class=\"btn btn-sm btn-success ml-1\"\n          [disabled]=\"!this.selectedFiles.length\"\n          value=\"Upload Selected\">\n      </form>\n      <h4>Selected Files: </h4>\n      <div *ngIf=\"selectedFiles.length\"\n        class=\"alert alert-primary m-1 p-1 d-flex flex-row flex-wrap\">\n        <div *ngFor=\"let s of selectedFiles\"\n          class=\"alert alert-sm alert-light m-1\">\n          <span>{{s.newName}}</span>\n          <button class=\"btn btn-sm btn-outline-secondary m-1\"\n            (click)=\"removeFile(s)\">X</button>\n        </div>\n      </div>\n    </div>\n\n    <div *ngIf=\"help\" class=\"p-2\">\n      <ul>\n        <li>Upload file window let you upload one or more files.</li>\n        <li>To upload a file, use 'Select File' input box.</li>\n        <li>Now type an appropriate name for file and click 'Add file'</li>\n        <li>To add another file, repeat above two.</li>\n        <li>Selected files are always there at bottom, so you may remove one\n          or more of them, if you wish to cancel them.\n        </li>\n        <li>Click 'Upload Selected' to upload selected files</li>\n      </ul>\n      <p class=\"alert-warning p-2\">Click on info button again to close help.</p>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"uploadFile\">\r\n\r\n  <div *ngIf=\"uploading\" class=\"m-5\">\r\n    <h3 class=\"text-primary\">Uploading {{progress}}</h3>\r\n    <p>Please wait while files are being uploaded</p>\r\n  </div>\r\n\r\n  <div id=\"main\">\r\n    <div class=\"d-flex flex-row-reverse p-1\">\r\n      <button class=\"btn btn-sm btn-secondary ml-1\"\r\n        (click)=\"closeModel()\">\r\n        <fa-icon [icon]=\"faWindowClose\"></fa-icon>\r\n      </button>\r\n      <button class=\"btn btn-sm btn-secondary ml-1\"\r\n        (click)=\"toggleHelp()\">\r\n        <fa-icon [icon]=\"faInfo\"></fa-icon>\r\n      </button>\r\n    </div>\r\n\r\n    <div *ngIf=\"!help\">\r\n      <div id=\"error\" [class.hidden]=\"!errorMessage\" class=\"alert alert-danger\">\r\n        {{errorMessage}}\r\n      </div>\r\n\r\n      <h4>Upload a new file</h4>\r\n      <form (ngSumbit)=\"upload()\" #form=\"ngForm\" id=\"uploadForm\">\r\n        <div class=\"form-group\">\r\n          <label for=\"file\">File</label>\r\n          <input type=\"file\" name=\"file\" id=\"file\" class=\"form-control\"\r\n            [(ngModel)]=\"file\" (change)=\"fileName = ''\"\r\n            #fileModel=\"ngModel\" required>\r\n          <div *ngIf=\"fileModel.invalid && (fileModel.dirty && fileModel.touched)\"\r\n            class=\"text-muted\">\r\n            <div *ngIf=\"fileModel.errors.required\">\r\n                Please choose a file\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n          <label for=\"targetName\">Target Name</label>\r\n          <input type=\"text\" name=\"targetName\" class=\"form-control\"\r\n            [(ngModel)]=\"fileName\" #filename=\"ngModel\">\r\n          <div *ngIf=\"!(filename.dirty || filename.touched)\">\r\n            Please enter a name to save as a new name\r\n          </div>\r\n          <div *ngIf=\"!validateFileName() && (filename.dirty || filename.touched)\"\r\n            class=\"alert alert-danger\">\r\n            <div *ngIf=\"!validateFileName()\">\r\n              File name is not valid, try another\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <button type=\"button\" class=\"btn btn-sm btn-primary ml-1\"\r\n          (click)=\"addSelectedFile()\" [disabled]=\"!fileModel.valid\">\r\n          Add File</button>\r\n        <input (click)=\"upload()\" type=\"submit\" class=\"btn btn-sm btn-success ml-1\"\r\n          [disabled]=\"!this.selectedFiles.length\"\r\n          value=\"Upload Selected\">\r\n      </form>\r\n      <h4>Selected Files: </h4>\r\n      <div *ngIf=\"selectedFiles.length\"\r\n        class=\"alert alert-primary m-1 p-1 d-flex flex-row flex-wrap\">\r\n        <div *ngFor=\"let s of selectedFiles\"\r\n          class=\"alert alert-sm alert-light m-1\">\r\n          <span>{{s.newName}}</span>\r\n          <button class=\"btn btn-sm btn-outline-secondary m-1\"\r\n            (click)=\"removeFile(s)\">X</button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div *ngIf=\"help\" class=\"p-2\">\r\n      <ul>\r\n        <li>Upload file window let you upload one or more files.</li>\r\n        <li>To upload a file, use 'Select File' input box.</li>\r\n        <li>Now type an appropriate name for file and click 'Add file'</li>\r\n        <li>To add another file, repeat above two.</li>\r\n        <li>Selected files are always there at bottom, so you may remove one\r\n          or more of them, if you wish to cancel them.\r\n        </li>\r\n        <li>Click 'Upload Selected' to upload selected files</li>\r\n      </ul>\r\n      <p class=\"alert-warning p-2\">Click on info button again to close help.</p>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -217,7 +217,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"m-auto\">\n  <ngb-tabset>\n    <ngb-tab title=\"Login\">\n      <ng-template ngbTabContent>\n        <app-login></app-login>\n        <div class=\"alert alert-primary m-1\">\n          If you've not yet register, head over to Register tab and register.\n        </div>\n      </ng-template>\n    </ngb-tab>\n    <ngb-tab title=\"Register\">\n      <ng-template ngbTabContent>\n        <app-register></app-register>\n        <div class=\"alert alert-primary m-1\">\n          If you've already register, head over to Login tab and login.\n        </div>\n      </ng-template>\n    </ngb-tab>\n  </ngb-tabset>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"m-auto\">\r\n  <ngb-tabset>\r\n    <ngb-tab title=\"Login\">\r\n      <ng-template ngbTabContent>\r\n        <app-login></app-login>\r\n        <div class=\"alert alert-primary m-1\">\r\n          If you've not yet register, head over to Register tab and register.\r\n        </div>\r\n      </ng-template>\r\n    </ngb-tab>\r\n    <ngb-tab title=\"Register\">\r\n      <ng-template ngbTabContent>\r\n        <app-register></app-register>\r\n        <div class=\"alert alert-primary m-1\">\r\n          If you've already register, head over to Login tab and login.\r\n        </div>\r\n      </ng-template>\r\n    </ngb-tab>\r\n  </ngb-tabset>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -230,7 +230,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n<div *ngIf=\"triggers.createDirectory\">\n  <app-create-directory (directory)=\"createDirectory($event)\"\n    [currentDirectory]=\"currentDirectory\" [existingNames]=\"getExistingNames()\">\n  </app-create-directory>\n</div>\n\n<div *ngIf=\"triggers.uploadFile\">\n  <app-upload-file (fileEvent)=\"uploadFile($event)\"\n    [location]=\"currentDirectory.location\" [existingNames]=\"getExistingNames()\">\n  </app-upload-file>\n</div>\n\n<div *ngIf=\"mediaOpened\">\n  <app-open-media [media]=\"media\" (mediaClose)=\"closeFile()\">\n  </app-open-media>\n</div>\n\n<!-- File Manager Header -->\n<div class=\"item alert alert-sm alert-success\">\n  <div class=\"item-header\">\n    <input class=\"btn btn-sm btn-light m-1\" title=\"Select All\"\n      type=\"checkbox\" id=\"selectAll\" (change)=\"select(null, $event)\">\n  </div>\n  <div class=\"item-content\">\n    <b>Current Location: </b> {{ currentDirectory.location | minifyPath:40 }}\n    <b class=\"ml-2\">Usage: </b> {{ usagePercent | to4Precision }}%\n    <ngb-progressbar [value]=\"usagePercent\"\n      class=\"getUsageClass()\"></ngb-progressbar>\n  </div>\n  <div class=\"item-actions\">\n    <div class=\"d-flex flex-row\">\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Go Back\"\n        [disabled]=\"!backwardStack.length\"\n        (click)=\"previousDirectory()\">\n        <fa-icon [icon]=\"faArrowCircleLeft\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Go Forward\"\n        [disabled]=\"!forwardStack.length\"\n        (click)=\"reopenDirectory()\">\n        <fa-icon [icon]=\"faArrowCircleRight\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\"\n        (click)=\"trigger('createDirectory')\" title=\"Create Directory\">\n        <fa-icon [icon]=\"faFolderPlus\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Upload File\"\n        (click)=\"trigger('uploadFile')\">\n        <fa-icon [icon]=\"faFileUpload\"></fa-icon>\n      </button>\n      <button [class]=\"!clipboard.length || !keep ? 'btn btn-sm btn-light m-1' :\n        'btn btn-sm btn-secondary m-1'\"\n        title=\"Copy\" (click)=\"copyEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faCopy\"></fa-icon>\n      </button>\n      <button [class]=\"!clipboard.length || keep ? 'btn btn-sm btn-light m-1' :\n        'btn btn-sm btn-secondary m-1'\"\n        title=\"Cut\" (click)=\"cutEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faCut\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Paste\"\n        (click)=\"pasteEntries()\" [disabled]=\"!clipboard.length ||\n          (!this.backwardStack.length && !this.forwardStack.length)\">\n        <fa-icon [icon]=\"faPaste\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Delete\"\n        (click)=\"deleteEntries()\" [disabled]=\"!selected.length\">\n        <fa-icon [icon]=\"faTrash\"></fa-icon>\n      </button>\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Logout\"\n        (click)=\"logout()\">\n        <fa-icon [icon]=\"faPowerOff\"></fa-icon>\n      </button>\n    </div>\n  </div>\n</div>\n\n<!-- No files or directories are there -->\n<div *ngIf=\"!currentDirectory.contents.files.length &&\n  !currentDirectory.contents.directories.length\" class=\"p-5\">\n  <h3 class=\"text-muted\">\n    There is nothing here\n  </h3>\n</div>\n\n<!-- There is/are one/some files/directories -->\n<div *ngIf=\"currentDirectory.contents.files.length ||\n  currentDirectory.contents.directories.length\">\n  <div *ngIf=\"message\" class=\"alert alert-sm alert-primary\">\n    {{message}}\n  </div>\n  <div *ngIf=\"errorMessage\" class=\"alert alert-sm alert-danger\">\n    {{errorMessage}}\n  </div>\n\n  <div *ngFor=\"let e of currentDirectory.contents.directories\" class=\"item\"\n    (click)=\"openDirectory(e)\">\n    <div class=\"item-header\">\n      <input type=\"checkbox\" (change)=\"select(e, $event)\"\n        (click)=\"$event.stopPropagation();\">\n      <a (click)=\"openDirectory(e)\">\n        <img src=\"/images/folder.png\">\n      </a>\n    </div>\n    <div class=\"item-content\">\n      <span class=\"item-name\" contenteditable=\"true\" spellcheck=\"false\"\n        (click)=\"$event.stopPropagation();\"\n        (blur)=\"renameEntry(e, $event.target.innerText)\"\n        (keypress)=\"checkInputCharacter($event)\">{{e.name}}</span>\n    </div>\n    <div class=\"item-actions\">\n      <div>\n        <button (click)=\"deleteEntry(e)\"\n          class=\"btn btn-sm btn-light m-1\">\n          <fa-icon [icon]=\"faTrash\"></fa-icon>\n        </button>\n      </div>\n    </div>\n  </div>\n\n  <div *ngFor=\"let e of currentDirectory.contents.files\" class=\"item\"\n    (click)=\"openFile(e)\">\n\n    <div class=\"item-header\">\n      <input type=\"checkbox\" (change)=\"select(e, $event)\"\n        (click)=\"$event.stopPropagation();\">\n      <a href=\"#\">\n        <img src=\"/images/file.png\">\n      </a>\n    </div>\n\n    <div [class.hidden]=\"playingAudio === e.id\" class=\"item-content\">\n      <span class=\"item-name\" contenteditable=\"true\" spellcheck=\"false\"\n        (blur)=\"renameEntry(e, $event.target.innerText)\"\n        (click)=\"stopEventPropagation()\">{{e.name}}</span>\n      <span>{{e.extension}}</span>\n    </div>\n    <div [id]=\"e.id\" [class.hidden]=\"!playingAudio\"\n      class=\"item-content d-flex\"></div>\n\n    <div class=\"item-actions\">\n      <div>\n        <button (click)=\"deleteEntry(e); stopEventPropagation($event)\"\n          class=\"btn btn-sm btn-light mr-1\">\n          <fa-icon [icon]=\"faTrash\"></fa-icon>\n        </button>\n      </div>\n      <div>\n        <button class=\"btn btn-sm btn-light mr-1\"\n          (click)=\"downloadFile(e.name, e.location);\n            stopEventPropagation($event)\">\n          <fa-icon [icon]=\"faDownload\"></fa-icon>\n        </button>\n      </div>\n      <div>\n        <button class=\"btn btn-sm btn-primary mr-1\"\n          (click)=\"stopEventPropagation($event)\" disabled>\n          {{e.mediaType}}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\r\n<div *ngIf=\"triggers.createDirectory\">\r\n  <app-create-directory (directory)=\"createDirectory($event)\"\r\n    [currentDirectory]=\"currentDirectory\" [existingNames]=\"getExistingNames()\">\r\n  </app-create-directory>\r\n</div>\r\n\r\n<div *ngIf=\"triggers.uploadFile\">\r\n  <app-upload-file (fileEvent)=\"uploadFile($event)\"\r\n    [location]=\"currentDirectory.location\" [existingNames]=\"getExistingNames()\">\r\n  </app-upload-file>\r\n</div>\r\n\r\n<div *ngIf=\"mediaOpened\">\r\n  <app-open-media [media]=\"media\" (mediaClose)=\"closeFile()\">\r\n  </app-open-media>\r\n</div>\r\n\r\n<!-- File Manager Header -->\r\n<div class=\"item alert alert-sm alert-success\">\r\n  <div class=\"item-header\">\r\n    <input class=\"btn btn-sm btn-light m-1\" title=\"Select All\"\r\n      type=\"checkbox\" id=\"selectAll\" (change)=\"select(null, $event)\">\r\n  </div>\r\n  <div class=\"item-content\">\r\n    <b>Current Location: </b> {{ currentDirectory.location | minifyPath:40 }}\r\n    <b class=\"ml-2\">Usage: </b> {{ usagePercent | to4Precision }}%\r\n    <ngb-progressbar [value]=\"usagePercent\"\r\n      class=\"getUsageClass()\"></ngb-progressbar>\r\n  </div>\r\n  <div class=\"item-actions\">\r\n    <div class=\"d-flex flex-row\">\r\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Go Back\"\r\n        [disabled]=\"!backwardStack.length\"\r\n        (click)=\"previousDirectory()\">\r\n        <fa-icon [icon]=\"faArrowCircleLeft\"></fa-icon>\r\n      </button>\r\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Go Forward\"\r\n        [disabled]=\"!forwardStack.length\"\r\n        (click)=\"reopenDirectory()\">\r\n        <fa-icon [icon]=\"faArrowCircleRight\"></fa-icon>\r\n      </button>\r\n      <button class=\"btn btn-sm btn-light m-1\"\r\n        (click)=\"trigger('createDirectory')\" title=\"Create Directory\">\r\n        <fa-icon [icon]=\"faFolderPlus\"></fa-icon>\r\n      </button>\r\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Upload File\"\r\n        (click)=\"trigger('uploadFile')\">\r\n        <fa-icon [icon]=\"faFileUpload\"></fa-icon>\r\n      </button>\r\n      <button [class]=\"!clipboard.length || !keep ? 'btn btn-sm btn-light m-1' :\r\n        'btn btn-sm btn-secondary m-1'\"\r\n        title=\"Copy\" (click)=\"copyEntries()\" [disabled]=\"!selected.length\">\r\n        <fa-icon [icon]=\"faCopy\"></fa-icon>\r\n      </button>\r\n      <button [class]=\"!clipboard.length || keep ? 'btn btn-sm btn-light m-1' :\r\n        'btn btn-sm btn-secondary m-1'\"\r\n        title=\"Cut\" (click)=\"cutEntries()\" [disabled]=\"!selected.length\">\r\n        <fa-icon [icon]=\"faCut\"></fa-icon>\r\n      </button>\r\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Paste\"\r\n        (click)=\"pasteEntries()\" [disabled]=\"!clipboard.length ||\r\n          (!this.backwardStack.length && !this.forwardStack.length)\">\r\n        <fa-icon [icon]=\"faPaste\"></fa-icon>\r\n      </button>\r\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Delete\"\r\n        (click)=\"deleteEntries()\" [disabled]=\"!selected.length\">\r\n        <fa-icon [icon]=\"faTrash\"></fa-icon>\r\n      </button>\r\n      <button class=\"btn btn-sm btn-light m-1\" title=\"Logout\"\r\n        (click)=\"logout()\">\r\n        <fa-icon [icon]=\"faPowerOff\"></fa-icon>\r\n      </button>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<!-- No files or directories are there -->\r\n<div *ngIf=\"!currentDirectory.contents.files.length &&\r\n  !currentDirectory.contents.directories.length\" class=\"p-5\">\r\n  <h3 class=\"text-muted\">\r\n    There is nothing here\r\n  </h3>\r\n</div>\r\n\r\n<!-- There is/are one/some files/directories -->\r\n<div *ngIf=\"currentDirectory.contents.files.length ||\r\n  currentDirectory.contents.directories.length\">\r\n  <div *ngIf=\"message\" class=\"alert alert-sm alert-primary\">\r\n    {{message}}\r\n  </div>\r\n  <div *ngIf=\"errorMessage\" class=\"alert alert-sm alert-danger\">\r\n    {{errorMessage}}\r\n  </div>\r\n\r\n  <div *ngFor=\"let e of currentDirectory.contents.directories\"\r\n    class=\"alert item\" [class.alert-light]=\"isSelected(e)\"\r\n    [class.alert-warning]=\"isCopied(e)\" [class.alert-danger]=\"isCut(e)\"\r\n    (click)=\"openDirectory(e)\">\r\n    <div class=\"item-header\">\r\n      <input type=\"checkbox\" (change)=\"select(e, $event)\"\r\n        (click)=\"$event.stopPropagation();\">\r\n      <a (click)=\"openDirectory(e)\">\r\n        <img src=\"/images/folder.png\">\r\n      </a>\r\n    </div>\r\n    <div class=\"item-content\">\r\n      <span class=\"item-name\" contenteditable=\"true\" spellcheck=\"false\"\r\n        (click)=\"$event.stopPropagation();\"\r\n        (blur)=\"renameEntry(e, $event.target.innerText)\"\r\n        (keypress)=\"checkInputCharacter($event)\">{{e.name}}</span>\r\n    </div>\r\n    <div class=\"item-actions\">\r\n      <div>\r\n        <button (click)=\"deleteEntry(e); stopEventPropagation($event)\"\r\n          class=\"btn btn-sm btn-light m-1\">\r\n          <fa-icon [icon]=\"faTrash\"></fa-icon>\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <div *ngFor=\"let e of currentDirectory.contents.files\" class=\"alert item\"\r\n    [class.alert-light]=\"isSelected(e)\" [class.alert-warning]=\"isCopied(e)\"\r\n    [class.alert-danger]=\"isCut(e)\" (click)=\"openFile(e)\">\r\n\r\n    <div class=\"item-header\">\r\n      <input type=\"checkbox\" (change)=\"select(e, $event)\"\r\n        (click)=\"$event.stopPropagation();\">\r\n      <a href=\"#\">\r\n        <img src=\"/images/file.png\">\r\n      </a>\r\n    </div>\r\n\r\n    <div [class.hidden]=\"playingAudio === e.id\" class=\"item-content\">\r\n      <span class=\"item-name\" contenteditable=\"true\" spellcheck=\"false\"\r\n        (blur)=\"renameEntry(e, $event.target.innerText)\"\r\n        (click)=\"stopEventPropagation()\">{{e.name}}</span>\r\n      <span>{{e.extension}}</span>\r\n    </div>\r\n    <div [id]=\"e.id\" [class.hidden]=\"!playingAudio\"\r\n      class=\"item-content d-flex\"></div>\r\n\r\n    <div class=\"item-actions\">\r\n      <div>\r\n        <button (click)=\"deleteEntry(e); stopEventPropagation($event)\"\r\n          class=\"btn btn-sm btn-light mr-1\">\r\n          <fa-icon [icon]=\"faTrash\"></fa-icon>\r\n        </button>\r\n      </div>\r\n      <div>\r\n        <button class=\"btn btn-sm btn-light mr-1\"\r\n          (click)=\"downloadFile(e.name, e.location);\r\n            stopEventPropagation($event)\">\r\n          <fa-icon [icon]=\"faDownload\"></fa-icon>\r\n        </button>\r\n      </div>\r\n      <div>\r\n        <button class=\"btn btn-sm btn-primary mr-1\"\r\n          (click)=\"stopEventPropagation($event)\" disabled>\r\n          {{e.mediaType}}\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -664,7 +664,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".createDirectory {\n  position: absolute;\n  background: white;\n  top: 2vh;\n  left: 20vw;\n  width: 60vw;\n  height: 75vh;\n  padding: 1vh 1vw;\n  border: 0.1px solid grey;\n  border-radius: 10px;\n  z-index: 100;\n  overflow: auto;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kaXNrL3Byb2plY3RzL29ubGluZS1zdG9yYWdlL29ubGluZS1zdG9yYWdlLWNsaWVudC9zcmMvYXBwL2NyZWF0ZS1kaXJlY3RvcnkvY3JlYXRlLWRpcmVjdG9yeS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvY3JlYXRlLWRpcmVjdG9yeS9jcmVhdGUtZGlyZWN0b3J5LmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFDQSxpQkFBQTtFQUNBLFFBQUE7RUFDQSxVQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7RUFDQSxnQkFBQTtFQUNBLHdCQUFBO0VBQ0EsbUJBQUE7RUFDQSxZQUFBO0VBQ0EsY0FBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvY3JlYXRlLWRpcmVjdG9yeS9jcmVhdGUtZGlyZWN0b3J5LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNyZWF0ZURpcmVjdG9yeSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIHRvcDogMnZoO1xuICBsZWZ0OiAyMHZ3O1xuICB3aWR0aDogNjB2dztcbiAgaGVpZ2h0OiA3NXZoO1xuICBwYWRkaW5nOiAxdmggMXZ3O1xuICBib3JkZXI6IDAuMXB4IHNvbGlkIGdyZXk7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIHotaW5kZXg6IDEwMDtcbiAgb3ZlcmZsb3c6IGF1dG87XG59XG4iLCIuY3JlYXRlRGlyZWN0b3J5IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgdG9wOiAydmg7XG4gIGxlZnQ6IDIwdnc7XG4gIHdpZHRoOiA2MHZ3O1xuICBoZWlnaHQ6IDc1dmg7XG4gIHBhZGRpbmc6IDF2aCAxdnc7XG4gIGJvcmRlcjogMC4xcHggc29saWQgZ3JleTtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgei1pbmRleDogMTAwO1xuICBvdmVyZmxvdzogYXV0bztcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".createDirectory {\n  position: absolute;\n  background: white;\n  top: 2vh;\n  left: 20vw;\n  width: 60vw;\n  height: 75vh;\n  padding: 1vh 1vw;\n  border: 0.1px solid grey;\n  border-radius: 10px;\n  z-index: 100;\n  overflow: auto;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY3JlYXRlLWRpcmVjdG9yeS9EOlxccHJvamVjdHNcXG9ubGluZS1zdG9yYWdlXFxvbmxpbmUtc3RvcmFnZS1jbGllbnQvc3JjXFxhcHBcXGNyZWF0ZS1kaXJlY3RvcnlcXGNyZWF0ZS1kaXJlY3RvcnkuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2NyZWF0ZS1kaXJlY3RvcnkvY3JlYXRlLWRpcmVjdG9yeS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFBO0VBQ0EsaUJBQUE7RUFDQSxRQUFBO0VBQ0EsVUFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsZ0JBQUE7RUFDQSx3QkFBQTtFQUNBLG1CQUFBO0VBQ0EsWUFBQTtFQUNBLGNBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL2NyZWF0ZS1kaXJlY3RvcnkvY3JlYXRlLWRpcmVjdG9yeS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jcmVhdGVEaXJlY3Rvcnkge1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcclxuICB0b3A6IDJ2aDtcclxuICBsZWZ0OiAyMHZ3O1xyXG4gIHdpZHRoOiA2MHZ3O1xyXG4gIGhlaWdodDogNzV2aDtcclxuICBwYWRkaW5nOiAxdmggMXZ3O1xyXG4gIGJvcmRlcjogMC4xcHggc29saWQgZ3JleTtcclxuICBib3JkZXItcmFkaXVzOiAxMHB4O1xyXG4gIHotaW5kZXg6IDEwMDtcclxuICBvdmVyZmxvdzogYXV0bztcclxufVxyXG4iLCIuY3JlYXRlRGlyZWN0b3J5IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgdG9wOiAydmg7XG4gIGxlZnQ6IDIwdnc7XG4gIHdpZHRoOiA2MHZ3O1xuICBoZWlnaHQ6IDc1dmg7XG4gIHBhZGRpbmc6IDF2aCAxdnc7XG4gIGJvcmRlcjogMC4xcHggc29saWQgZ3JleTtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgei1pbmRleDogMTAwO1xuICBvdmVyZmxvdzogYXV0bztcbn0iXX0= */");
 
 /***/ }),
 
@@ -777,12 +777,6 @@ let CreateDirectoryComponent = class CreateDirectoryComponent {
         }, (err) => {
             this.errorMessage = 'Some kind of error occured while creating directory.';
         });
-    }
-    removeDirectory(name) {
-        const index = this.que.findIndex((e) => {
-            return e === name;
-        });
-        this.que.splice(index, 1);
     }
     toggleHelp() {
         if (this.help) {
@@ -977,7 +971,7 @@ function hru(num) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("#login {\n  position: absolute;\n  top: 25%;\n  left: 33.33vw;\n  background: white;\n  width: 33vw;\n  height: 50vh;\n  padding: 10px;\n  border: 1px solid #e6e6e6;\n  border-radius: 10px;\n  box-shadow: 1px 1px 5px 1px black;\n  overflow: auto;\n}\n\n.title {\n  text-align: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kaXNrL3Byb2plY3RzL29ubGluZS1zdG9yYWdlL29ubGluZS1zdG9yYWdlLWNsaWVudC9zcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9sb2dpbi9sb2dpbi5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFBO0VBQ0EsUUFBQTtFQUNBLGFBQUE7RUFDQSxpQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsYUFBQTtFQUNBLHlCQUFBO0VBQ0EsbUJBQUE7RUFDQSxpQ0FBQTtFQUNBLGNBQUE7QUNDRjs7QURFQTtFQUNFLGtCQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC9sb2dpbi9sb2dpbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNsb2dpbiB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAyNSU7XG4gIGxlZnQ6IDMzLjMzdnc7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xuICB3aWR0aDogMzN2dztcbiAgaGVpZ2h0OiA1MHZoO1xuICBwYWRkaW5nOiAxMHB4O1xuICBib3JkZXI6IDFweCBzb2xpZCByZ2JhKDIzMCwgMjMwLCAyMzAsIDEpO1xuICBib3JkZXItcmFkaXVzOiAxMHB4O1xuICBib3gtc2hhZG93OiAxcHggMXB4IDVweCAxcHggYmxhY2s7XG4gIG92ZXJmbG93OiBhdXRvO1xufVxuXG4udGl0bGUge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG4iLCIjbG9naW4ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMjUlO1xuICBsZWZ0OiAzMy4zM3Z3O1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgd2lkdGg6IDMzdnc7XG4gIGhlaWdodDogNTB2aDtcbiAgcGFkZGluZzogMTBweDtcbiAgYm9yZGVyOiAxcHggc29saWQgI2U2ZTZlNjtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgYm94LXNoYWRvdzogMXB4IDFweCA1cHggMXB4IGJsYWNrO1xuICBvdmVyZmxvdzogYXV0bztcbn1cblxuLnRpdGxlIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("#login {\n  position: absolute;\n  top: 25%;\n  left: 33.33vw;\n  background: white;\n  width: 33vw;\n  height: 50vh;\n  padding: 10px;\n  border: 1px solid #e6e6e6;\n  border-radius: 10px;\n  box-shadow: 1px 1px 5px 1px black;\n  overflow: auto;\n}\n\n.title {\n  text-align: center;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vRDpcXHByb2plY3RzXFxvbmxpbmUtc3RvcmFnZVxcb25saW5lLXN0b3JhZ2UtY2xpZW50L3NyY1xcYXBwXFxsb2dpblxcbG9naW4uY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFDQSxRQUFBO0VBQ0EsYUFBQTtFQUNBLGlCQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7RUFDQSxhQUFBO0VBQ0EseUJBQUE7RUFDQSxtQkFBQTtFQUNBLGlDQUFBO0VBQ0EsY0FBQTtBQ0NGOztBREVBO0VBQ0Usa0JBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI2xvZ2luIHtcclxuICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgdG9wOiAyNSU7XHJcbiAgbGVmdDogMzMuMzN2dztcclxuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcclxuICB3aWR0aDogMzN2dztcclxuICBoZWlnaHQ6IDUwdmg7XHJcbiAgcGFkZGluZzogMTBweDtcclxuICBib3JkZXI6IDFweCBzb2xpZCByZ2JhKDIzMCwgMjMwLCAyMzAsIDEpO1xyXG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XHJcbiAgYm94LXNoYWRvdzogMXB4IDFweCA1cHggMXB4IGJsYWNrO1xyXG4gIG92ZXJmbG93OiBhdXRvO1xyXG59XHJcblxyXG4udGl0bGUge1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG4iLCIjbG9naW4ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMjUlO1xuICBsZWZ0OiAzMy4zM3Z3O1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgd2lkdGg6IDMzdnc7XG4gIGhlaWdodDogNTB2aDtcbiAgcGFkZGluZzogMTBweDtcbiAgYm9yZGVyOiAxcHggc29saWQgI2U2ZTZlNjtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgYm94LXNoYWRvdzogMXB4IDFweCA1cHggMXB4IGJsYWNrO1xuICBvdmVyZmxvdzogYXV0bztcbn1cblxuLnRpdGxlIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xufSJdfQ== */");
 
 /***/ }),
 
@@ -1525,7 +1519,7 @@ MinifyPathPipe = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("#media {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vw;\n  background-color: white;\n  z-index: 100;\n}\n\n.controls {\n  max-height: 10vh;\n  z-index: 101;\n}\n\n#mediaWindow {\n  max-height: 80vh;\n  max-width: 100vw;\n  z-index: 101;\n}\n\n#mediaInfo {\n  z-index: 101;\n}\n\n.textReader {\n  border: 0.5 solid black;\n  border-radius: 3px;\n  overflow: auto;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kaXNrL3Byb2plY3RzL29ubGluZS1zdG9yYWdlL29ubGluZS1zdG9yYWdlLWNsaWVudC9zcmMvYXBwL29wZW4tbWVkaWEvb3Blbi1tZWRpYS5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvb3Blbi1tZWRpYS9vcGVuLW1lZGlhLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFDQSxNQUFBO0VBQ0EsT0FBQTtFQUNBLFlBQUE7RUFDQSxhQUFBO0VBQ0EsdUJBQUE7RUFDQSxZQUFBO0FDQ0Y7O0FERUE7RUFDRSxnQkFBQTtFQUNBLFlBQUE7QUNDRjs7QURFQTtFQUNFLGdCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxZQUFBO0FDQ0Y7O0FERUE7RUFDRSxZQUFBO0FDQ0Y7O0FERUE7RUFDRSx1QkFBQTtFQUNBLGtCQUFBO0VBQ0EsY0FBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvb3Blbi1tZWRpYS9vcGVuLW1lZGlhLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI21lZGlhIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiAxMDB2dztcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIHotaW5kZXg6IDEwMDtcbn1cblxuLmNvbnRyb2xzIHtcbiAgbWF4LWhlaWdodDogMTB2aDtcbiAgei1pbmRleDogMTAxO1xufVxuXG4jbWVkaWFXaW5kb3cge1xuICBtYXgtaGVpZ2h0OiA4MHZoO1xuICBtYXgtd2lkdGg6IDEwMHZ3O1xuICB6LWluZGV4OiAxMDE7XG59XG5cbiNtZWRpYUluZm8ge1xuICB6LWluZGV4OiAxMDE7XG59XG5cbi50ZXh0UmVhZGVyIHtcbiAgYm9yZGVyOiAwLjUgc29saWQgYmxhY2s7XG4gIGJvcmRlci1yYWRpdXM6IDNweDtcbiAgb3ZlcmZsb3c6IGF1dG87XG59XG4iLCIjbWVkaWEge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMDtcbiAgbGVmdDogMDtcbiAgd2lkdGg6IDEwMHZ3O1xuICBoZWlnaHQ6IDEwMHZ3O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgei1pbmRleDogMTAwO1xufVxuXG4uY29udHJvbHMge1xuICBtYXgtaGVpZ2h0OiAxMHZoO1xuICB6LWluZGV4OiAxMDE7XG59XG5cbiNtZWRpYVdpbmRvdyB7XG4gIG1heC1oZWlnaHQ6IDgwdmg7XG4gIG1heC13aWR0aDogMTAwdnc7XG4gIHotaW5kZXg6IDEwMTtcbn1cblxuI21lZGlhSW5mbyB7XG4gIHotaW5kZXg6IDEwMTtcbn1cblxuLnRleHRSZWFkZXIge1xuICBib3JkZXI6IDAuNSBzb2xpZCBibGFjaztcbiAgYm9yZGVyLXJhZGl1czogM3B4O1xuICBvdmVyZmxvdzogYXV0bztcbn0iXX0= */");
+/* harmony default export */ __webpack_exports__["default"] = ("#media {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vw;\n  background-color: white;\n  z-index: 100;\n}\n\n.controls {\n  max-height: 10vh;\n  z-index: 101;\n}\n\n#mediaWindow {\n  max-height: 80vh;\n  max-width: 100vw;\n  z-index: 101;\n}\n\n#mediaInfo {\n  z-index: 101;\n}\n\n.textReader {\n  border: 0.5 solid black;\n  border-radius: 3px;\n  overflow: auto;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvb3Blbi1tZWRpYS9EOlxccHJvamVjdHNcXG9ubGluZS1zdG9yYWdlXFxvbmxpbmUtc3RvcmFnZS1jbGllbnQvc3JjXFxhcHBcXG9wZW4tbWVkaWFcXG9wZW4tbWVkaWEuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL29wZW4tbWVkaWEvb3Blbi1tZWRpYS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFBO0VBQ0EsTUFBQTtFQUNBLE9BQUE7RUFDQSxZQUFBO0VBQ0EsYUFBQTtFQUNBLHVCQUFBO0VBQ0EsWUFBQTtBQ0NGOztBREVBO0VBQ0UsZ0JBQUE7RUFDQSxZQUFBO0FDQ0Y7O0FERUE7RUFDRSxnQkFBQTtFQUNBLGdCQUFBO0VBQ0EsWUFBQTtBQ0NGOztBREVBO0VBQ0UsWUFBQTtBQ0NGOztBREVBO0VBQ0UsdUJBQUE7RUFDQSxrQkFBQTtFQUNBLGNBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL29wZW4tbWVkaWEvb3Blbi1tZWRpYS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNtZWRpYSB7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIHRvcDogMDtcclxuICBsZWZ0OiAwO1xyXG4gIHdpZHRoOiAxMDB2dztcclxuICBoZWlnaHQ6IDEwMHZ3O1xyXG4gIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xyXG4gIHotaW5kZXg6IDEwMDtcclxufVxyXG5cclxuLmNvbnRyb2xzIHtcclxuICBtYXgtaGVpZ2h0OiAxMHZoO1xyXG4gIHotaW5kZXg6IDEwMTtcclxufVxyXG5cclxuI21lZGlhV2luZG93IHtcclxuICBtYXgtaGVpZ2h0OiA4MHZoO1xyXG4gIG1heC13aWR0aDogMTAwdnc7XHJcbiAgei1pbmRleDogMTAxO1xyXG59XHJcblxyXG4jbWVkaWFJbmZvIHtcclxuICB6LWluZGV4OiAxMDE7XHJcbn1cclxuXHJcbi50ZXh0UmVhZGVyIHtcclxuICBib3JkZXI6IDAuNSBzb2xpZCBibGFjaztcclxuICBib3JkZXItcmFkaXVzOiAzcHg7XHJcbiAgb3ZlcmZsb3c6IGF1dG87XHJcbn1cclxuIiwiI21lZGlhIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICB0b3A6IDA7XG4gIGxlZnQ6IDA7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiAxMDB2dztcbiAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gIHotaW5kZXg6IDEwMDtcbn1cblxuLmNvbnRyb2xzIHtcbiAgbWF4LWhlaWdodDogMTB2aDtcbiAgei1pbmRleDogMTAxO1xufVxuXG4jbWVkaWFXaW5kb3cge1xuICBtYXgtaGVpZ2h0OiA4MHZoO1xuICBtYXgtd2lkdGg6IDEwMHZ3O1xuICB6LWluZGV4OiAxMDE7XG59XG5cbiNtZWRpYUluZm8ge1xuICB6LWluZGV4OiAxMDE7XG59XG5cbi50ZXh0UmVhZGVyIHtcbiAgYm9yZGVyOiAwLjUgc29saWQgYmxhY2s7XG4gIGJvcmRlci1yYWRpdXM6IDNweDtcbiAgb3ZlcmZsb3c6IGF1dG87XG59Il19 */");
 
 /***/ }),
 
@@ -1668,7 +1662,7 @@ OpenMediaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("#register {\n  position: absolute;\n  top: 15%;\n  left: 33.33vw;\n  background: white;\n  width: 33vw;\n  height: 75vh;\n  padding: 15px;\n  border: 1px solid #e6e6e6;\n  border-radius: 10px;\n  box-shadow: 1px 1px 5px 1px black;\n  overflow: auto;\n}\n\n.title {\n  text-align: center;\n}\n\n.hidden {\n  visibility: 0;\n  display: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kaXNrL3Byb2plY3RzL29ubGluZS1zdG9yYWdlL29ubGluZS1zdG9yYWdlLWNsaWVudC9zcmMvYXBwL3JlZ2lzdGVyL3JlZ2lzdGVyLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC9yZWdpc3Rlci9yZWdpc3Rlci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFBO0VBQ0EsUUFBQTtFQUNBLGFBQUE7RUFDQSxpQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsYUFBQTtFQUNBLHlCQUFBO0VBQ0EsbUJBQUE7RUFDQSxpQ0FBQTtFQUNBLGNBQUE7QUNDRjs7QURFQTtFQUNFLGtCQUFBO0FDQ0Y7O0FERUE7RUFDRSxhQUFBO0VBQ0EsYUFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjcmVnaXN0ZXIge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMTUlO1xuICBsZWZ0OiAzMy4zM3Z3O1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgd2lkdGg6IDMzdnc7XG4gIGhlaWdodDogNzV2aDtcbiAgcGFkZGluZzogMTVweDtcbiAgYm9yZGVyOiAxcHggc29saWQgcmdiYSgyMzAsIDIzMCwgMjMwLCAxKTtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgYm94LXNoYWRvdzogMXB4IDFweCA1cHggMXB4IGJsYWNrO1xuICBvdmVyZmxvdzogYXV0bztcbn1cblxuLnRpdGxlIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4uaGlkZGVuIHtcbiAgdmlzaWJpbGl0eTogMDtcbiAgZGlzcGxheTogbm9uZTtcbn1cbiIsIiNyZWdpc3RlciB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAxNSU7XG4gIGxlZnQ6IDMzLjMzdnc7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xuICB3aWR0aDogMzN2dztcbiAgaGVpZ2h0OiA3NXZoO1xuICBwYWRkaW5nOiAxNXB4O1xuICBib3JkZXI6IDFweCBzb2xpZCAjZTZlNmU2O1xuICBib3JkZXItcmFkaXVzOiAxMHB4O1xuICBib3gtc2hhZG93OiAxcHggMXB4IDVweCAxcHggYmxhY2s7XG4gIG92ZXJmbG93OiBhdXRvO1xufVxuXG4udGl0bGUge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG5cbi5oaWRkZW4ge1xuICB2aXNpYmlsaXR5OiAwO1xuICBkaXNwbGF5OiBub25lO1xufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("#register {\n  position: absolute;\n  top: 15%;\n  left: 33.33vw;\n  background: white;\n  width: 33vw;\n  height: 75vh;\n  padding: 15px;\n  border: 1px solid #e6e6e6;\n  border-radius: 10px;\n  box-shadow: 1px 1px 5px 1px black;\n  overflow: auto;\n}\n\n.title {\n  text-align: center;\n}\n\n.hidden {\n  visibility: 0;\n  display: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVnaXN0ZXIvRDpcXHByb2plY3RzXFxvbmxpbmUtc3RvcmFnZVxcb25saW5lLXN0b3JhZ2UtY2xpZW50L3NyY1xcYXBwXFxyZWdpc3RlclxccmVnaXN0ZXIuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3JlZ2lzdGVyL3JlZ2lzdGVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFDQSxRQUFBO0VBQ0EsYUFBQTtFQUNBLGlCQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7RUFDQSxhQUFBO0VBQ0EseUJBQUE7RUFDQSxtQkFBQTtFQUNBLGlDQUFBO0VBQ0EsY0FBQTtBQ0NGOztBREVBO0VBQ0Usa0JBQUE7QUNDRjs7QURFQTtFQUNFLGFBQUE7RUFDQSxhQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC9yZWdpc3Rlci9yZWdpc3Rlci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNyZWdpc3RlciB7XHJcbiAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gIHRvcDogMTUlO1xyXG4gIGxlZnQ6IDMzLjMzdnc7XHJcbiAgYmFja2dyb3VuZDogd2hpdGU7XHJcbiAgd2lkdGg6IDMzdnc7XHJcbiAgaGVpZ2h0OiA3NXZoO1xyXG4gIHBhZGRpbmc6IDE1cHg7XHJcbiAgYm9yZGVyOiAxcHggc29saWQgcmdiYSgyMzAsIDIzMCwgMjMwLCAxKTtcclxuICBib3JkZXItcmFkaXVzOiAxMHB4O1xyXG4gIGJveC1zaGFkb3c6IDFweCAxcHggNXB4IDFweCBibGFjaztcclxuICBvdmVyZmxvdzogYXV0bztcclxufVxyXG5cclxuLnRpdGxlIHtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuXHJcbi5oaWRkZW4ge1xyXG4gIHZpc2liaWxpdHk6IDA7XHJcbiAgZGlzcGxheTogbm9uZTtcclxufVxyXG4iLCIjcmVnaXN0ZXIge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogMTUlO1xuICBsZWZ0OiAzMy4zM3Z3O1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgd2lkdGg6IDMzdnc7XG4gIGhlaWdodDogNzV2aDtcbiAgcGFkZGluZzogMTVweDtcbiAgYm9yZGVyOiAxcHggc29saWQgI2U2ZTZlNjtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgYm94LXNoYWRvdzogMXB4IDFweCA1cHggMXB4IGJsYWNrO1xuICBvdmVyZmxvdzogYXV0bztcbn1cblxuLnRpdGxlIHtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xufVxuXG4uaGlkZGVuIHtcbiAgdmlzaWJpbGl0eTogMDtcbiAgZGlzcGxheTogbm9uZTtcbn0iXX0= */");
 
 /***/ }),
 
@@ -1719,26 +1713,31 @@ let RegisterComponent = class RegisterComponent {
         return this.passwordRepeat === this.model.password;
     }
     save() {
+        this.registerFailed = false;
+        this.registerSuccess = false;
         const auth = 'Basic ' + buffer__WEBPACK_IMPORTED_MODULE_5__["Buffer"].from(this.model.email).toString('base64');
         this.http.get('/user', {
             headers: {
                 Authorization: auth
             }
         }).subscribe((responce) => {
-            this.userExist = (responce.email === this.model.email);
-        });
-        if (this.userExist) {
-            return;
-        }
-        this.http.post('/user', this.model)
-            .subscribe((user) => {
-            this.registerSuccess = true;
-            const offsetTop = document.getElementById('success').offsetTop;
-            document.getElementById('register').scrollTop = offsetTop;
+            this.userExist = responce.email === this.model.email;
+            if (this.userExist) {
+                const offsetTop = document.getElementById('email').offsetTop;
+                document.getElementById('register').scrollTop = offsetTop;
+                return;
+            }
         }, (err) => {
-            this.registerFailed = true;
-            const offsetTop = document.getElementById('failed').offsetTop;
-            document.getElementById('register').scrollTop = offsetTop;
+            this.http.post('/user', this.model)
+                .subscribe((user) => {
+                this.registerSuccess = true;
+                const offsetTop = document.getElementById('success').offsetTop;
+                document.getElementById('register').scrollTop = offsetTop;
+            }, (err) => {
+                this.registerFailed = true;
+                const offsetTop = document.getElementById('failed').offsetTop;
+                document.getElementById('register').scrollTop = offsetTop;
+            });
         });
     }
 };
@@ -1795,7 +1794,7 @@ To4PrecisionPipe = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".uploadFile {\n  position: absolute;\n  background: white;\n  top: 2vh;\n  left: 20vw;\n  width: 60vw;\n  height: 75vh;\n  padding: 1vh 1vw;\n  border: 0.1px solid gray;\n  border-radius: 10px;\n  z-index: 100;\n  overflow: auto;\n}\n\n.hidden {\n  visibility: hidden;\n  display: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kaXNrL3Byb2plY3RzL29ubGluZS1zdG9yYWdlL29ubGluZS1zdG9yYWdlLWNsaWVudC9zcmMvYXBwL3VwbG9hZC1maWxlL3VwbG9hZC1maWxlLmNvbXBvbmVudC5zY3NzIiwic3JjL2FwcC91cGxvYWQtZmlsZS91cGxvYWQtZmlsZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFBO0VBQ0EsaUJBQUE7RUFDQSxRQUFBO0VBQ0EsVUFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsZ0JBQUE7RUFDQSx3QkFBQTtFQUNBLG1CQUFBO0VBQ0EsWUFBQTtFQUNBLGNBQUE7QUNDRjs7QURFQTtFQUNFLGtCQUFBO0VBQ0EsYUFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvdXBsb2FkLWZpbGUvdXBsb2FkLWZpbGUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudXBsb2FkRmlsZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIHRvcDogMnZoO1xuICBsZWZ0OiAyMHZ3O1xuICB3aWR0aDogNjB2dztcbiAgaGVpZ2h0OiA3NXZoO1xuICBwYWRkaW5nOiAxdmggMXZ3O1xuICBib3JkZXI6IDAuMXB4IHNvbGlkIGdyYXk7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIHotaW5kZXg6IDEwMDtcbiAgb3ZlcmZsb3c6IGF1dG87XG59XG5cbi5oaWRkZW4ge1xuICB2aXNpYmlsaXR5OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG59XG4iLCIudXBsb2FkRmlsZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIHRvcDogMnZoO1xuICBsZWZ0OiAyMHZ3O1xuICB3aWR0aDogNjB2dztcbiAgaGVpZ2h0OiA3NXZoO1xuICBwYWRkaW5nOiAxdmggMXZ3O1xuICBib3JkZXI6IDAuMXB4IHNvbGlkIGdyYXk7XG4gIGJvcmRlci1yYWRpdXM6IDEwcHg7XG4gIHotaW5kZXg6IDEwMDtcbiAgb3ZlcmZsb3c6IGF1dG87XG59XG5cbi5oaWRkZW4ge1xuICB2aXNpYmlsaXR5OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG59Il19 */");
+/* harmony default export */ __webpack_exports__["default"] = (".uploadFile {\n  position: absolute;\n  background: white;\n  top: 2vh;\n  left: 20vw;\n  width: 60vw;\n  height: 75vh;\n  padding: 1vh 1vw;\n  border: 0.1px solid gray;\n  border-radius: 10px;\n  z-index: 100;\n  overflow: auto;\n}\n\n.hidden {\n  visibility: hidden;\n  display: none;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdXBsb2FkLWZpbGUvRDpcXHByb2plY3RzXFxvbmxpbmUtc3RvcmFnZVxcb25saW5lLXN0b3JhZ2UtY2xpZW50L3NyY1xcYXBwXFx1cGxvYWQtZmlsZVxcdXBsb2FkLWZpbGUuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3VwbG9hZC1maWxlL3VwbG9hZC1maWxlLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQUE7RUFDQSxpQkFBQTtFQUNBLFFBQUE7RUFDQSxVQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7RUFDQSxnQkFBQTtFQUNBLHdCQUFBO0VBQ0EsbUJBQUE7RUFDQSxZQUFBO0VBQ0EsY0FBQTtBQ0NGOztBREVBO0VBQ0Usa0JBQUE7RUFDQSxhQUFBO0FDQ0YiLCJmaWxlIjoic3JjL2FwcC91cGxvYWQtZmlsZS91cGxvYWQtZmlsZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi51cGxvYWRGaWxlIHtcclxuICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgYmFja2dyb3VuZDogd2hpdGU7XHJcbiAgdG9wOiAydmg7XHJcbiAgbGVmdDogMjB2dztcclxuICB3aWR0aDogNjB2dztcclxuICBoZWlnaHQ6IDc1dmg7XHJcbiAgcGFkZGluZzogMXZoIDF2dztcclxuICBib3JkZXI6IDAuMXB4IHNvbGlkIGdyYXk7XHJcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcclxuICB6LWluZGV4OiAxMDA7XHJcbiAgb3ZlcmZsb3c6IGF1dG87XHJcbn1cclxuXHJcbi5oaWRkZW4ge1xyXG4gIHZpc2liaWxpdHk6IGhpZGRlbjtcclxuICBkaXNwbGF5OiBub25lO1xyXG59XHJcbiIsIi51cGxvYWRGaWxlIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgdG9wOiAydmg7XG4gIGxlZnQ6IDIwdnc7XG4gIHdpZHRoOiA2MHZ3O1xuICBoZWlnaHQ6IDc1dmg7XG4gIHBhZGRpbmc6IDF2aCAxdnc7XG4gIGJvcmRlcjogMC4xcHggc29saWQgZ3JheTtcbiAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgei1pbmRleDogMTAwO1xuICBvdmVyZmxvdzogYXV0bztcbn1cblxuLmhpZGRlbiB7XG4gIHZpc2liaWxpdHk6IGhpZGRlbjtcbiAgZGlzcGxheTogbm9uZTtcbn0iXX0= */");
 
 /***/ }),
 
@@ -2017,7 +2016,7 @@ UserEntryComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("img {\n  max-width: 24px;\n  max-height: 24px;\n  margin: 1px;\n}\n\n.item {\n  display: grid;\n  grid-template-columns: 0.3fr 3fr 0.7fr;\n  padding: 3px;\n}\n\n.item:hover {\n  background: rgba(230, 230, 230, 0.5);\n}\n\n.item-header {\n  grid-column: 1;\n}\n\n.item-content {\n  grid-column: 2;\n}\n\n.item-name:focus {\n  background: white;\n  border: none;\n}\n\n.item-actions {\n  grid-column: 3;\n  display: flex;\n  flex-direction: row-reverse;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9kaXNrL3Byb2plY3RzL29ubGluZS1zdG9yYWdlL29ubGluZS1zdG9yYWdlLWNsaWVudC9zcmMvYXBwL3VzZXItcGFuZWwvdXNlci1wYW5lbC5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvdXNlci1wYW5lbC91c2VyLXBhbmVsLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZUFBQTtFQUNBLGdCQUFBO0VBQ0EsV0FBQTtBQ0NGOztBREVBO0VBQ0UsYUFBQTtFQUNBLHNDQUFBO0VBQ0EsWUFBQTtBQ0NGOztBREVBO0VBQ0Usb0NBQUE7QUNDRjs7QURFQTtFQUNFLGNBQUE7QUNDRjs7QURFQTtFQUNFLGNBQUE7QUNDRjs7QURFQTtFQUNFLGlCQUFBO0VBQ0EsWUFBQTtBQ0NGOztBREVBO0VBQ0UsY0FBQTtFQUNBLGFBQUE7RUFDQSwyQkFBQTtBQ0NGIiwiZmlsZSI6InNyYy9hcHAvdXNlci1wYW5lbC91c2VyLXBhbmVsLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW1nIHtcbiAgbWF4LXdpZHRoOiAyNHB4O1xuICBtYXgtaGVpZ2h0OiAyNHB4O1xuICBtYXJnaW46IDFweDtcbn1cblxuLml0ZW0ge1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDAuM2ZyIDNmciAwLjdmcjtcbiAgcGFkZGluZzogM3B4O1xufVxuXG4uaXRlbTpob3ZlciB7XG4gIGJhY2tncm91bmQ6IHJnYmEoMjMwLCAyMzAsIDIzMCwgMC41KTtcbn1cblxuLml0ZW0taGVhZGVyIHtcbiAgZ3JpZC1jb2x1bW46IDE7XG59XG5cbi5pdGVtLWNvbnRlbnQge1xuICBncmlkLWNvbHVtbjogMjtcbn1cblxuLml0ZW0tbmFtZTpmb2N1cyB7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xuICBib3JkZXI6IG5vbmU7XG59XG5cbi5pdGVtLWFjdGlvbnMge1xuICBncmlkLWNvbHVtbjogMztcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdy1yZXZlcnNlO1xufVxuIiwiaW1nIHtcbiAgbWF4LXdpZHRoOiAyNHB4O1xuICBtYXgtaGVpZ2h0OiAyNHB4O1xuICBtYXJnaW46IDFweDtcbn1cblxuLml0ZW0ge1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDAuM2ZyIDNmciAwLjdmcjtcbiAgcGFkZGluZzogM3B4O1xufVxuXG4uaXRlbTpob3ZlciB7XG4gIGJhY2tncm91bmQ6IHJnYmEoMjMwLCAyMzAsIDIzMCwgMC41KTtcbn1cblxuLml0ZW0taGVhZGVyIHtcbiAgZ3JpZC1jb2x1bW46IDE7XG59XG5cbi5pdGVtLWNvbnRlbnQge1xuICBncmlkLWNvbHVtbjogMjtcbn1cblxuLml0ZW0tbmFtZTpmb2N1cyB7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xuICBib3JkZXI6IG5vbmU7XG59XG5cbi5pdGVtLWFjdGlvbnMge1xuICBncmlkLWNvbHVtbjogMztcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdy1yZXZlcnNlO1xufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("img {\n  max-width: 24px;\n  max-height: 24px;\n  margin: 1px;\n}\n\n.item {\n  display: grid;\n  grid-template-columns: 0.3fr 3fr 0.7fr;\n  padding: 3px;\n}\n\n.item:hover {\n  background: rgba(230, 230, 230, 0.5);\n}\n\n.item-header {\n  grid-column: 1;\n}\n\n.item-content {\n  grid-column: 2;\n}\n\n.item-name:focus {\n  background: white;\n  border: none;\n}\n\n.item-actions {\n  grid-column: 3;\n  display: flex;\n  flex-direction: row-reverse;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdXNlci1wYW5lbC9EOlxccHJvamVjdHNcXG9ubGluZS1zdG9yYWdlXFxvbmxpbmUtc3RvcmFnZS1jbGllbnQvc3JjXFxhcHBcXHVzZXItcGFuZWxcXHVzZXItcGFuZWwuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3VzZXItcGFuZWwvdXNlci1wYW5lbC5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGVBQUE7RUFDQSxnQkFBQTtFQUNBLFdBQUE7QUNDRjs7QURFQTtFQUNFLGFBQUE7RUFDQSxzQ0FBQTtFQUNBLFlBQUE7QUNDRjs7QURFQTtFQUNFLG9DQUFBO0FDQ0Y7O0FERUE7RUFDRSxjQUFBO0FDQ0Y7O0FERUE7RUFDRSxjQUFBO0FDQ0Y7O0FERUE7RUFDRSxpQkFBQTtFQUNBLFlBQUE7QUNDRjs7QURFQTtFQUNFLGNBQUE7RUFDQSxhQUFBO0VBQ0EsMkJBQUE7QUNDRiIsImZpbGUiOiJzcmMvYXBwL3VzZXItcGFuZWwvdXNlci1wYW5lbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImltZyB7XHJcbiAgbWF4LXdpZHRoOiAyNHB4O1xyXG4gIG1heC1oZWlnaHQ6IDI0cHg7XHJcbiAgbWFyZ2luOiAxcHg7XHJcbn1cclxuXHJcbi5pdGVtIHtcclxuICBkaXNwbGF5OiBncmlkO1xyXG4gIGdyaWQtdGVtcGxhdGUtY29sdW1uczogMC4zZnIgM2ZyIDAuN2ZyO1xyXG4gIHBhZGRpbmc6IDNweDtcclxufVxyXG5cclxuLml0ZW06aG92ZXIge1xyXG4gIGJhY2tncm91bmQ6IHJnYmEoMjMwLCAyMzAsIDIzMCwgMC41KTtcclxufVxyXG5cclxuLml0ZW0taGVhZGVyIHtcclxuICBncmlkLWNvbHVtbjogMTtcclxufVxyXG5cclxuLml0ZW0tY29udGVudCB7XHJcbiAgZ3JpZC1jb2x1bW46IDI7XHJcbn1cclxuXHJcbi5pdGVtLW5hbWU6Zm9jdXMge1xyXG4gIGJhY2tncm91bmQ6IHdoaXRlO1xyXG4gIGJvcmRlcjogbm9uZTtcclxufVxyXG5cclxuLml0ZW0tYWN0aW9ucyB7XHJcbiAgZ3JpZC1jb2x1bW46IDM7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjogcm93LXJldmVyc2U7XHJcbn1cclxuIiwiaW1nIHtcbiAgbWF4LXdpZHRoOiAyNHB4O1xuICBtYXgtaGVpZ2h0OiAyNHB4O1xuICBtYXJnaW46IDFweDtcbn1cblxuLml0ZW0ge1xuICBkaXNwbGF5OiBncmlkO1xuICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDAuM2ZyIDNmciAwLjdmcjtcbiAgcGFkZGluZzogM3B4O1xufVxuXG4uaXRlbTpob3ZlciB7XG4gIGJhY2tncm91bmQ6IHJnYmEoMjMwLCAyMzAsIDIzMCwgMC41KTtcbn1cblxuLml0ZW0taGVhZGVyIHtcbiAgZ3JpZC1jb2x1bW46IDE7XG59XG5cbi5pdGVtLWNvbnRlbnQge1xuICBncmlkLWNvbHVtbjogMjtcbn1cblxuLml0ZW0tbmFtZTpmb2N1cyB7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xuICBib3JkZXI6IG5vbmU7XG59XG5cbi5pdGVtLWFjdGlvbnMge1xuICBncmlkLWNvbHVtbjogMztcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IHJvdy1yZXZlcnNlO1xufSJdfQ== */");
 
 /***/ }),
 
@@ -2038,9 +2037,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/ngx-cookie-service.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _hru__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hru */ "./src/app/hru.ts");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _file_system_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../file-system.service */ "./src/app/file-system.service.ts");
-/* harmony import */ var _mime_types_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../mime-types.service */ "./src/app/mime-types.service.ts");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! path */ "./node_modules/path/path.js");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _file_system_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../file-system.service */ "./src/app/file-system.service.ts");
+/* harmony import */ var _mime_types_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../mime-types.service */ "./src/app/mime-types.service.ts");
+
 
 
 
@@ -2058,21 +2060,21 @@ let UserPanelComponent = class UserPanelComponent {
         this.router = router;
         this.fs = fs;
         this.ms = ms;
-        this.faFolder = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faFolder"];
-        this.faFile = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faFile"];
-        this.faFolderPlus = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faFolderPlus"];
-        this.faFileUpload = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faFileUpload"];
-        this.faDownload = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faDownload"];
-        this.faCopy = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faCopy"];
-        this.faCut = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faCut"];
-        this.faPaste = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faPaste"];
-        this.faTrash = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faTrash"];
-        this.faPowerOff = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faPowerOff"];
-        this.faArrowCircleUp = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faArrowCircleUp"];
-        this.faArrowCircleRight = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faArrowCircleRight"];
-        this.faArrowCircleLeft = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faArrowCircleLeft"];
-        this.faCheck = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faCheck"];
-        this.faCheckCircle = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_7__["faCheckCircle"];
+        this.faFolder = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faFolder"];
+        this.faFile = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faFile"];
+        this.faFolderPlus = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faFolderPlus"];
+        this.faFileUpload = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faFileUpload"];
+        this.faDownload = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faDownload"];
+        this.faCopy = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faCopy"];
+        this.faCut = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faCut"];
+        this.faPaste = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faPaste"];
+        this.faTrash = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faTrash"];
+        this.faPowerOff = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faPowerOff"];
+        this.faArrowCircleUp = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faArrowCircleUp"];
+        this.faArrowCircleRight = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faArrowCircleRight"];
+        this.faArrowCircleLeft = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faArrowCircleLeft"];
+        this.faCheck = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faCheck"];
+        this.faCheckCircle = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_8__["faCheckCircle"];
         this.hru = _hru__WEBPACK_IMPORTED_MODULE_6__["hru"];
         this.triggers = {
             createDirectory: false,
@@ -2114,14 +2116,24 @@ let UserPanelComponent = class UserPanelComponent {
         this.clipboard = this.selected;
         this.clipboardDirectory = this.currentDirectory;
         this.keep = true;
+        this.selected = [];
+        const checkboxs = Array.from(document.querySelectorAll('input[type=checkbox]'));
+        for (const e of checkboxs) {
+            e.removeAttribute('checked');
+        }
     }
     cutEntries() {
         this.clipboard = this.selected;
         this.clipboardDirectory = this.currentDirectory;
         this.keep = false;
+        this.selected = [];
+        const checkboxs = Array.from(document.querySelectorAll('input[type=checkbox]'));
+        for (const e of checkboxs) {
+            e.removeAttribute('checked');
+        }
     }
     deleteEntry(entry) {
-        this.selected = [entry];
+        this.selected = [entry]; // array of one element
         this.deleteEntries();
     }
     deleteEntries() {
@@ -2149,6 +2161,24 @@ let UserPanelComponent = class UserPanelComponent {
         });
         this.selected = [];
     }
+    isCut(entry) {
+        const index = this.clipboard.findIndex(c => {
+            return c.name === entry.name;
+        });
+        return !this.keep && index >= 0;
+    }
+    isCopied(entry) {
+        const index = this.clipboard.findIndex(c => {
+            return c.name === entry.name;
+        });
+        return this.keep && index >= 0;
+    }
+    isSelected(entry) {
+        const index = this.selected.findIndex(s => {
+            return s.name === entry.name;
+        });
+        return index >= 0;
+    }
     pasteEntries() {
         this.errorMessage = '';
         this.message = '';
@@ -2160,7 +2190,12 @@ let UserPanelComponent = class UserPanelComponent {
             to.mediaType = from.mediaType;
             to.size = from.size;
             to.extension = from.extension || undefined;
-            to.location = to.location + '/' + from.name + from.extension || '';
+            if (from.mediaType !== 'directory') {
+                to.location = to.location + path__WEBPACK_IMPORTED_MODULE_7__["sep"] + from.name + from.extension;
+            }
+            else {
+                to.location = to.location + path__WEBPACK_IMPORTED_MODULE_7__["sep"] + from.name;
+            }
             copyObjects.push({
                 from,
                 to
@@ -2209,35 +2244,67 @@ let UserPanelComponent = class UserPanelComponent {
             this.keep = true;
         });
     }
+    select(entry, event) {
+        if (event.target.id === 'selectAll') {
+            if (event.target.checked) {
+                this.selected = JSON.parse(JSON.stringify(this.currentDirectory.contents.directories));
+                for (const f of this.currentDirectory.contents.files) {
+                    this.selected.push(JSON.parse(JSON.stringify(f)));
+                }
+                const checkboxs = Array.from(document.querySelectorAll('input[type=checkbox]'));
+                for (const e of checkboxs) {
+                    e.setAttribute('checked', 'true');
+                }
+            }
+            else {
+                this.selected = [];
+                const checkboxs = Array.from(document.querySelectorAll('input[type=checkbox]'));
+                for (const e of checkboxs) {
+                    e.removeAttribute('checked');
+                }
+            }
+        }
+        else {
+            if (event.target.checked) {
+                this.selected.push(entry);
+            }
+            else {
+                const index = this.selected.findIndex(s => {
+                    return s.name === entry.name;
+                });
+                this.selected.splice(index, 1);
+            }
+        }
+    }
     renameEntry(entry, newName) {
         if (entry.name === newName) {
             return;
         }
-        const targetEntry = entry;
-        const newEntry = JSON.parse(JSON.stringify(targetEntry));
+        const sourceEntry = entry;
+        const newEntry = JSON.parse(JSON.stringify(sourceEntry));
         newEntry.name = newName.match(/[\w\.-]*/g).join('');
-        newEntry.location = newEntry.location.replace(targetEntry.name, newEntry.name);
+        newEntry.location = newEntry.location.replace(sourceEntry.name, newEntry.name);
         this.fs
             .copy({
             pairs: [
                 {
-                    from: targetEntry,
+                    from: sourceEntry,
                     to: newEntry
                 }
             ],
             keep: false
         })
             .subscribe((res) => {
-            if (entry.mediaType !== 'directory') {
+            if (sourceEntry.mediaType !== 'directory') {
                 const index = this.currentDirectory.contents.files.findIndex(e => {
-                    return (e.location = targetEntry.location);
+                    return (e.location === sourceEntry.location);
                 });
                 this.currentDirectory.contents.files.splice(index, 1);
                 this.currentDirectory.contents.files.push(res[0]);
             }
             else {
                 const index = this.currentDirectory.contents.directories.findIndex(e => {
-                    return (e.location = targetEntry.location);
+                    return (e.location === sourceEntry.location);
                 });
                 this.currentDirectory.contents.directories.splice(index, 1);
                 this.currentDirectory.contents.directories.push(res[0]);
@@ -2401,38 +2468,6 @@ let UserPanelComponent = class UserPanelComponent {
         this.cookieService.delete('maxStorage');
         this.router.navigateByUrl('/login');
     }
-    select(entry, event) {
-        if (event.target.id === 'selectAll') {
-            if (event.target.checked) {
-                this.selected = JSON.parse(JSON.stringify(this.currentDirectory.contents.directories));
-                for (const f of this.currentDirectory.contents.files) {
-                    this.selected.push(JSON.parse(JSON.stringify(f)));
-                }
-                const checkboxs = Array.from(document.querySelectorAll('input[type=checkbox]'));
-                for (const e of checkboxs) {
-                    e.setAttribute('checked', 'true');
-                }
-            }
-            else {
-                this.selected = [];
-                const checkboxs = Array.from(document.querySelectorAll('input[type=checkbox]'));
-                for (const e of checkboxs) {
-                    e.removeAttribute('checked');
-                }
-            }
-        }
-        else {
-            if (event.target.checked) {
-                this.selected.push(entry);
-            }
-            else {
-                const index = this.selected.findIndex(i => {
-                    return i === entry;
-                });
-                this.selected.splice(index, 1);
-            }
-        }
-    }
     setIds(directory) {
         const setFileIds = (files) => {
             // tslint:disable-next-line: prefer-for-of
@@ -2482,8 +2517,8 @@ UserPanelComponent.ctorParameters = () => [
     { type: ngx_cookie_service__WEBPACK_IMPORTED_MODULE_4__["CookieService"] },
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _file_system_service__WEBPACK_IMPORTED_MODULE_8__["FileSystemService"] },
-    { type: _mime_types_service__WEBPACK_IMPORTED_MODULE_9__["MimeTypesService"] }
+    { type: _file_system_service__WEBPACK_IMPORTED_MODULE_9__["FileSystemService"] },
+    { type: _mime_types_service__WEBPACK_IMPORTED_MODULE_10__["MimeTypesService"] }
 ];
 UserPanelComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -2562,7 +2597,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /disk/projects/online-storage/online-storage-client/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\projects\online-storage\online-storage-client\src\main.ts */"./src/main.ts");
 
 
 /***/ })

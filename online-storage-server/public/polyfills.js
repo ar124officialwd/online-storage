@@ -6360,6 +6360,9 @@ __webpack_require__.r(__webpack_exports__);
  * APPLICATION IMPORTS
  */
 window.global = window;
+window.process = {
+    env: { DEBUG: undefined },
+};
 
 
 /***/ }),
@@ -6371,8 +6374,8 @@ window.global = window;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /disk/projects/online-storage/online-storage-client/src/polyfills.ts */"./src/polyfills.ts");
-module.exports = __webpack_require__(/*! /disk/projects/online-storage/online-storage-client/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js */"./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js");
+__webpack_require__(/*! D:\projects\online-storage\online-storage-client\src\polyfills.ts */"./src/polyfills.ts");
+module.exports = __webpack_require__(/*! D:\projects\online-storage\online-storage-client\node_modules\@angular-devkit\build-angular\src\angular-cli-files\models\jit-polyfills.js */"./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/jit-polyfills.js");
 
 
 /***/ })
