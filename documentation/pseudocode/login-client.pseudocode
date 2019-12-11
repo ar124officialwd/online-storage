@@ -1,4 +1,4 @@
-# Login 
+# Login
 
 input user email
 input user password
@@ -8,9 +8,9 @@ if (inputs are valid) {
   responce = make http validation request(get)
 
   if (responce is positive) {
-    valid = true 
+    valid = true
   } else {
-    valid = false;
+    valid = false
   }
 
   if (valid) {

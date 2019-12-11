@@ -1,16 +1,16 @@
 # Registration Client Side
 
-input first name 
-input second name 
-input email 
-input password 
-input confirmation password 
-input pricing plan 
+input first name
+input second name
+input email
+input password
+input confirmation password
+input pricing plan
 
 valid = validateInputs()
 
 if (valid) {
-  responce = make http post request
+  responce = make http request(post)
 
   if (responce is positive) {
     registered = true
@@ -19,12 +19,13 @@ if (valid) {
   }
 
   if (registered) {
-    show confirmation
-    let user login
+    show success message
+    show login option(link)
   } else {
     show error
     let user retry
   }
+
 } else {
   let user retry
 }

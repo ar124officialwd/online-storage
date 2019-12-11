@@ -1,13 +1,13 @@
-# FILESYSTEM REST API 
-# API FOR SERVING FILESYSTEM 
+# FILESYSTEM REST API
+# API FOR SERVING FILESYSTEM
 
-app = new http app 
+app = new http app
 
 // 'all' would parse each and every request to validate credentials
 -> Method
 app.all('/fileSystem', (req, res) {
   if (req has credentials) {
-    valdiate = valdiate credentials 
+    valdiate = valdiate credentials
 
     if (valdiate) {
       pass request
@@ -22,10 +22,10 @@ app.all('/fileSystem', (req, res) {
 
 
 
-// 'get' would server directories and files 
+// 'get' would server directories and files
 -> Method
 app.get('/fileSystem', (req, res) {
-  directory = root of user 
+  directory = root of user
 
   if (req has 'Directory' header) {
     directory = req.headers.Directory
@@ -35,19 +35,19 @@ app.get('/fileSystem', (req, res) {
 
 
   if (directory) {
-    prepare directory contents 
+    prepare directory contents
     responce with directory contents
   } else {
-    responce with file
+    responce with downloadable file
   }
 })
 
 
 
 
-// 'post' would create directories and upload files 
+// 'post' would create directories and upload files
 -> Method
-app.get('/fileSystem', (req, res) {
+app.post('/fileSystem', (req, res) {
   if (req has 'Create-Directories' header) {
     directories = req.body.directories
   } else {
@@ -61,6 +61,7 @@ app.get('/fileSystem', (req, res) {
 
     response with created directories
   } else {
+    // file uploads
     for (f in files) {
       rename (f.path, t.targetPath)
     }
@@ -75,7 +76,7 @@ app.get('/fileSystem', (req, res) {
 // 'put' would copy and rename files
 -> Method
 app.put('/fileSystem', (req, res) {
-  pairs = req.pairs 
+  pairs = req.pairs
 
   if (req.body.keep) {
     for (p in pairs) {
@@ -93,7 +94,7 @@ app.put('/fileSystem', (req, res) {
 
 
 
-// 'delete' would delete files and directories 
+// 'delete' would delete files and directories
 -> Method
 app.delete('/fileSystem', (req, res) {
   for (e in entries) {
