@@ -123,14 +123,6 @@ export class CreateDirectoryComponent implements OnInit {
     });
   }
 
-  removeDirectory(name) {
-    const index = this.que.findIndex((e) => {
-      return e === name;
-    });
-
-    this.que.splice(index, 1);
-  }
-
   toggleHelp() {
     if (this.help) {
       this.help = false;
