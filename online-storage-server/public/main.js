@@ -1323,6 +1323,8 @@ let MimeTypesService = class MimeTypesService {
             'image/hsj2',
             'image/jls',
             'image/jp2',
+            'image/jpg',
+            'image/jpeg',
             'image/jph',
             'image/jphc',
             'image/jpm',
