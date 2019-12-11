@@ -34,7 +34,5 @@
     "tslib": "^1.10.0",
     "typescript": "^3.7.2"
   },
-  "dependencies": {
-    "online-storage-server": "file:../online-storage-server"
-  }
+  "dependencies": {}
 }
