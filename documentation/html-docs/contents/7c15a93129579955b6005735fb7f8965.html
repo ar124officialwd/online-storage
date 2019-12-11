@@ -169,7 +169,7 @@
           
           <tr>
             <td>public</td>
-            <td><a href="f507b2d0e30c06f7617bb8575a951341.html">get()</a></td>
+            <td><a href="f507b2d0e30c06f7617bb8575a951341.html">get(headers)</a></td>
             <td><p><code>get</code> returns file system entries.</p>
 
 <p>It accepts a query parameter, <code>the path from root</code> to access a particular file system entry or if not provided, it would return root directory contents.</p>
@@ -181,7 +181,7 @@
           
           <tr>
             <td>public</td>
-            <td><a href="de004fea12dae0b03977ddaa5ad37a84.html">post()</a></td>
+            <td><a href="de004fea12dae0b03977ddaa5ad37a84.html">post(headers, files = null, directories = null)</a></td>
             <td><p><code>post</code> method is used to create file system entries. This can be used upload files or create directories.</p>
 
 <p>If a only path is sent, it would create a directory. If a file is sent(uploaded), it would save file to given path.</p>
@@ -195,7 +195,7 @@
           
           <tr>
             <td>public</td>
-            <td><a href="43b7da75e70cebfb070b1cd78a5b99e7.html">delete()</a></td>
+            <td><a href="43b7da75e70cebfb070b1cd78a5b99e7.html">delete(headers, entries)</a></td>
             <td><p><code>delete</code> method deletes the file system entry pointed by path.</p>
 
 <p>Body Format:
@@ -206,7 +206,7 @@
           
           <tr>
             <td>public</td>
-            <td><a href="4f82c27a49fade8b7665af87920559a4.html">put()</a></td>
+            <td><a href="4f82c27a49fade8b7665af87920559a4.html">put(headers, entryPairs, keep = true)</a></td>
             <td><p><code>put</code> method renames a file system entry point by path in body to targetPath in body.
 If special flag <code>keep</code> is true, it would just copy file to target and keeps original.</p>
 
