@@ -141,6 +141,16 @@ fileSystemRouter.post('/fileSystem', upload.array('file[]', 20), async (req, res
       }
     } catch(err) {
       Logger.log(err)
+
+      /* cleanup */
+      try {
+        for (f of req.files) {
+          await fs.promises.unlink(f.path)
+        }
+      } catch(err) {
+        Logger.log(err) // just log, not a serious issue
+      }
+
       res.status(500).end()
     }
   }
