@@ -1,10 +1,10 @@
-# User REST API 
+# User REST API
 # API FOR SERVING USERS
+# API provide services for managing users on server
 
 app = new http
 
 // get would validate user existance and credentials
-
 -> Method
 app.get('user/', (req, res) {
   if (req has credentials) {
@@ -38,12 +38,12 @@ app.get('user/', (req, res) {
 // post would create a new user
 -> Method
 app.post('/user', (req, res) => {
-  validate = check user model 
+  validate = check user model
 
   if (validate) {
     open database connection
     result = try save user
-    
+
     if (result) {
       response with true registeration message
     } else {
@@ -65,7 +65,7 @@ app.patch('/user', (req, res) {
 
     if (validate) {
       open database connection
-      patch = try user patch 
+      patch = try user patch
 
       if (patch) {
         response with true message
@@ -86,7 +86,7 @@ app.patch('/user', (req, res) {
 -> Method
 app.delete('/user', (req, res) => {
   if (req has credentials) {
-    validation = validate user 
+    validation = validate user
 
     if (validation) {
       open database connection

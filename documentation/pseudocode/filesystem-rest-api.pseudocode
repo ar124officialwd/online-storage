@@ -1,5 +1,6 @@
 # FILESYSTEM REST API
 # API FOR SERVING FILESYSTEM
+# API provide services for managing files and directories on server
 
 app = new http app
 

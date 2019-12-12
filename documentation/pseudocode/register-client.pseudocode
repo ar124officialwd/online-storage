@@ -1,4 +1,5 @@
 # Registration Client Side
+# Registration controls user registeration to the system
 
 input first name
 input second name
@@ -10,9 +11,9 @@ input pricing plan
 valid = validateInputs()
 
 if (valid) {
-  responce = make http request(post)
+  response = make http request(post)
 
-  if (responce is positive) {
+  if (response is positive) {
     registered = true
   } else {
     registered = false

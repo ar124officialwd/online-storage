@@ -1,13 +1,14 @@
 # Login
+# Login controls login of user to system
 
 input user email
 input user password
 validate inputs
 
 if (inputs are valid) {
-  responce = make http validation request(get)
+  response = make http validation request(get)
 
-  if (responce is positive) {
+  if (response is positive) {
     valid = true
   } else {
     valid = false
