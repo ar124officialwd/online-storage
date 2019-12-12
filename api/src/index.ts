@@ -4,10 +4,6 @@ export class FileSystemEntry {
   size: number = 0;
   exists: boolean = false;
   type: string = '';
-
-  constructor() {
-
-  }
 }
 
 export class Directory extends FileSystemEntry {
@@ -15,67 +11,38 @@ export class Directory extends FileSystemEntry {
   parent: string | undefined;
   subDirectories: number = 0;
   files: number = 0;
-  contents: DirectoryContents = new DirectoryContents()
-
-  constructor() {
-    super();
-  }
+  contents: DirectoryContents = new DirectoryContents();
 }
 
 export class File extends FileSystemEntry {
   mediaType: string = '';
   extension: string = '';
-
-  constructor() {
-    super();
-  }
 }
 
 export class DirectoryContents {
   files: File[] = [];
   directories: Directory[] = [];
-
-  constructor() {
-
-  }
 }
-
 
 export class Create {
   directory: Directory = new Directory();
-
-  constructor() {
-
-  }
 }
-  
+
 export class Copy {
   from: FileSystemEntry = new FileSystemEntry();
   to: FileSystemEntry = new FileSystemEntry();
   recursive: boolean = false;
   keep: boolean = false;
-
-  constructor() {
-
-  }
 }
 
 export class Delete {
   entry: FileSystemEntry = new FileSystemEntry();
   recursive: boolean = false;
-
-  constructor() {
-
-  }
 }
 
 export class Upload {
   file: any = null;
   target: FileSystemEntry = new FileSystemEntry();
-
-  constructor() {
-
-  }
 }
 
 export class PricingPlan {
@@ -83,10 +50,6 @@ export class PricingPlan {
   price: number = 0;
   size: number = 0;
   period: string = '';
-
-  constructor() {
-
-  }
 }
 
 export class User {
@@ -95,8 +58,4 @@ export class User {
   email: string = '';
   password: string = '';
   pricingPlan: PricingPlan = new PricingPlan();
-
-  constructor() {
-
-  }
 }
