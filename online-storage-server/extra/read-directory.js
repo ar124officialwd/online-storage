@@ -7,16 +7,15 @@ const getFileType = require('../extra/get-file-type')
 
 async function readDirectory(dirToRead) {
   let dir
+  let dirToReadStats
+  let dirents
 
   try {
-    const dirToReadStats = await fs.promises.stat(dirToRead)
-    
+    dirToReadStats = await fs.promises.stat(dirToRead)
+    dirents = await fs.promises.readdir(dirToRead)
     dir = new Directory(path.basename(dirToRead), dirToRead, 0, true, null, 0, 0)
+
     dir.size = dirToReadStats.size
-
-
-    let dirents = await fs.promises.readdir(dirToRead)
-
     for (let d of dirents) {
       const stat = await fs.promises.stat(path.join(dirToRead, d))
       dir.size += stat.size;
@@ -40,7 +39,17 @@ async function readDirectory(dirToRead) {
       }
     }
   } catch(err) {
-    Logger.log(err)
+    /* fault tolarance:- make directory if does not exists */
+    if (err.errno === -2) {
+      await fs.promises.mkdir(dirToRead, {
+        recursive: true
+      })
+
+      return readDirectory(dirToRead)
+    } else {
+      Logger.log(err)
+      throw err
+    }
   }
 
   return dir
