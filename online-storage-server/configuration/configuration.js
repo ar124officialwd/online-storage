@@ -15,17 +15,30 @@ class Configuration {
   }
 
   static getMountRoot() {
-    if (process.env["NODE_ENV"] == "development") {
-      if (process.platform === 'win32')
-        return "D:\\projects\\online-storage\\mounts"
-
-      return "/disk/projects/online-storage/mounts"
-    } else {
-      if (process.platform === 'win32')
-        return "D:\\mounts"
-
-      return "/disk/mounts"
-    }
+    return (new Promise((res, rej) => {
+      if (process.env["NODE_ENV"] == "development") {
+        if (process.platform === 'win32')
+          res("D:\\projects\\online-storage\\mounts")
+        else
+          res("/disk/projects/online-storage/mounts")
+      } else {
+        if (process.platform === 'win32')
+          res("D:\\mounts")
+        else
+          res("/disk/mounts")
+      }
+    }))
+      .then(mountRoot => {
+        fs.promises.mkdir(mountRoot, {
+          recursive: true
+        })
+          .then(() => {
+            return mountRoot
+          })
+          .catch(err => {
+            throw err
+          })
+      })
   }
 
   static getErrors() {

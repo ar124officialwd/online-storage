@@ -11,7 +11,7 @@ describe('Unit testing of Configuration', () => {
     expect(Configuration.getDBName()).toBeTruthy('Error: No database name returned!')
   })
 
-  it('should return mount path', () => {
-    expect(Configuration.getMountRoot).toBeTruthy('Error: No mouth path was returned!')
+  it('should return mount path', async () => {
+    await expectAsync(Configuration.getMountRoot()).toBeResolved()
   })
 });
