@@ -12,7 +12,10 @@ async function createStorage(email, firstName, secondName) {
   try {
     const mountRoot = await getMountRoot() 
     let storagePath = path.join(mountRoot, `${secondName}${email}${firstName}`)
-    storage = await fs.promises.mkdir(storagePath, { recursive: true })
+    storage = fs.promises.mkdir(storagePath, { recursive: true })
+      .then(() => {
+        return storagePath
+      })
   } catch(err) {
     Logger.log(err)
     throw err
