@@ -15,7 +15,7 @@ class Configuration {
   }
 
   static getMountRoot() {
-    return (new Promise((res, rej) => {
+    const promise = new Promise((res, rej) => {
       if (process.env["NODE_ENV"] == "development") {
         if (process.platform === 'win32')
           res("D:\\projects\\online-storage\\mounts")
@@ -27,7 +27,9 @@ class Configuration {
         else
           res("/disk/mounts")
       }
-    }))
+    })
+
+    promise
       .then(mountRoot => {
         fs.promises.mkdir(mountRoot, {
           recursive: true
@@ -39,6 +41,8 @@ class Configuration {
             throw err
           })
       })
+
+    return promise
   }
 
   static getErrors() {
