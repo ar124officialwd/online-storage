@@ -35,6 +35,7 @@ var authenticateUser = function(req, res, next) {
         })
       } else {
         req.storagePath = doc.storagePath
+        console.log(req.storagePath)
         next()
       }
     }
