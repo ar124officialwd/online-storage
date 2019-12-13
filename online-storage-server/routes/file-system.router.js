@@ -100,7 +100,9 @@ fileSystemRouter.post('/fileSystem', upload.array('file[]', 20), async (req, res
   // request is about creating directories
   if (req.get('Create-Directory')) {
     for (let i = 0; i < req.body.locations.length; i++) {
-      fs.promises.mkdir(path.join(req.storagePath, req.body.locations[i]))
+      fs.promises.mkdir(path.join(req.storagePath, req.body.locations[i]), {
+        recursive: true
+      })
         .then(() => {
           responce.push(req.body.locations[i])
 
