@@ -15,7 +15,9 @@
       "node_modules/@types"
     ],
     "types": [
-      "node"
+      "node",
+      "jest",
+      "mocha"
     ],
     "lib": [
       "es2018",

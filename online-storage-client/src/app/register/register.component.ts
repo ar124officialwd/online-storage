@@ -1,3 +1,5 @@
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -19,9 +21,15 @@ export class RegisterComponent implements OnInit {
   registerSuccess = false;
   registerFailed = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private router: Router,
+              private cookieService: CookieService) {}
 
   ngOnInit() {
+    if (this.cookieService.get('login')) {
+      this.router.navigateByUrl('/user-panel');
+    }
+
     this.http
       .get('/pricingplans')
       .subscribe((pricingplans: PricingPlan[]) => {

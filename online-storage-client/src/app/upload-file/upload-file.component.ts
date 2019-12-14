@@ -1,22 +1,21 @@
+import { Router } from '@angular/router';
+import { CwdService } from './../cwd.service';
 import { CustomFile } from './../custom-file';
-import { join } from 'path';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { faWindowClose, faInfo } from '@fortawesome/free-solid-svg-icons';
 import { FileSystemService } from '../file-system.service';
 import { File } from 'api';
+import { Sidebar } from '../sidebar';
 
 @Component({
   selector: 'app-upload-file',
   templateUrl: './upload-file.component.html',
   styleUrls: ['./upload-file.component.scss']
 })
-export class UploadFileComponent implements OnInit {
+export class UploadFileComponent extends Sidebar implements OnInit {
   faWindowClose = faWindowClose;
   faInfo = faInfo;
 
-  @Output() fileEvent = new EventEmitter<any>();
-  @Input() location;
-  @Input() existingNames;
   errorMessage = undefined;
   file: any;
   fileName = '';
@@ -25,10 +24,18 @@ export class UploadFileComponent implements OnInit {
   help = false;
   progress = '';
   progressCount = 1;
+  names: any;
+  cwd: any;
 
-  constructor(private fs: FileSystemService) { }
+  constructor(routerInstance: Router,
+              private fs: FileSystemService,
+              private cwdService: CwdService) {
+                super(routerInstance);
+              }
 
   ngOnInit() {
+    this.cwd = this.cwdService.getCwd();
+    this.names = this.cwdService.getNames();
   }
 
   addSelectedFile() {
@@ -56,7 +63,7 @@ export class UploadFileComponent implements OnInit {
       return;
     }
 
-    index = this.existingNames.findIndex((n) => {
+    index = this.names.findIndex((n) => {
       return n === file.newName;
     });
 
@@ -92,8 +99,9 @@ export class UploadFileComponent implements OnInit {
     this.selectedFiles.push(file);
   }
 
-  closeModel() {
-    this.fileEvent.emit(null);
+  /* open help about uploading */
+  openHelp() {
+
   }
 
   removeFile(s) {
@@ -104,14 +112,7 @@ export class UploadFileComponent implements OnInit {
     this.selectedFiles.splice(index, 1);
   }
 
-  toggleHelp() {
-    if (this.help) {
-      this.help = false;
-    } else {
-      this.help = true;
-    }
-  }
-
+  /* upload selected files */
   upload() {
     const mainElement = document.getElementById('main');
     mainElement.style.opacity = '0.1';
@@ -127,23 +128,17 @@ export class UploadFileComponent implements OnInit {
     }, 1000);
 
     const formData = new FormData();
-    const names = [];
 
     for (const s of this.selectedFiles) {
       formData.append('file[]', s);
       formData.append('name[]', s.newName);
     }
+    formData.append('location', this.cwd.location);
 
-    formData.append('location', this.location);
-
+    let uploadedFiles = [];
     this.fs.uploadFiles(formData).subscribe((res: File[]) => {
       clearInterval(interval);
-
-      for (const r of res) {
-        this.fileEvent.emit(r);
-      }
-
-      this.fileEvent.emit(null);
+      uploadedFiles = res;
     }, (err) => {
       clearInterval(interval);
       this.errorMessage = 'Some kind of error occured while upload files';
@@ -152,6 +147,9 @@ export class UploadFileComponent implements OnInit {
 
       const offsetTop = document.getElementById('error').offsetTop;
       mainElement.scrollTop = offsetTop;
+    }, () => {
+      this.cwdService.pushToFiles(uploadedFiles);
+      this.closeModel();
     });
   }
 

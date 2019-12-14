@@ -1,0 +1,18 @@
+<div class="item alert d-flex flex-row m-0" (click)="openDirectory()">
+  <div class="item-header mx-2">
+    <img src="/images/folder.png">
+  </div>
+  <div class="item-content flex-grow-1 d-flex flex-row">
+    <div class="flex-item flex-grow">
+      {{directory.name}}
+    </div>
+  </div>
+  <div class="item-actions d-flex flex-row-reverse">
+    <div class="flex-item">
+      <button class="btn btn-dark p-1 ml-1"
+        (click)="deleteDirectory(); stopEventPropagation($event)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>

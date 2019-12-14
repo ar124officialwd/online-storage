@@ -23,6 +23,8 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@ng-bootstrap/ng-bootstrap": "^5.1.4",
+    "@types/jest": "^24.0.23",
+    "@types/mocha": "^5.2.7",
     "api": "file:../api",
     "bootstrap": "^4.4.1",
     "email-validator": "^2.0.4",

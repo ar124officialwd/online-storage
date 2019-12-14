@@ -1,34 +1,21 @@
-img {
-  max-width: 24px;
-  max-height: 24px;
-  margin: 1px;
+.directoryView {
+  margin: 10px;
+  padding: 10px;
+  height: 80vh;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px;
+  z-index: 1;
 }
 
-.item {
-  display: grid;
-  grid-template-columns: 0.3fr 3fr 0.7fr;
-  padding: 3px;
+.directoryView .header {
+  height: 10%;
+  padding: 0;
+  margin: 0;
 }
 
-.item:hover {
-  background: rgba(230, 230, 230, 0.5);
-}
-
-.item-header {
-  grid-column: 1;
-}
-
-.item-content {
-  grid-column: 2;
-}
-
-.item-name:focus {
-  background: white;
-  border: none;
-}
-
-.item-actions {
-  grid-column: 3;
-  display: flex;
-  flex-direction: row-reverse;
+.directoryView .contents {
+  height: 90%;
+  margin: 0;
+  overflow: auto;
 }

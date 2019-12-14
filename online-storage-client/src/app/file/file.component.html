@@ -1,0 +1,37 @@
+<div class="item alert d-flex flex-row m-0"
+  click="openFile()">
+  <div class="item-header mx-2">
+    <img src="/images/file.png">
+  </div>
+  <div class="item-content flex-grow-1 d-flex flex-row">
+    <div id="name-field" class="flex-item item-name flex-grow-1"
+      (click)="playFile()">
+      <div id="item-name">
+        {{file.name}}
+      </div>
+      <div id="item-play">
+      </div>
+    </div>
+    <div class="flex-item alert alert-sm alert-secondary text-right p-0 ml-2">
+      {{file.mediaType.split('/')[1]}}
+    </div>
+    <div class="flex-item alert alert-sm alert-secondary text-right p-0 ml-2">
+      {{ hru(file.size) }}
+    </div>
+  </div>
+
+  <div class="item-actions d-flex flex-row-reverse">
+    <div class="flex-item">
+      <button class="btn btn-sm btn-dark p-1 ml-1"
+        (click)="deleteFile(); stopEventPropagation($event)">
+        <fa-icon [icon]="faTrash"></fa-icon>
+      </button>
+    </div>
+    <div class="flex-item">
+      <button class="flex-item btn btn-sm btn-dark p-1 ml-1"
+        (click)="downloadFile(); stopEventPropagation($event);">
+        <fa-icon [icon]="faDownload"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>

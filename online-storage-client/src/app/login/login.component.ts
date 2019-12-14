@@ -17,10 +17,13 @@ export class LoginComponent implements OnInit {
   otherError = false;
 
   constructor(private http: HttpClient,
-              private cookieSerivce: CookieService,
+              private cookieService: CookieService,
               private router: Router) { }
 
   ngOnInit() {
+    if (this.cookieService.get('login')) {
+      this.router.navigateByUrl('/user-panel');
+    }
   }
 
   createSession() {
@@ -32,10 +35,10 @@ export class LoginComponent implements OnInit {
       }
     }).subscribe((user: User) => {
       this.loginSuccess = true;
-      this.cookieSerivce.set('firstName', user.firstName);
-      this.cookieSerivce.set('secondName', user.secondName);
-      this.cookieSerivce.set('login', user.email);
-      this.cookieSerivce.set('maxStorage', String(user.pricingPlan.size));
+      this.cookieService.set('firstName', user.firstName);
+      this.cookieService.set('secondName', user.secondName);
+      this.cookieService.set('login', user.email);
+      this.cookieService.set('maxStorage', String(user.pricingPlan.size));
       this.router.navigateByUrl('/user-panel');
     }, (error: HttpErrorResponse) => {
       if (error.status === 403) {
