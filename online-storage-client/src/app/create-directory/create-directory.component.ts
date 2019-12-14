@@ -42,11 +42,11 @@ export class CreateDirectoryComponent extends Sidebar implements OnInit {
               private fs: FileSystemService,
               private cwdService: CwdService) {
                 super(routerInstance);
+                this.existingNames = this.cwdService.getNames();
+                this.cwd = this.cwdService.getCwd();
               }
 
   ngOnInit() {
-    this.existingNames = this.cwdService.getNames();
-    this.cwd = this.cwdService.getCwd();
   }
 
   addDirectory() {
