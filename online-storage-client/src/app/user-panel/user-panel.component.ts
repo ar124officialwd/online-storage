@@ -131,7 +131,7 @@ export class UserPanelComponent implements OnInit {
 
   /************************************************************************** */
   // ENTRY LEVEL OPERATIONS
-  private copyEntries() {
+  copyEntries() {
     this.clipboard = this.selected;
     this.clipboardDirectory = this.cwd;
     this.keep = true;
@@ -145,7 +145,7 @@ export class UserPanelComponent implements OnInit {
     }
   }
 
-  private cutEntries() {
+  cutEntries() {
     this.clipboard = this.selected;
     this.clipboardDirectory = this.cwd;
     this.keep = false;
@@ -160,7 +160,7 @@ export class UserPanelComponent implements OnInit {
     }
   }
 
-  private deleteEntries() {
+  deleteEntries() {
     let locations = '';
 
     for (const s of this.selected) {
@@ -205,7 +205,7 @@ export class UserPanelComponent implements OnInit {
   }
 
   /* paste copied/cut directories and files */
-  private pasteEntries() {
+  pasteEntries() {
     this.errorMessage = '';
     this.message = '';
 
@@ -266,7 +266,7 @@ export class UserPanelComponent implements OnInit {
       );
   }
 
-  private select(entry, event) {
+  select(entry, event) {
     if (event.target.id === 'selectAll') {
       if (event.target.checked) {
         this.selected = JSON.parse(
@@ -356,16 +356,16 @@ export class UserPanelComponent implements OnInit {
     return this.cwdService.canGoForward();
   }
 
-  private createDirectories() {
+  createDirectories() {
     this.router.navigate([{ outlets: {sidebar: 'create-directories'} }]);
   }
 
-  private previousDirectory() {
+  previousDirectory() {
     this.cwdService.previousDirectory();
     this.selected = [];
   }
 
-  private reopenDirectory() {
+  reopenDirectory() {
     this.cwdService.reopenDirectory();
     this.selected = [];
   }
@@ -374,7 +374,7 @@ export class UserPanelComponent implements OnInit {
     this.router.navigate([{ outlets: {sidebar: 'upload-files'} }]);
   }
 
-  private getUsageClass() {
+  getUsageClass() {
     if (this.usage < 25) {
       return 'alert alert-sm alert-success';
     } else if (this.usage < 50) {
@@ -386,7 +386,7 @@ export class UserPanelComponent implements OnInit {
     }
   }
 
-  private logout() {
+  logout() {
     this.cookieService.delete('login');
     this.cookieService.delete('firstName');
     this.cookieService.delete('secondName');

@@ -46,7 +46,7 @@ export class FileComponent implements OnInit {
       })
   }
 
-  private deleteFile() {
+  deleteFile() {
     this.fs.deleteEntries([this.file.location + ':' + this.file.mediaType])
       .subscribe(res => {
         this.removeMe.emit(this.file);
@@ -55,7 +55,7 @@ export class FileComponent implements OnInit {
       }));
   }
 
-  private downloadFile() {
+  downloadFile() {
     this.fs.downloadFile(this.file.location).subscribe(
       (res: Blob) => {
         const link = document.createElement('a');
@@ -82,7 +82,7 @@ export class FileComponent implements OnInit {
       let itemName = document.querySelector(`#${this.file.id} .item-name`) as HTMLElement;
       this.audio = document.createElement('audio');
       this.closeButton = document.createElement('button')
-      
+
       /* prepare audio */
       this.audio.src = 'http://' + this.cookieService.get('login') + ':' +
         '@127.0.0.1:3000/fileSystem/' +
