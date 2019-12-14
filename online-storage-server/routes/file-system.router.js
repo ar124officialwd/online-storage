@@ -201,11 +201,22 @@ fileSystemRouter.put('/fileSystem', async (req, res, next) => {
       } else {
         // target is a directory: copy directory recursively
         if (from[i].mediaType === 'directory') {
-          await fs.promises.mkdir(path.join(req.storagePath, to[i].location))
+          // create directory, if it does not exist
+          await fs.promises.mkdir(path.join(req.storagePath, to[i].location), {
+            recursive: true
+          })
+
+          // copy directory recursively
           await copyDirectoryRecursive(
             path.join(req.storagePath, from[i].location),
             path.join(req.storagePath, to[i].location))
-          responce.push(to[i])
+
+          // now read directory as Directory object
+          const responseDirectory = await readDirectory(
+            path.join(req.storagePath, to[i].location))
+          
+          // push Directory object
+          responce.push(responseDirectory)
 
         // target is a file: copy single file
         } else {
