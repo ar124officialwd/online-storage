@@ -87,6 +87,27 @@ fileSystemRouter.get('/fileSystem', async (req, res, next) => {
   }
 })
 
+fileSystemRouter.get('/fileSystem/:file', async (req, res) => {
+  try {
+    const file =  path.join(req.storagePath, req.params.file)
+    console.log(file)
+    const stream = fs.createReadStream(file)
+    const stat = await fs.promises.stat(file)
+
+    res.writeHead(200, {
+      'Content-Type': await getFileType(file),
+      'Content-Length': stat.size
+    })
+    stream.pipe(res)
+  } catch(err) {
+    if (err.errno === -2) {
+      res.status(404).end()
+    } else {
+      res.status(504).end()
+    }
+  }
+})
+
 let upload = multer({
   dest: path.join(path.join('..', '/uploads'))
 })
