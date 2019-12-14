@@ -6,6 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('hello-world-express:server');
+var http = require('http');
 var https = require('https');
 const fs = require('fs')
 const path = require('path')
@@ -21,7 +22,8 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = https.createServer({
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer({
   key: fs.readFileSync(path.join(__dirname, '..', 'localhost-privkey.pem')),
   cert: fs.readFileSync(path.join(__dirname, '..', 'localhost-cert.pem'))
 }, app);
@@ -30,9 +32,15 @@ var server = https.createServer({
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+httpServer.listen(3000);
+httpServer.on('error', onError);
+httpServer.on('listening', onListening);
+
+/*
+httpsServer.listen(443);
+httpsServer.on('error', onError);
+httpsServer.on('listening', onListening);
+*/
 
 /**
  * Normalize a port into a number, string, or false.
@@ -86,10 +94,11 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
+
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  console.log('Listening on ' + bind);
+  //var addr = server.address();
+  //var bind = typeof addr === 'string'
+  //  ? 'pipe ' + addr
+  //  : 'port ' + addr.port;
+  console.log('Listening for requests')
 }
