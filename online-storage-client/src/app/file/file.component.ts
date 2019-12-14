@@ -16,7 +16,6 @@ import { Router } from '@angular/router';
 })
 export class FileComponent implements OnInit {
   @Input() file: ExtendedFile;
-  @Output() removeMe = new EventEmitter<ExtendedFile>();
 
   faTrash = faTrash;
   faDownload = faDownload;
@@ -43,13 +42,13 @@ export class FileComponent implements OnInit {
           this.stopAudio();
           this.payingAudio = false;
         }
-      })
+      });
   }
 
   deleteFile() {
     this.fs.deleteEntries([this.file.location + ':' + this.file.mediaType])
       .subscribe(res => {
-        this.removeMe.emit(this.file);
+        this.cwdService.removeEntries([this.file]);
       }, (err => {
         this.error('Delete File', err);
       }));
@@ -79,9 +78,9 @@ export class FileComponent implements OnInit {
 
       /* replace name field with audio player */
       this.nameField = document.getElementById(this.file.id);
-      let itemName = document.querySelector(`#${this.file.id} .item-name`) as HTMLElement;
+      this.itemName = document.querySelector(`#${this.file.id} .item-name`) as HTMLElement;
       this.audio = document.createElement('audio');
-      this.closeButton = document.createElement('button')
+      this.closeButton = document.createElement('button');
 
       /* prepare audio */
       this.audio.src = 'http://' + this.cookieService.get('login') + ':' +
@@ -102,7 +101,7 @@ export class FileComponent implements OnInit {
       }).bind(this));
 
       // remove item name till audio plays */
-      this.itemName = this.nameField.removeChild(itemName);
+      this.itemName = this.nameField.removeChild(this.itemName);
 
       /* add audio */
       this.nameField.appendChild(this.audio);

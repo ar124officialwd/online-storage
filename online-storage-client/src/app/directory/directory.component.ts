@@ -13,15 +13,13 @@ import { stopEventPropagation } from '../stopEventPropagation';
 })
 export class DirectoryComponent implements OnInit {
   @Input() directory: ExtendedDirectory;
-  @Output() removeMe = new EventEmitter<ExtendedDirectory>();
 
   faTrash = faTrash;
 
   stopEventPropagation = stopEventPropagation;
 
   constructor(private fs: FileSystemService,
-              private cwdService: CwdService,
-              private router: Router) { }
+              private cwdService: CwdService) { }
 
   ngOnInit() {
   }
@@ -33,7 +31,7 @@ export class DirectoryComponent implements OnInit {
   deleteDirectory() {
     this.fs.deleteEntries([this.directory.location + ':' + 'directory'])
       .subscribe((res => {
-        this.removeMe.emit(this.directory);
+        this.cwdService.removeEntries([this.directory]);
       }));
   }
 }
