@@ -44,26 +44,14 @@ var authenticateUser = function(req, res, next) {
 
 // authenticate each and every request
 fileSystemRouter.all('/fileSystem', authenticateUser)
+fileSystemRouter.all('/fileSystem/:file', authenticateUser)
 
 // requests of getting files and directories
-fileSystemRouter.get('/fileSystem/:file', async (req, res, next) => {
-  console.log(req.params)
+fileSystemRouter.get('/fileSystem', async (req, res, next) => {
   // request is about download a file
-  if (req.headers['file-location'] || req.params.file !== '') {
-    let file
-    if (req.headers['file-location']) {
-      file = path.join(req.storagePath, req.headers['file-location'])
-    } else {
-      file = path.join(req.storagePath, req.param.file)
-    }
-    const stream = fs.createReadStream(file)
-    const stat = await fs.promises.stat(file)
-
-    res.writeHead(200, {
-      'Content-Type': await getFileType(file),
-      'Content-Length': await stat.size
-    })
-    stream.pipe(res);
+  if (req.headers['file-location']) {
+    const file = path.join(req.storagePath, req.headers['file-location'])
+    res.sendFile(file)
   } else {
     // by default root directory is sent
     let directory = req.storagePath
