@@ -217,11 +217,11 @@ export class UserPanelComponent implements OnInit {
       to.name = from.name;
       to.mediaType = from.mediaType;
       to.size = from.size;
-      to.extension = from.extension || undefined;
-      if (from.mediaType !== 'directory') {
-        to.location = to.location + path.sep + from.name + from.extension;
+
+      if (from.mediaType === 'directory') {
+        to.location = path.join(to.location, to.name);
       } else {
-        to.location = to.location + path.sep + from.name;
+        to.location = path.join(to.location, to.name + to.extension);
       }
 
       copyObjects.push({
@@ -255,7 +255,7 @@ export class UserPanelComponent implements OnInit {
         () => {
           // clean if moving entries
           if (!this.keep) {
-            this.cwdService.removeFromMarkedCwd(pastedEntries);
+            this.cwdService.removeFromMarkedCwd(this.clipboard);
           }
 
           this.cwdService.pushEntries(pastedEntries);
@@ -269,13 +269,19 @@ export class UserPanelComponent implements OnInit {
   select(entry, event) {
     if (event.target.id === 'selectAll') {
       if (event.target.checked) {
+        // reset first before pushing all, to avoid duplicates
+        this.selected = [];
+
+        // push directories
         this.selected = JSON.parse(
           JSON.stringify(this.cwd.contents.directories)
         );
+        // push files
         for (const f of this.cwd.contents.files) {
           this.selected.push(JSON.parse(JSON.stringify(f)));
         }
 
+        // check checkboxes to show all are checked
         const checkboxs = Array.from(
           document.querySelectorAll('input[type=checkbox]')
         );
@@ -294,13 +300,23 @@ export class UserPanelComponent implements OnInit {
       }
 
     } else {
+      const selectAllCheckbox = document.querySelector('input[type=checkbox]');
       if (event.target.checked) {
         this.selected.push(entry);
+
+        // if all are selected after this select, check select all checkbox
+        if (this.selected.length === this.cwd.files +
+          this.cwd.subDirectories) {
+          selectAllCheckbox.setAttribute('checked', 'true');
+        }
       } else {
         const index = this.selected.findIndex(s => {
           return s.name === entry.name;
         });
         this.selected.splice(index, 1);
+
+        // since all contents are not selected now, uncheck select all checkbox
+        selectAllCheckbox.removeAttribute('checked');
       }
     }
   }
