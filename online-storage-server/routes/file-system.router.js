@@ -10,6 +10,7 @@ const decryptAuth = require('../extra/decrypt-auth')
 const File = require('../models/file.model')
 const getFileType = require('../extra/get-file-type')
 const fs = require('fs')
+const copyDirectoryRecursive = require('../extra/copy-directory-recursive')
 
 // we first must check request authentication
 var authenticateUser = function(req, res, next) {
@@ -35,7 +36,6 @@ var authenticateUser = function(req, res, next) {
         })
       } else {
         req.storagePath = doc.storagePath
-        console.log(req.storagePath)
         next()
       }
     }
@@ -192,7 +192,8 @@ fileSystemRouter.put('/fileSystem', async (req, res, next) => {
 
       // a rename request: rename directories and files
       if (!req.body.keep) {
-          await fs.promises.rename(path.join(req.storagePath, from[i].location),
+          await fs.promises.rename(
+           path.join(req.storagePath, from[i].location),
            path.join(req.storagePath, to[i].location))
           responce.push(req.body.pairs[i].to)
 
@@ -201,22 +202,16 @@ fileSystemRouter.put('/fileSystem', async (req, res, next) => {
         // target is a directory: copy directory recursively
         if (from[i].mediaType === 'directory') {
           await fs.promises.mkdir(path.join(req.storagePath, to[i].location))
-          const dirents = await fs.promises.readdir(
-            path.join(req.storagePath, from[i].location))
-
-          for (let d of dirents) {
-            await fs.promises.copyFile(path.join(req.storagePath,
-              from[i].location, d),
-              path.join(req.storagePath, to[i].location))
-          }
-
+          await copyDirectoryRecursive(
+            path.join(req.storagePath, from[i].location),
+            path.join(req.storagePath, to[i].location))
           responce.push(to[i])
 
         // target is a file: copy single file
         } else {
-          await fs.promises.copyFile(path.join(req.storagePath,
-            from[i].location), path.join(req.storagePath, to[i].location))
-
+          await fs.promises.copyFile(
+            path.join(req.storagePath, from[i].location), 
+            path.join(req.storagePath, to[i].location))
           responce.push(to[i])
         }
       }
