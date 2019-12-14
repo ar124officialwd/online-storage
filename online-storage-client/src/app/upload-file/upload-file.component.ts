@@ -31,11 +31,11 @@ export class UploadFileComponent extends Sidebar implements OnInit {
               private fs: FileSystemService,
               private cwdService: CwdService) {
                 super(routerInstance);
+                this.cwd = this.cwdService.getCwd();
+                this.names = this.cwdService.getNames();
               }
 
   ngOnInit() {
-    this.cwd = this.cwdService.getCwd();
-    this.names = this.cwdService.getNames();
   }
 
   addSelectedFile() {
