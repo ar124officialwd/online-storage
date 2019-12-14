@@ -1,7 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
 .hidden {
   visibility: hidden;
   display: none;
+}
+
+.item {
+  z-index: 99;
+}
+
+.item-header img {
+  max-width: 24px;
+  max-height: 24px;
+  margin: 1px;
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 33.33vw;
+  height: 100vh;
+  padding: 10px;
 }

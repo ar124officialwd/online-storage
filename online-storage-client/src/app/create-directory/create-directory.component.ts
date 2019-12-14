@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { CwdService } from './../cwd.service';
 import { ExtendedDirectoryContents } from './../extended-directory-contents';
 import { element } from 'protractor';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
@@ -7,28 +9,44 @@ import { faInfo, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { FileSystemService } from '../file-system.service';
 import { join } from 'path';
 import { ExtendedDirectory } from '../extended-directory';
+import { trigger, transition, animate, style, state } from '@angular/animations';
+import { Sidebar } from '../sidebar';
 
 @Component({
   selector: 'app-create-directory',
   templateUrl: './create-directory.component.html',
-  styleUrls: ['./create-directory.component.scss']
+  styleUrls: ['./create-directory.component.scss'],
+  animations: [
+    trigger('routerTransition', [
+      transition('void => *', [
+        animate('5s ease-in')
+      ]),
+      transition('* => void', [
+        style({transform: 'translateX(100%)'}),
+        animate(100)
+      ])
+    ])
+  ]
 })
-export class CreateDirectoryComponent implements OnInit {
+export class CreateDirectoryComponent extends Sidebar implements OnInit {
   faWindowClose = faWindowClose;
   faInfo = faInfo;
 
   model = '';
-  @Output() directory = new EventEmitter<ExtendedDirectory>();
-  @Input() currentDirectory;
-  @Input() existingNames;
-  help = false;
+  existingNames = [];
+  cwd = null;
   que: string[] = [];
   errorMessage: string;
 
-  constructor(private http: HttpClient,
-              private fs: FileSystemService) { }
+  constructor(routerInstance: Router,
+              private fs: FileSystemService,
+              private cwdService: CwdService) {
+                super(routerInstance);
+              }
 
   ngOnInit() {
+    this.existingNames = this.cwdService.getNames();
+    this.cwd = this.cwdService.getCwd();
   }
 
   addDirectory() {
@@ -55,11 +73,11 @@ export class CreateDirectoryComponent implements OnInit {
       const target = event.target as HTMLElement;
       document.getElementById('directoryQue').removeChild(target.parentElement);
 
-      const index = this.que.findIndex(i => {
+      const innerIndex = this.que.findIndex(i => {
         return i === target.getAttribute('directoryName');
       });
 
-      this.que.splice(index, 1);
+      this.que.splice(innerIndex, 1);
     }).bind(this);
 
     divElement.setAttribute('class', 'alert alert-sm alert-light mr-1');
@@ -70,6 +88,7 @@ export class CreateDirectoryComponent implements OnInit {
     this.model = '';
   }
 
+  /* check user input against allowed characters */
   checkInputCharacter(event) {
     const str = String.fromCharCode(event.charCode);
     if (!str.match(/[\.a-zA-Z0-9_-]/)) {
@@ -77,19 +96,16 @@ export class CreateDirectoryComponent implements OnInit {
     }
   }
 
-  closeModel() {
-    this.directory.emit(null);
-  }
-
+  /* create name directories */
   createDirectories() {
     const directories = []; // directory objects holding name and location
     const locations = []; // locations to be created
 
     for (const q of this.que) {
       const object = {
-        location: this.currentDirectory.location === '/' ?
-          this.currentDirectory.location + q :
-          this.currentDirectory.location + '/' + q,
+        location: this.cwd.location === '/' ?
+          this.cwd.location + q :
+          this.cwd.location + '/' + q,
         name: q
       };
 
@@ -97,6 +113,7 @@ export class CreateDirectoryComponent implements OnInit {
       locations.push(object.location);
     }
 
+    const createdDirectories = [];
     this.fs.createDirectory({
       locations
     }).subscribe((responceLocations: string[]) => {
@@ -116,18 +133,17 @@ export class CreateDirectoryComponent implements OnInit {
           directories: []
         };
 
-        this.directory.emit(newDirectory);
+        createdDirectories.push(newDirectory);
       }
     }, (err) => {
       this.errorMessage = 'Some kind of error occured while creating directory.';
+    }, () => {
+      this.cwdService.pushToDirectories(createdDirectories);
+      this.closeModel();
     });
   }
 
-  toggleHelp() {
-    if (this.help) {
-      this.help = false;
-    } else {
-      this.help = true;
-    }
+  openHelp() {
+
   }
 }

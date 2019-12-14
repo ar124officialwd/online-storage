@@ -1,0 +1,19 @@
+main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+}
+
+aside {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 33.33vw;
+  height: 100vh;
+  padding: 1vh 1vw;
+  overflow: auto;
+  z-index: -100;
+}

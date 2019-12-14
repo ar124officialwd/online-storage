@@ -1,4 +1,13 @@
-<div class="uploadFile">
+<div class="uploadFile sidebar bg-dark text-light">
+  <div class="d-flex flex-row-reverse p-1">
+    <button class="btn btn-sm btn-light" (click)="closeModel()">
+      <fa-icon [icon]="faWindowClose"></fa-icon>
+    </button>
+    <button class="btn btn-sm mr-1 btn-dark">
+      <fa-icon [icon]="faInfo"
+        (click)="openHelp()"></fa-icon>
+    </button>
+  </div>
 
   <div *ngIf="uploading" class="m-5">
     <h3 class="text-primary">Uploading {{progress}}</h3>
@@ -6,17 +15,6 @@
   </div>
 
   <div id="main">
-    <div class="d-flex flex-row-reverse p-1">
-      <button class="btn btn-sm btn-secondary ml-1"
-        (click)="closeModel()">
-        <fa-icon [icon]="faWindowClose"></fa-icon>
-      </button>
-      <button class="btn btn-sm btn-secondary ml-1"
-        (click)="toggleHelp()">
-        <fa-icon [icon]="faInfo"></fa-icon>
-      </button>
-    </div>
-
     <div *ngIf="!help">
       <div id="error" [class.hidden]="!errorMessage" class="alert alert-danger">
         {{errorMessage}}
@@ -30,7 +28,7 @@
             [(ngModel)]="file" (change)="fileName = ''"
             #fileModel="ngModel" required>
           <div *ngIf="fileModel.invalid && (fileModel.dirty && fileModel.touched)"
-            class="text-muted">
+            class="text-light">
             <div *ngIf="fileModel.errors.required">
                 Please choose a file
             </div>

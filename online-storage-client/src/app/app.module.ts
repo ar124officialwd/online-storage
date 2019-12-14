@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CookieService } from 'ngx-cookie-service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,10 @@ import { To4PrecisionPipe } from './to4-precision.pipe';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { MinifyPathPipe } from './minify-path.pipe';
 import { OpenMediaComponent } from './open-media/open-media.component';
+import { FileComponent } from './file/file.component';
+import { DirectoryComponent } from './directory/directory.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +34,11 @@ import { OpenMediaComponent } from './open-media/open-media.component';
     To4PrecisionPipe,
     UploadFileComponent,
     MinifyPathPipe,
-    OpenMediaComponent
+    OpenMediaComponent,
+    FileComponent,
+    DirectoryComponent,
+    SidebarComponent,
+    HelpComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +46,8 @@ import { OpenMediaComponent } from './open-media/open-media.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

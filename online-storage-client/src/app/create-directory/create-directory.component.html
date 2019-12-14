@@ -1,68 +1,49 @@
-<div class="createDirectory">
+<div class="createDirectory sidebar bg-dark text-light">
+  <!-- controls -->
   <div class="d-flex flex-row-reverse p-1">
-    <button class="btn btn-sm">
-      <fa-icon [icon]="faWindowClose"
-        (click)="closeModel()"></fa-icon>
+    <button class="btn btn-sm btn-light" (click)="closeModel()">
+      <fa-icon [icon]="faWindowClose"></fa-icon>
     </button>
-    <button class="btn btn-sm">
+    <button class="btn btn-sm mr-1 btn-dark">
       <fa-icon [icon]="faInfo"
-        (click)="toggleHelp()"></fa-icon>
+        (click)="openHelp()"></fa-icon>
     </button>
   </div>
 
   <div class="m-1">
     <h4>Create New Directories</h4>
   </div>
+  <form (ngSubmit)="createDirectories()" #form="ngForm">
+    <div class="form-group">
+      <label for="directory">Enter name</label>
+      <input type="text" name="directory" class="form-control" maxlength="128"
+        [(ngModel)]="model" #directory="ngModel"
+        (keypress)="checkInputCharacter($event)"
+        required>
 
-  <div *ngIf="!help">
-    <form (ngSubmit)="createDirectories()" #form="ngForm">
-      <div class="form-group">
-        <label for="directory">Enter names for directories</label>
-        <input type="text" name="directory" class="form-control" maxlength="128"
-          [(ngModel)]="model" #directory="ngModel"
-          (keypress)="checkInputCharacter($event)"
-          required>
-
-        <div *ngIf="!directory.dirty || !directory.touched" class="text-muted">
-          Allowed characters are 'a to z', 'A-Z', ., - and _
-        </div>
-
-        <div *ngIf="directory.invalid && !que.length && (directory.dirty || directory.touched)"
-            class="text-muted">
-          <div *ngIf="directory.errors.required">
-            Directory name is required
-          </div>
-        </div>
+      <div *ngIf="!directory.dirty || !directory.touched">
+        Allowed characters are 'a to z', 'A-Z', ., - and _
       </div>
 
-      <button type="button" class="btn btn-sm btn-primary"
-        (click)="addDirectory()" [disabled]="!form.valid">
-        Add Directory</button>
-
-      <input [disabled]="form.invalid && !que" type="submit"
-        value="Create Directories" class="btn btn-sm btn-success m-2 p-1">
-    </form>
-
-    <div>
-      <h6>Directories List</h6>
+      <div *ngIf="directory.invalid && !que.length && (directory.dirty || directory.touched)"
+        >
+        <div *ngIf="directory.errors.required">
+          Directory name is required
+        </div>
+      </div>
     </div>
-    <div id="directoryQue" [class.hidden]="!que.length"
-      class="alert alert-primary m-1 d-flex flex-row flex-wrap">
-    </div>
+
+    <button type="button" class="btn btn-sm btn-primary"
+      (click)="addDirectory()" [disabled]="!form.valid">
+      Add Directory</button>
+
+    <input [disabled]="form.invalid && !que" type="submit"
+      value="Create Directories" class="btn btn-sm btn-success m-2 p-1">
+  </form>
+  <div>
+    <h6>Directories List</h6>
   </div>
-
-  <div *ngIf="help" class="p-2">
-    <ul>
-      <li>Create Directory option let you create one or more directories</li>
-      <li>To create a directory, use Directory Name input field</li>
-      <li>Click 'Add Next' to add typed directory.</li>
-      <li>Click 'Create Directories' to create directories in
-        Directories list.</li>
-      <li>Selected directories are always there at bottom,
-        so you may remove one if you wish to cancel.</li>
-    </ul>
-    <div class="alert alert-warning p-2">
-      Click 'Info' button at top again to close this help.
-    </div>
+  <div id="directoryQue" [class.hidden]="!que.length"
+    class="alert alert-primary m-1 d-flex flex-row flex-wrap">
   </div>
 </div>
