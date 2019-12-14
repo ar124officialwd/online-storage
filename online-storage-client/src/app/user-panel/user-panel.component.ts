@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { CwdService } from './../cwd.service';
 import { ExtendedDirectory } from './../extended-directory';
 import { ExtendedFile } from './../extended-file';
@@ -27,7 +28,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import { FileSystemService } from '../file-system.service';
-import { MimeTypesService } from '../mime-types.service';
 import { FileSystemEntry } from 'api';
 
 @Component({
@@ -59,8 +59,8 @@ export class UserPanelComponent implements OnInit {
     uploadFile: false
   };
 
-  root = new ExtendedDirectory(); // root directory of user
-  cwd = new ExtendedDirectory(); // current working directory
+  root: ExtendedDirectory = null; // root directory of user
+  cwd: ExtendedDirectory = null; // current working directory
 
   maxStorage = 0; // max size of user storage
   usage = 0; // size consumed by user files/directories
@@ -78,24 +78,49 @@ export class UserPanelComponent implements OnInit {
     private cookieService: CookieService,
     private router: Router,
     private fs: FileSystemService,
-    private cwdService: CwdService
+    private cwdService: CwdService,
+    private location: Location
   ) {
     this.clipboard = cwdService.getClipboard();
     this.keep = cwdService.getKeep();
+    this.cwd = new ExtendedDirectory();
   }
 
   ngOnInit() {
+    /* navigate back to root if user is not logged in */
     if (!this.cookieService.get('login')) {
       this.router.navigateByUrl('/');
     }
+
+    /* bind history event */
+    this.location.subscribe(() => {
+      if (this.canGoBack()) {
+        this.cwdService.previousDirectory();
+      } else {
+        this.router.navigateByUrl('/user-panel');
+      }
+    });
+
     this.maxStorage = Number(this.cookieService.get('maxStorage'));
 
+    // ask cwdService to load entries
+    this.cwdService.fetchEntries();
+    // now load entries from cwdService
+    this.cwd = this.cwdService.getCwd();
     // watch for changes of current directory
     this.cwdService.cwdEvent
       .subscribe((cwd: ExtendedDirectory) => {
         this.cwd = cwd;
-        this.usage = Number(this.cwd.size);
-        this.usagePercent = (this.usage * 100) / this.maxStorage;
+
+        if (this.cwd.name === 'root') {
+          this.usage = Number(this.cwd.size);
+          this.usagePercent = (this.usage * 100) / this.maxStorage;
+        } else {
+          const root = this.cwdService.getRoot();
+          this.usage = Number(root.size);
+          this.usagePercent = (this.usage * 100) / this.maxStorage;
+        }
+
       }, (err) => {
         console.log(err);
       }, () => {

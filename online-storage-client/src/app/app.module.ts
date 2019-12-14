@@ -20,7 +20,6 @@ import { MinifyPathPipe } from './minify-path.pipe';
 import { OpenMediaComponent } from './open-media/open-media.component';
 import { FileComponent } from './file/file.component';
 import { DirectoryComponent } from './directory/directory.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { HelpComponent } from './help/help.component';
 
 @NgModule({
@@ -37,7 +36,6 @@ import { HelpComponent } from './help/help.component';
     OpenMediaComponent,
     FileComponent,
     DirectoryComponent,
-    SidebarComponent,
     HelpComponent,
   ],
   imports: [

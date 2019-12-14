@@ -1,16 +1,12 @@
 import { Router } from '@angular/router';
 import { CwdService } from './../cwd.service';
-import { ExtendedDirectoryContents } from './../extended-directory-contents';
-import { element } from 'protractor';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Directory } from 'api';
-import { HttpClient } from '@angular/common/http';
 import { faInfo, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { FileSystemService } from '../file-system.service';
-import { join } from 'path';
 import { ExtendedDirectory } from '../extended-directory';
 import { trigger, transition, animate, style, state } from '@angular/animations';
 import { Sidebar } from '../sidebar';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-directory',
@@ -38,10 +34,10 @@ export class CreateDirectoryComponent extends Sidebar implements OnInit {
   que: string[] = [];
   errorMessage: string;
 
-  constructor(routerInstance: Router,
+  constructor(router: Router,
               private fs: FileSystemService,
               private cwdService: CwdService) {
-                super(routerInstance);
+                super(router);
                 this.existingNames = this.cwdService.getNames();
                 this.cwd = this.cwdService.getCwd();
               }

@@ -154,7 +154,8 @@ export class MimeTypesService {
     'audio/vnd.sealedmedia.softseal.mpeg',
     'audio/vnd.vmx.cvsd',
     'audio/vorbis',
-    'audio/vorbis-config'
+    'audio/vorbis-config',
+    'audio/x-m4a'
   ];
 
   readonly video = [

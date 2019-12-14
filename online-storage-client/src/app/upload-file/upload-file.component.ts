@@ -6,6 +6,7 @@ import { faWindowClose, faInfo } from '@fortawesome/free-solid-svg-icons';
 import { FileSystemService } from '../file-system.service';
 import { File } from 'api';
 import { Sidebar } from '../sidebar';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-upload-file',
@@ -27,10 +28,10 @@ export class UploadFileComponent extends Sidebar implements OnInit {
   names: any;
   cwd: any;
 
-  constructor(routerInstance: Router,
+  constructor(router: Router,
               private fs: FileSystemService,
               private cwdService: CwdService) {
-                super(routerInstance);
+                super(router);
                 this.cwd = this.cwdService.getCwd();
                 this.names = this.cwdService.getNames();
               }
@@ -114,9 +115,6 @@ export class UploadFileComponent extends Sidebar implements OnInit {
 
   /* upload selected files */
   upload() {
-    const mainElement = document.getElementById('main');
-    mainElement.style.opacity = '0.1';
-
     this.uploading = true;
     const interval = setInterval(() => {
       this.progressCount = (this.progressCount + 1) % 6;
@@ -142,11 +140,7 @@ export class UploadFileComponent extends Sidebar implements OnInit {
     }, (err) => {
       clearInterval(interval);
       this.errorMessage = 'Some kind of error occured while upload files';
-      mainElement.style.opacity = '1';
       this.uploading = false;
-
-      const offsetTop = document.getElementById('error').offsetTop;
-      mainElement.scrollTop = offsetTop;
     }, () => {
       this.cwdService.pushToFiles(uploadedFiles);
       this.closeModel();

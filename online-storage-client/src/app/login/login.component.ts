@@ -4,6 +4,7 @@ import { User } from 'api';
 import * as Buffer from 'buffer';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { CwdService } from '../cwd.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private cookieService: CookieService,
-              private router: Router) { }
+              private router: Router,
+              private cwdService: CwdService) { }
 
   ngOnInit() {
     if (this.cookieService.get('login')) {
@@ -34,11 +36,17 @@ export class LoginComponent implements OnInit {
         Authorization: 'Basic ' + auth
       }
     }).subscribe((user: User) => {
+      // set up cookies for remembering user
       this.loginSuccess = true;
       this.cookieService.set('firstName', user.firstName);
       this.cookieService.set('secondName', user.secondName);
       this.cookieService.set('login', user.email);
       this.cookieService.set('maxStorage', String(user.pricingPlan.size));
+
+      // fetch entries from filesystem at server
+      this.cwdService.fetchEntries();
+
+      // open user panel
       this.router.navigateByUrl('/user-panel');
     }, (error: HttpErrorResponse) => {
       if (error.status === 403) {

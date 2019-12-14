@@ -16,22 +16,17 @@ export class CwdService {
   forwardStack = []; // opened directories
   keep = false; // is clipboard cut or copy
   markedCwd: ExtendedDirectory; // clipoard directory
-
+  markedFile: ExtendedFile;
+  playingAudio = false; // if an audio file of cwd is being played
 
   /* events */
   clipboardEvent = new EventEmitter(); // clipboard changed
   cwdEvent = new EventEmitter<ExtendedDirectory>(); // cwd changed
   keepEvent = new EventEmitter(); // changed from/to copy/cut
+  playingAudioEvent = new EventEmitter(); // send signal to stop audio if being played
+  root: ExtendedDirectory;
 
   constructor(private fs: FileSystemService) {
-    this.fs.getEntries()
-      .pipe(
-        map(res => this.setIds(res as ExtendedDirectory))
-      )
-      .subscribe((res) => {
-        this.cwd = res;
-        this.cwdEvent.emit(this.cwd);
-      });
   }
 
   /* whether there is a previous directory */
@@ -44,16 +39,17 @@ export class CwdService {
     return this.forwardStack.length >= 1;
   }
 
-  private fetchEntries() {
-    if (!this.cwd) {
-      this.fs.getEntries()
-        .pipe(
-          map(res => this.setIds(res as ExtendedDirectory))
-        )
-        .subscribe((res) => {
-          this.cwd = res;
-        });
-      }
+  fetchEntries() {
+    this.fs.getEntries()
+      .pipe(
+        map(res => this.setIds(res as ExtendedDirectory))
+      )
+      .subscribe((res) => {
+        this.root = res;
+        this.root.name = 'root';
+        this.cwd = this.root;
+        this.cwdEvent.emit(this.cwd);
+      });
   }
 
   /* get Clipboard */
@@ -86,6 +82,11 @@ export class CwdService {
     return this.markedCwd;
   }
 
+  /* return marked file */
+  getMarkedFile(): ExtendedFile {
+    return this.markedFile;
+  }
+
   /* return existing names */
   getNames() {
     const names = [];
@@ -101,12 +102,24 @@ export class CwdService {
     return names;
   }
 
+  /* return root directory */
+  getRoot() {
+    return this.root;
+  }
+
   /* mark entry, so it may be accesssed later
     * its use case is copying/movings files/directories where you need
       access that directory
   */
   markCwd() {
     this.markedCwd = this.cwd;
+  }
+
+  /* mark file, so it may be accessed by components
+    * its use case is playing file, where it need to identify file
+  */
+  markFile(file: ExtendedFile) {
+    this.markedFile = file;
   }
 
   /* open directory, change cwd to one of its children */
@@ -226,8 +239,24 @@ export class CwdService {
     return directory;
   }
 
+  /* set playing audio */
+  setPlayingAudio(value) {
+    this.playingAudio = value;
+  }
+
+  /* send signal to stop audio if one is playing */
+  stopAudio() {
+    this.playingAudio = false;
+    this.playingAudioEvent.emit(true);
+  }
+
   /* un-mark working directory marked by 'markCwd' */
   unmarkDirectory() {
     this.markedCwd = null;
+  }
+
+  /* unmark marked file */
+  unmarkFile() {
+    this.markedFile = null;
   }
 }

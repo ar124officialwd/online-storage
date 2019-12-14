@@ -1,112 +1,114 @@
-<div id="user-panel">
-  <!-- File Manager Dashboard -->
-  <div class="item alert alert-sm alert-success d-flex">
-    <div class="item-header">
-    </div>
-    <div class="item-content flex-grow-1">
-      <b>Current Location: </b> {{ cwd.location | minifyPath:40 }}
-      <b class="ml-2">Usage: </b> {{ usagePercent | to4Precision }}%
-      <ngb-progressbar [value]="usagePercent"
-        class="getUsageClass()"></ngb-progressbar>
-    </div>
-    <div class="item-actions">
-      <div class="d-flex flex-row">
-        <button class="btn btn-sm btn-light m-1" title="Go Back"
-          [disabled]="!canGoBack()"
-          (click)="previousDirectory()">
-          <fa-icon [icon]="faArrowCircleLeft"></fa-icon>
-        </button>
-        <button class="btn btn-sm btn-light m-1" title="Go Forward"
-          [disabled]="!canGoForward()"
-          (click)="reopenDirectory()">
-          <fa-icon [icon]="faArrowCircleRight"></fa-icon>
-        </button>
-        <button class="btn btn-sm btn-light m-1"
-          (click)="createDirectories()">
-            <fa-icon [icon]="faFolderPlus"></fa-icon>
-        </button>
-        <button class="btn btn-sm btn-light m-1" title="Upload File"
-          (click)="uploadFiles()">
-          <fa-icon [icon]="faFileUpload"></fa-icon>
-        </button>
-        <button [class]="!clipboard.length || !keep ? 'btn btn-sm btn-light m-1' :
-          'btn btn-sm btn-secondary m-1'"
-          title="Copy" (click)="copyEntries()" [disabled]="!selected.length">
-          <fa-icon [icon]="faCopy"></fa-icon>
-        </button>
-        <button [class]="!clipboard.length || keep ? 'btn btn-sm btn-light m-1' :
-          'btn btn-sm btn-secondary m-1'"
-          title="Cut" (click)="cutEntries()" [disabled]="!selected.length">
-          <fa-icon [icon]="faCut"></fa-icon>
-        </button>
-        <button class="btn btn-sm btn-light m-1" title="Paste"
-          (click)="pasteEntries()"
-          [disabled]="!clipboard.length || clipboardDirectory === cwd">
-          <fa-icon [icon]="faPaste"></fa-icon>
-        </button>
-        <button class="btn btn-sm btn-light m-1" title="Delete"
-          (click)="deleteEntries()" [disabled]="!selected.length">
-          <fa-icon [icon]="faTrash"></fa-icon>
-        </button>
-        <button class="btn btn-sm btn-light m-1" title="Logout"
-          (click)="logout()">
-          <fa-icon [icon]="faPowerOff"></fa-icon>
-        </button>
+<div *ngIf="cwd">
+  <div id="user-panel">
+    <!-- File Manager Dashboard -->
+    <div class="item alert alert-sm alert-success d-flex">
+      <div class="item-header">
       </div>
-    </div>
-  </div>
-  <div class="directoryView">
-    <div class="header alert bg-primary text-light">
-      <div class="item header d-flex flex-row">
-        <div>
-          <input class="btn btn-sm btn-light m-1" title="Select All"
-            type="checkbox" id="selectAll" (change)="select(null, $event)">
-        </div>
-        <div class="flex-grow-1 d-flex flex-row">
-          <div class="flex-grow-1">
-            <b>Name</b>
-          </div>
-          <div class="p-1 ml-1">
-            Type
-          </div>
-          <div class="p-1 ml-1">
-            Size
-          </div>
-        </div>
-        <div class="ml-1 px-1">
-          <b>Actions</b>
+      <div class="item-content flex-grow-1">
+        <b>Current Location: </b> {{ cwd.location | minifyPath:40 }}
+        <b class="ml-2">Usage: </b> {{ usagePercent | to4Precision }}%
+        <ngb-progressbar [value]="usagePercent"
+          class="getUsageClass()"></ngb-progressbar>
+      </div>
+      <div class="item-actions">
+        <div class="d-flex flex-row">
+          <button class="btn btn-sm btn-light m-1" title="Go Back"
+            [disabled]="!canGoBack()"
+            (click)="previousDirectory()">
+            <fa-icon [icon]="faArrowCircleLeft"></fa-icon>
+          </button>
+          <button class="btn btn-sm btn-light m-1" title="Go Forward"
+            [disabled]="!canGoForward()"
+            (click)="reopenDirectory()">
+            <fa-icon [icon]="faArrowCircleRight"></fa-icon>
+          </button>
+          <button class="btn btn-sm btn-light m-1"
+            (click)="createDirectories()">
+              <fa-icon [icon]="faFolderPlus"></fa-icon>
+          </button>
+          <button class="btn btn-sm btn-light m-1" title="Upload File"
+            (click)="uploadFiles()">
+            <fa-icon [icon]="faFileUpload"></fa-icon>
+          </button>
+          <button [class]="!clipboard.length || !keep ? 'btn btn-sm btn-light m-1' :
+            'btn btn-sm btn-secondary m-1'"
+            title="Copy" (click)="copyEntries()" [disabled]="!selected.length">
+            <fa-icon [icon]="faCopy"></fa-icon>
+          </button>
+          <button [class]="!clipboard.length || keep ? 'btn btn-sm btn-light m-1' :
+            'btn btn-sm btn-secondary m-1'"
+            title="Cut" (click)="cutEntries()" [disabled]="!selected.length">
+            <fa-icon [icon]="faCut"></fa-icon>
+          </button>
+          <button class="btn btn-sm btn-light m-1" title="Paste"
+            (click)="pasteEntries()"
+            [disabled]="!clipboard.length || clipboardDirectory === cwd">
+            <fa-icon [icon]="faPaste"></fa-icon>
+          </button>
+          <button class="btn btn-sm btn-light m-1" title="Delete"
+            (click)="deleteEntries()" [disabled]="!selected.length">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+          <button class="btn btn-sm btn-light m-1" title="Logout"
+            (click)="logout()">
+            <fa-icon [icon]="faPowerOff"></fa-icon>
+          </button>
         </div>
       </div>
     </div>
-    <div class="contents">
-      <!-- No files or directories are there -->
-      <div *ngIf="!cwd.contents.files.length &&
-        !cwd.contents.directories.length" class="p-5">
-        <h3 class="text-muted">
-          There is nothing here
-        </h3>
+    <div class="directoryView">
+      <div class="header alert bg-primary text-light">
+        <div class="item header d-flex flex-row">
+          <div>
+            <input class="btn btn-sm btn-light m-1" title="Select All"
+              type="checkbox" id="selectAll" (change)="select(null, $event)">
+          </div>
+          <div class="flex-grow-1 d-flex flex-row">
+            <div class="flex-grow-1">
+              <b>Name</b>
+            </div>
+            <div class="p-1 ml-1">
+              Type
+            </div>
+            <div class="p-1 ml-1">
+              Size
+            </div>
+          </div>
+          <div class="ml-1 px-1">
+            <b>Actions</b>
+          </div>
+        </div>
       </div>
+      <div class="contents">
+        <!-- No files or directories are there -->
+        <div *ngIf="!cwd.contents.files.length &&
+          !cwd.contents.directories.length" class="p-5">
+          <h3 class="text-muted">
+            There is nothing here
+          </h3>
+        </div>
 
-      <!-- There are some directories -->
-      <div *ngFor="let d of cwd.contents.directories">
-        <div class="p-0 m-0 d-flex flex-row">
-          <div class="flex-item mx-1">
-            <input type="checkbox" (change)="select(d, $event)">
-          </div>
-          <div class="flex-item flex-grow-1">
-            <app-directory [directory]="d"></app-directory>
+        <!-- There are some directories -->
+        <div *ngFor="let d of cwd.contents.directories">
+          <div class="p-0 m-0 d-flex flex-row">
+            <div class="flex-item mx-1">
+              <input type="checkbox" (change)="select(d, $event)">
+            </div>
+            <div class="flex-item flex-grow-1">
+              <app-directory [directory]="d"></app-directory>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- There are some files -->
-      <div *ngFor="let f of cwd.contents.files">
-        <div class="p-0 m-0 d-flex flex-row">
-          <div class="flex-item mx-1">
-            <input type="checkbox" (change)="select(f, $event)">
-          </div>
-          <div class="flex-item flex-grow-1">
-            <app-file [file]="f"></app-file>
+        <!-- There are some files -->
+        <div *ngFor="let f of cwd.contents.files">
+          <div class="p-0 m-0 d-flex flex-row">
+            <div class="flex-item mx-1">
+              <input type="checkbox" (change)="select(f, $event)">
+            </div>
+            <div class="flex-item flex-grow-1">
+              <app-file [file]="f"></app-file>
+            </div>
           </div>
         </div>
       </div>
