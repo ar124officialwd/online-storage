@@ -21,12 +21,14 @@ async function readDirectory(dirToRead) {
       dir.size += stat.size;
 
       if (stat.isFile()) {
+        const fileTypeObject = await getFileType(path.join(dirToRead, d))
+
         dir.files++
         let file = new File(d.replace(path.extname(d),''), 
           path.join(dirToRead, d),
           stat.size, '', true);
-        file.mediaType = await getFileType(file.location)
-        file.extension = path.extname(d)
+        file.mediaType = fileTypeObject.mime
+        file.extension = fileTypeObject.ext
         file.location = path.normalize(file.location)
         dir.contents.files.push(file)
       } else if (stat.isDirectory()) {

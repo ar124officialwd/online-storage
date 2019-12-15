@@ -90,12 +90,12 @@ fileSystemRouter.get('/fileSystem', async (req, res, next) => {
 fileSystemRouter.get('/fileSystem/:file', async (req, res) => {
   try {
     const file =  path.join(req.storagePath, req.params.file)
-    console.log(file)
     const stream = fs.createReadStream(file)
     const stat = await fs.promises.stat(file)
+    const fileTypeObject = await getFileType(file)
 
     res.writeHead(200, {
-      'Content-Type': await getFileType(file),
+      'Content-Type': fileTypeObject.mime,
       'Content-Length': stat.size
     })
     stream.pipe(res)
@@ -151,7 +151,9 @@ fileSystemRouter.post('/fileSystem', upload.array('file[]', 20), async (req, res
         const stats = await fs.promises.stat(file.location)
         file.size = stats.size;
         file.exists = true;
-        file.mediaType = await getFileType(file.location)
+        const fileTypeObject = await getFileType(file.location)
+        file.mediaType = fileTypeObject.mime
+        file.extension = fileTypeObject.ext
         file.location = file.location.replace(req.storagePath, '/')
 
         responce.push(file)
