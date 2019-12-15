@@ -13,6 +13,9 @@ const routes: Routes = [
   {
     path: 'user-panel',
     component: UserPanelComponent,
+    data: {
+      animation: 'user-panel'
+    }
   },
 
   {
@@ -27,7 +30,10 @@ const routes: Routes = [
 
   {
     path: 'open-media',
-    component: OpenMediaComponent
+    component: OpenMediaComponent,
+    data: {
+      animation: 'open-media'
+    }
   },
 
   {
@@ -35,7 +41,7 @@ const routes: Routes = [
     component: CreateDirectoryComponent,
     outlet: 'sidebar',
     data: {
-      animation: 'sidebar'
+      animation: 'create-directories'
     }
   },
 
@@ -44,7 +50,7 @@ const routes: Routes = [
     component: UploadFileComponent,
     outlet: 'sidebar',
     data: {
-      animation: 'sidebar'
+      animation: 'upload-files'
     }
   }
 ];

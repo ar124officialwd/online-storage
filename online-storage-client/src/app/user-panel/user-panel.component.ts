@@ -29,11 +29,33 @@ import {
 
 import { FileSystemService } from '../file-system.service';
 import { FileSystemEntry } from 'api';
+import { trigger, query, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-user-panel',
   templateUrl: './user-panel.component.html',
-  styleUrls: ['./user-panel.component.scss']
+  styleUrls: ['./user-panel.component.scss'],
+  animations: [
+    trigger('itemInOut', [
+      transition(':enter', [
+        style({
+          position: 'relative',
+          top: 0,
+          left: '-100%',
+        }),
+        animate('300ms ease-in', style({left: 0}))
+      ]),
+
+      transition(':leave', [
+        style({
+          position: 'relative',
+          top: 0,
+          left: 0,
+        }),
+        animate('300ms ease-in', style({left: '-100%'}))
+      ]),
+    ])
+  ]
 })
 export class UserPanelComponent implements OnInit {
   faFolder = faFolder;

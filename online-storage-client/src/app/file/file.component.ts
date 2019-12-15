@@ -1,6 +1,6 @@
 import { ExtendedFile } from './../extended-file';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { faTrash, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faDownload, faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { FileSystemService } from '../file-system.service';
 import { stopEventPropagation } from '../stopEventPropagation';
 import { hru } from '../hru';
@@ -8,25 +8,52 @@ import { MimeTypesService } from '../mime-types.service';
 import { CookieService } from 'ngx-cookie-service';
 import { CwdService } from '../cwd.service';
 import { Router } from '@angular/router';
+import { trigger, transition, query, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-file',
   templateUrl: './file.component.html',
-  styleUrls: ['./file.component.scss']
+  styleUrls: ['./file.component.scss'],
+  animations: [
+    trigger('audioAnimation', [
+      transition('np => pa', [
+        query('audio, button', [
+          style({
+            position: 'relative',
+            top: 0,
+            left: '100%'
+          }),
+
+          animate('0.3s ease-in', style({left: 0}))
+        ], {
+          optional: true
+        })
+      ]),
+
+      transition('pa => np', [
+        query('audio, button', [
+          animate('0.3s ease-out', style({opacity: 0}))
+        ], {
+          optional: true
+        })
+      ])
+    ])
+  ]
 })
 export class FileComponent implements OnInit {
   @Input() file: ExtendedFile;
 
   faTrash = faTrash;
   faDownload = faDownload;
+  faWindowClose = faWindowClose;
   hru = hru;
 
   stopEventPropagation = stopEventPropagation;
   itemName: HTMLElement;
-  closeButton: any;
   audio: any;
   nameField: HTMLElement;
-  payingAudio: any;
+  playingAudio: any;
+  itemNameClass: any;
 
   constructor(private fs: FileSystemService,
               private mts: MimeTypesService,
@@ -38,9 +65,9 @@ export class FileComponent implements OnInit {
     /* watch for event, if another file starts, close audio */
     this.cwdService.playingAudioEvent
       .subscribe(stop => {
-        if (this.payingAudio) {
+        if (this.playingAudio) {
           this.stopAudio();
-          this.payingAudio = false;
+          this.playingAudio = false;
         }
       });
   }
@@ -75,12 +102,17 @@ export class FileComponent implements OnInit {
       /* first ask to close if already playing a file */
       this.cwdService.stopAudio();
       this.cwdService.setPlayingAudio(true);
+      this.playingAudio = true;
 
       /* replace name field with audio player */
       this.nameField = document.getElementById(this.file.id);
       this.itemName = document.querySelector(`#${this.file.id} .item-name`) as HTMLElement;
+      this.itemNameClass = this.itemName.getAttribute('class');
       this.audio = document.createElement('audio');
-      this.closeButton = document.createElement('button');
+
+      // highlight item name
+      this.itemName.setAttribute('class', this.itemNameClass + ' ' +
+        'flex-item alert alert-sm alert-primary p-0 ml-2');
 
       /* prepare audio */
       let location = this.file.location;
@@ -96,23 +128,10 @@ export class FileComponent implements OnInit {
         stopEventPropagation(ev);
         this.stopAudio();
       }).bind(this));
-
-      /* prepare close button */
-      this.closeButton.innerText = 'x'
-      this.closeButton.setAttribute('class', 'btn btn-sm btn-secondary ml-1 p-1');
-      this.closeButton.addEventListener('click', ((ev) => {
-        stopEventPropagation(ev);
-        this.stopAudio();
-      }).bind(this));
-
-      // remove item name till audio plays */
-      this.itemName = this.nameField.removeChild(this.itemName);
+      this.audio.setAttribute('class', 'alert alert-sm ml-2 p-0');
 
       /* add audio */
       this.nameField.appendChild(this.audio);
-      this.nameField.appendChild(this.closeButton);
-
-      this.payingAudio = true;
       this.cwdService.setPlayingAudio(true);
     } else {
       this.cwdService.markFile(this.file);
@@ -121,9 +140,10 @@ export class FileComponent implements OnInit {
   }
 
   private stopAudio() {
+    this.playingAudio = false;
     this.nameField.removeChild(this.audio);
-    this.nameField.removeChild(this.closeButton);
     this.nameField.appendChild(this.itemName);
+    this.itemName.setAttribute('class', this.itemNameClass);
   }
 
   private error(action, err) {

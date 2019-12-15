@@ -1,6 +1,6 @@
-<main id="main" class="">
-<router-outlet></router-outlet>
+<main [@main]="prepareRoute(main)" id="main">
+<router-outlet #main="outlet"></router-outlet>
 </main>
-<div [@sidebar]="prepareRoute(outlet)">
-  <router-outlet name="sidebar" #outlet="outlet"></router-outlet>
+<div [@sidebar]="prepareRoute(sidebar)" id="sidebar">
+  <router-outlet name="sidebar" #sidebar="outlet"></router-outlet>
 </div>

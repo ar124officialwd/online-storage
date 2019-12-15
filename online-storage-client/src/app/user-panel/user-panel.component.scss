@@ -19,3 +19,22 @@
   margin: 0;
   overflow: auto;
 }
+
+.contents {
+  .alert {
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+  }
+
+  .alert > * {
+    padding: 0;
+    margin: 0;
+  }
+
+  .alert:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+}

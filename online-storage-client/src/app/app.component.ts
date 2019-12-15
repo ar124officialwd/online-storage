@@ -1,14 +1,16 @@
-import { sidebarAnimation } from './sidebar.animation';
+import { sidebarAnimation } from './animations/sidebar.animation';
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, RouterOutlet } from '@angular/router';
+import { mainAnimation } from './animations/main.animation';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
-    sidebarAnimation
+    sidebarAnimation,
+    mainAnimation
   ]
 })
 export class AppComponent implements OnInit {

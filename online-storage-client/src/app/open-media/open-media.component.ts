@@ -6,6 +6,7 @@ import { MimeTypesService } from '../mime-types.service';
 import { FileSystemService } from '../file-system.service';
 import { CwdService } from '../cwd.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-open-media',
@@ -21,11 +22,10 @@ export class OpenMediaComponent implements OnInit {
               private fs: FileSystemService,
               private cwdService: CwdService,
               private cookieService: CookieService,
-              private location: Location) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.media = this.cwdService.getMarkedFile();
-    console.log(this.media)
     if (!this.media) {
       this.closeMedia();
     }
@@ -126,6 +126,6 @@ export class OpenMediaComponent implements OnInit {
 
   closeMedia() {
     this.cwdService.unmarkFile();
-    this.location.back();
+    this.router.navigateByUrl('/user-panel');
   }
 }

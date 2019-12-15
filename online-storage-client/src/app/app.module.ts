@@ -21,6 +21,7 @@ import { OpenMediaComponent } from './open-media/open-media.component';
 import { FileComponent } from './file/file.component';
 import { DirectoryComponent } from './directory/directory.component';
 import { HelpComponent } from './help/help.component';
+import { FiletypePipe } from './filetype.pipe';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { HelpComponent } from './help/help.component';
     FileComponent,
     DirectoryComponent,
     HelpComponent,
+    FiletypePipe,
   ],
   imports: [
     BrowserModule,

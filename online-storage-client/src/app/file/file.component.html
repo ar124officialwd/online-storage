@@ -4,14 +4,15 @@
     <img src="/images/file.png">
   </div>
   <div class="item-content flex-grow-1 d-flex flex-row">
-    <div [id]="file.id" class="flex-item item-name flex-grow-1 d-flex"
+    <div [@audioAnimation]="playingAudio ? 'pa' : 'np'"
+      [id]="file.id" class="flex-item item-name flex-grow-1 d-flex"
       (click)="openFile()">
       <div class="item-name">
         {{file.name}}
       </div>
     </div>
     <div class="flex-item alert alert-sm alert-secondary text-right p-0 ml-2">
-      {{file.mediaType.split('/')[1]}}
+      {{file.mediaType | filetype}} | {{file.extension}}
     </div>
     <div class="flex-item alert alert-sm alert-secondary text-right p-0 ml-2">
       {{ hru(file.size) }}
@@ -20,16 +21,21 @@
 
   <div class="item-actions d-flex flex-row-reverse">
     <div class="flex-item">
-      <button class="btn btn-sm btn-dark p-1 ml-1"
+      <button class="btn btn-sm btn-dark p-1 ml-1" title="Delete"
         (click)="deleteFile(); stopEventPropagation($event)">
         <fa-icon [icon]="faTrash"></fa-icon>
       </button>
     </div>
     <div class="flex-item">
-      <button class="flex-item btn btn-sm btn-dark p-1 ml-1"
+      <button class="flex-item btn btn-sm btn-dark p-1 ml-1" title="Download"
         (click)="downloadFile(); stopEventPropagation($event);">
         <fa-icon [icon]="faDownload"></fa-icon>
       </button>
     </div>
+    <div *ngIf="playingAudio" class="flex-item">
+      <button class="flex-item btn btn-sm btn-primary p-1 ml-1" title="Stop Audio"
+        (click)="stopAudio(); stopEventPropagation($event);">
+        <fa-icon [icon]="faWindowClose"></fa-icon>
+      </button>
   </div>
 </div>
