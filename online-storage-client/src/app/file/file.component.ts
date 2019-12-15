@@ -83,9 +83,14 @@ export class FileComponent implements OnInit {
       this.closeButton = document.createElement('button');
 
       /* prepare audio */
+      let location = this.file.location;
+      // trim leading /
+      if (location[0] === '/') {
+        location = location.slice(1);
+      }
+      location = location.replace('/', '%2F');
       this.audio.src = 'http://' + this.cookieService.get('login') + ':' +
-        '@127.0.0.1:3000/fileSystem/' +
-        this.file.location.replace('/', '%2F');
+        '@127.0.0.1:3000/fileSystem/' + location;
       this.audio.controls = true;
       this.audio.addEventListener('complete', ((ev) => {
         stopEventPropagation(ev);
