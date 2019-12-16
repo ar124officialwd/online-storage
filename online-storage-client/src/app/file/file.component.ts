@@ -10,7 +10,6 @@ import { CwdService } from '../cwd.service';
 import { Router } from '@angular/router';
 import { trigger, transition, query, style, animate } from '@angular/animations';
 import { NotificationService } from '../notification.service';
-import { Notification } from '../notification';
 
 @Component({
   selector: 'app-file',
@@ -44,6 +43,9 @@ import { Notification } from '../notification';
 })
 export class FileComponent implements OnInit {
   @Input() file: ExtendedFile;
+  @Input() isSelected: boolean;
+  @Input() isCopied: boolean;
+  @Input() isCut: boolean;
 
   faTrash = faTrash;
   faDownload = faDownload;

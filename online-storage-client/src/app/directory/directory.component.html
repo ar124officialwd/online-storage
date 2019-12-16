@@ -1,4 +1,6 @@
-<div class="item alert d-flex flex-row m-0" (click)="openDirectory()">
+<div class="item alert d-flex flex-row m-0"
+  (click)="openDirectory()" [class.alert-danger]="isCut"
+    [class.alert-success]="isCopied" [class.alert-light]="isSelected">
   <div class="item-header mx-2">
     <img src="/images/folder.png">
   </div>

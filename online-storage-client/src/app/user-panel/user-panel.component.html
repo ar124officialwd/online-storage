@@ -96,7 +96,8 @@
               <input type="checkbox" (change)="select(d, $event)">
             </div>
             <div class="flex-item flex-grow-1">
-              <app-directory [directory]="d"></app-directory>
+              <app-directory [directory]="d" [isSelected]="isSelected(d)"
+                [isCopied]="isCopied(d)" [isCut]="isCut(d)"></app-directory>
             </div>
           </div>
         </div>
@@ -109,7 +110,8 @@
               <input type="checkbox" (change)="select(f, $event)">
             </div>
             <div class="flex-item flex-grow-1">
-              <app-file [file]="f"></app-file>
+              <app-file [file]="f" [isSelected]="isSelected(f)"
+                [isCopied]="isCopied(f)" [isCut]="isCut(f)"></app-file>
             </div>
           </div>
         </div>

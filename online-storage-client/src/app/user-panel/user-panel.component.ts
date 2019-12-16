@@ -211,21 +211,21 @@ export class UserPanelComponent implements OnInit {
 
   private isCut(entry) {
     const index = this.clipboard.findIndex(c => {
-      return c.name === entry.name;
+      return c.location === entry.location;
     });
     return !this.keep && index >= 0;
   }
 
   private isCopied(entry) {
     const index = this.clipboard.findIndex(c => {
-      return c.name === entry.name;
+      return c.location === entry.location;
     });
     return this.keep && index >= 0;
   }
 
   private isSelected(entry) {
     const index = this.selected.findIndex(s => {
-      return s.name === entry.name;
+      return s.location === entry.location;
     });
     return index >= 0;
   }

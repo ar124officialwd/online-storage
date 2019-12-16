@@ -14,6 +14,9 @@ import { NotificationService } from '../notification.service';
 })
 export class DirectoryComponent implements OnInit {
   @Input() directory: ExtendedDirectory;
+  @Input() isSelected: boolean;
+  @Input() isCopied: boolean;
+  @Input() isCut: boolean;
 
   faTrash = faTrash;
 
