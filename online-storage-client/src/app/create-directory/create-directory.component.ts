@@ -7,6 +7,7 @@ import { ExtendedDirectory } from '../extended-directory';
 import { trigger, transition, animate, style, state } from '@angular/animations';
 import { Sidebar } from '../sidebar';
 import { Location } from '@angular/common';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-create-directory',
@@ -36,7 +37,8 @@ export class CreateDirectoryComponent extends Sidebar implements OnInit {
 
   constructor(router: Router,
               private fs: FileSystemService,
-              private cwdService: CwdService) {
+              private cwdService: CwdService,
+              private ns: NotificationService) {
                 super(router);
                 this.existingNames = this.cwdService.getNames();
                 this.cwd = this.cwdService.getCwd();
@@ -135,7 +137,11 @@ export class CreateDirectoryComponent extends Sidebar implements OnInit {
       this.errorMessage = 'Some kind of error occured while creating directory.';
     }, () => {
       this.cwdService.pushToDirectories(createdDirectories);
-      this.closeModel();
+      this.closeModel()
+        .then(t => {
+          this.ns.add('Directories Created',
+            'Added directories have been successfully created.', 5);
+        });
     });
   }
 

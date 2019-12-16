@@ -5,6 +5,7 @@ import { ExtendedDirectory } from './../extended-directory';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FileSystemService } from '../file-system.service';
 import { stopEventPropagation } from '../stopEventPropagation';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-directory',
@@ -19,7 +20,8 @@ export class DirectoryComponent implements OnInit {
   stopEventPropagation = stopEventPropagation;
 
   constructor(private fs: FileSystemService,
-              private cwdService: CwdService) { }
+              private cwdService: CwdService,
+              private ns: NotificationService) { }
 
   ngOnInit() {
   }
@@ -32,6 +34,8 @@ export class DirectoryComponent implements OnInit {
     this.fs.deleteEntries([this.directory.location + ':' + 'directory'])
       .subscribe((res => {
         this.cwdService.removeEntries([this.directory]);
+        this.ns.add('Directory Deleted',
+          `Directory ${this.directory.name} has been deleted.`, 5);
       }));
   }
 }

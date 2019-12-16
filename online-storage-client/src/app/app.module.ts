@@ -22,6 +22,7 @@ import { FileComponent } from './file/file.component';
 import { DirectoryComponent } from './directory/directory.component';
 import { HelpComponent } from './help/help.component';
 import { FiletypePipe } from './filetype.pipe';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { FiletypePipe } from './filetype.pipe';
     DirectoryComponent,
     HelpComponent,
     FiletypePipe,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,

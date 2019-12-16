@@ -7,6 +7,7 @@ import { FileSystemService } from '../file-system.service';
 import { File } from 'api';
 import { Sidebar } from '../sidebar';
 import { Location } from '@angular/common';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-upload-file',
@@ -30,7 +31,8 @@ export class UploadFileComponent extends Sidebar implements OnInit {
 
   constructor(router: Router,
               private fs: FileSystemService,
-              private cwdService: CwdService) {
+              private cwdService: CwdService,
+              private ns: NotificationService) {
                 super(router);
                 this.cwd = this.cwdService.getCwd();
                 this.names = this.cwdService.getNames();
@@ -143,7 +145,13 @@ export class UploadFileComponent extends Sidebar implements OnInit {
       this.uploading = false;
     }, () => {
       this.cwdService.pushToFiles(uploadedFiles);
-      this.closeModel();
+      this.closeModel()
+        .then((t) => {
+          if (t) {
+            this.ns.add('File Uploads',
+              'Files have been uploaded successfully.', 5);
+          }
+        });
     });
   }
 

@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { CreateDirectoryComponent } from './create-directory/create-directory.component';
 import { OpenMediaComponent } from './open-media/open-media.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 const routes: Routes = [
@@ -52,7 +53,16 @@ const routes: Routes = [
     data: {
       animation: 'upload-files'
     }
-  }
+  },
+
+  {
+    path: 'notification',
+    component: NotificationsComponent,
+    outlet: 'notification',
+    data: {
+      animation: 'notification'
+    }
+  },
 ];
 
 @NgModule({

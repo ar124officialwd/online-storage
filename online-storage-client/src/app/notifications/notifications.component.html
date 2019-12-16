@@ -1,0 +1,20 @@
+<div *ngIf="notifications.length >= 1"
+  class="notification d-flex flex-row-reverse p-0">
+  <div @notificationAnimation *ngFor="let n of notifications"
+    class="notification-item alert alert-dark mx-1 p-0">
+
+    <div class="d-flex flex-row p-0">
+      <div class="flex-item flex-grow-1">
+        <h5>{{n.title}}</h5>
+      </div>
+      <div class="flex-item">
+        <button class="btn btn-sm btn-secondary"
+          (click)="removeNotification(n.id)">
+          <fa-icon [icon]="faWindowClose"></fa-icon>
+        </button>
+      </div>
+    </div>
+
+    <div>{{n.message}}</div>
+  </div>
+</div>

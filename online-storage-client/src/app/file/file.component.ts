@@ -9,6 +9,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { CwdService } from '../cwd.service';
 import { Router } from '@angular/router';
 import { trigger, transition, query, style, animate } from '@angular/animations';
+import { NotificationService } from '../notification.service';
+import { Notification } from '../notification';
 
 @Component({
   selector: 'app-file',
@@ -59,7 +61,8 @@ export class FileComponent implements OnInit {
               private mts: MimeTypesService,
               private cookieService: CookieService,
               private cwdService: CwdService,
-              private router: Router) { }
+              private router: Router,
+              private ns: NotificationService) { }
 
   ngOnInit() {
     /* watch for event, if another file starts, close audio */
@@ -75,6 +78,8 @@ export class FileComponent implements OnInit {
   deleteFile() {
     this.fs.deleteEntries([this.file.location + ':' + this.file.mediaType])
       .subscribe(res => {
+        this.ns.add('File Deleted',
+          `File ${this.file.name} has been deleted.`, 5);
         this.cwdService.removeEntries([this.file]);
       }, (err => {
         this.error('Delete File', err);

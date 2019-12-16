@@ -29,7 +29,8 @@ import {
 
 import { FileSystemService } from '../file-system.service';
 import { FileSystemEntry } from 'api';
-import { trigger, query, style, transition, animate } from '@angular/animations';
+import { trigger, style, transition, animate } from '@angular/animations';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-user-panel',
@@ -101,7 +102,8 @@ export class UserPanelComponent implements OnInit {
     private router: Router,
     private fs: FileSystemService,
     private cwdService: CwdService,
-    private location: Location
+    private location: Location,
+    private ns: NotificationService
   ) {
     this.clipboard = cwdService.getClipboard();
     this.keep = cwdService.getKeep();
@@ -200,6 +202,8 @@ export class UserPanelComponent implements OnInit {
         // Todo(display error message)
       }, () => {
         this.cwdService.removeEntries(deletedEntries);
+        this.ns.add('Deleted',
+          'Selected entries have been deleted.', 5);
       });
 
     this.selected = [];
@@ -278,6 +282,11 @@ export class UserPanelComponent implements OnInit {
           // clean if moving entries
           if (!this.keep) {
             this.cwdService.removeFromMarkedCwd(this.clipboard);
+            this.ns.add('Moved',
+              'Selected entries have been moved here.', 5);
+          } else {
+            this.ns.add('Files Moved',
+              'Selected entries have been copied here.', 5);
           }
 
           this.cwdService.pushEntries(pastedEntries);
