@@ -125,7 +125,7 @@ export class FileComponent implements OnInit {
       let location = this.file.location;
       location = location.replace(/\//g, '%2F');
       this.audio.src = 'http://' + this.cookieService.get('login') + ':' +
-        '@127.0.0.1:3000/fileSystem/' + location;
+        '@10.0.0.1/fileSystem/' + location;
       this.audio.controls = true;
       this.audio.addEventListener('complete', ((ev) => {
         stopEventPropagation(ev);
