@@ -123,11 +123,7 @@ export class FileComponent implements OnInit {
 
       /* prepare audio */
       let location = this.file.location;
-      // trim leading /
-      if (location[0] === '/') {
-        location = location.slice(1);
-      }
-      location = location.replace('/', '%2F');
+      location = location.replace(/\//g, '%2F');
       this.audio.src = 'http://' + this.cookieService.get('login') + ':' +
         '@127.0.0.1:3000/fileSystem/' + location;
       this.audio.controls = true;

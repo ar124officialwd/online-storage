@@ -29,7 +29,6 @@ async function readDirectory(dirToRead) {
           stat.size, '', true);
         file.mediaType = fileTypeObject.mime
         file.extension = fileTypeObject.ext
-        file.location = path.normalize(file.location)
         dir.contents.files.push(file)
       } else if (stat.isDirectory()) {
         const subdir = await readDirectory(path.join(dirToRead, d));

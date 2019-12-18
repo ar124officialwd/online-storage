@@ -34,11 +34,7 @@ export class OpenMediaComponent implements OnInit {
 
   open() {
     let location = this.media.location;
-    // trim leading /
-    if (location[0] === '/') {
-      location = location.slice(1);
-    }
-    location = location.replace('/', '%2F');
+    location = location.replace(/\//g, '%2F');
     const fileUrl = 'http://' + this.cookieService.get('login') +
     '@127.0.0.1:3000/fileSystem/' + location;
 

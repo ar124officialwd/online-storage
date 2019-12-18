@@ -42,6 +42,22 @@ var authenticateUser = function(req, res, next) {
   })
 }
 
+function fixLocations(directory, storagePath) {
+  for (let i = 0; i < directory.contents.directories.length; i++) {
+    directory.contents.directories[i].location = 
+      directory.contents.directories[i].location.replace(storagePath, '')
+    fixLocations(directory.contents.directories[i], storagePath)
+  }
+
+  for (let i = 0; i < directory.contents.files.length; i++) {
+    directory.contents.files[i].location = 
+      directory.contents.files[i].location.replace(storagePath, '')
+  }
+
+  return directory
+}
+
+
 // authenticate each and every request
 fileSystemRouter.all('/fileSystem', authenticateUser)
 fileSystemRouter.all('/fileSystem/:file', authenticateUser)
@@ -69,20 +85,7 @@ fileSystemRouter.get('/fileSystem', async (req, res, next) => {
       responce.location = '/'
     }
 
-    const fixLocations = function(directory) {
-      for (let i = 0; i < directory.contents.directories.length; i++) {
-        directory.contents.directories[i].location = 
-          directory.contents.directories[i].location.replace(req.storagePath, '')
-        fixLocations(directory.contents.directories[i])
-      }
-
-      for (let i = 0; i < directory.contents.files.length; i++) {
-        directory.contents.files[i].location = 
-          directory.contents.files[i].location.replace(req.storagePath, '')
-      }
-    }
-
-    fixLocations(responce)
+    fixLocations(responce, req.storagePath)
     res.json(responce)
   }
 })
@@ -197,10 +200,11 @@ fileSystemRouter.put('/fileSystem', async (req, res, next) => {
           await fs.promises.rename(
            path.join(req.storagePath, from[i].location),
            path.join(req.storagePath, to[i].location))
-          responce.push(req.body.pairs[i].to)
+          responce.push(to[i])
 
       // a copy request: copy files and directories
       } else {
+        console.log(req.body.pairs)
         // target is a directory: copy directory recursively
         if (from[i].mediaType === 'directory') {
           // create directory, if it does not exist
@@ -216,7 +220,8 @@ fileSystemRouter.put('/fileSystem', async (req, res, next) => {
           // now read directory as Directory object
           const responseDirectory = await readDirectory(
             path.join(req.storagePath, to[i].location))
-          
+          fixLocations(responseDirectory, req.storagePath)
+
           // push Directory object
           responce.push(responseDirectory)
 
