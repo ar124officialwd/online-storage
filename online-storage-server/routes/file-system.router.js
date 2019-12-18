@@ -30,13 +30,19 @@ var authenticateUser = function(req, res, next) {
       Logger.log(err)
       res.status(500).end()
     } else {
-      if (doc === null) {
+      if (doc === null || !auth.password) {
         res.status(403).json({
           error: httpMessages['403']
         })
       } else {
-        req.storagePath = doc.storagePath
-        next()
+        if (doc.validatePassword(auth.password)) {
+          req.storagePath = doc.storagePath
+          next()
+        } else {
+          res.status(403).json({
+            error: httpMessages['403']
+          })
+        }
       }
     }
   })
