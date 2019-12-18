@@ -183,7 +183,7 @@ fileSystemRouter.post('/fileSystem', upload.array('file[]', 20), async (req, res
 })
 
 fileSystemRouter.put('/fileSystem', async (req, res, next) => {
-  let from = [], responce = [], to = []
+  let from = [], response = [], to = []
 
   // prepare location pairs
   for (let i=0; i < req.body.pairs.length; i++) {
@@ -200,8 +200,14 @@ fileSystemRouter.put('/fileSystem', async (req, res, next) => {
           await fs.promises.rename(
            path.join(req.storagePath, from[i].location),
            path.join(req.storagePath, to[i].location))
-          responce.push(to[i])
-
+          if (to[i].mediaType === 'directory') {
+            const responseDirectory = await readDirectory(path.join(req.storagePath,
+              to[i].location))
+            fixLocations(responseDirectory, req.storagePath)
+            response.push(responseDirectory)
+          } else {
+            response.push(to[i]);
+          }
       // a copy request: copy files and directories
       } else {
         console.log(req.body.pairs)
@@ -223,19 +229,19 @@ fileSystemRouter.put('/fileSystem', async (req, res, next) => {
           fixLocations(responseDirectory, req.storagePath)
 
           // push Directory object
-          responce.push(responseDirectory)
+          response.push(responseDirectory)
 
         // target is a file: copy single file
         } else {
           await fs.promises.copyFile(
             path.join(req.storagePath, from[i].location), 
             path.join(req.storagePath, to[i].location))
-          responce.push(to[i])
+          response.push(to[i])
         }
       }
 
       if (i === req.body.pairs.length - 1)
-        res.json(responce)
+        res.json(response)
     }
   } catch(err) {
     Logger.log(err);
