@@ -146,7 +146,7 @@ export class FileComponent implements OnInit {
     }
   }
 
-  private stopAudio() {
+  stopAudio() {
     this.playingAudio = false;
     this.nameField.removeChild(this.audio);
     this.nameField.appendChild(this.itemName);
