@@ -145,6 +145,7 @@ export class CwdService {
   /* push new files and directories to cwd */
   pushEntries(entries) {
     for (const e of entries) {
+      this.root.size += e.size;
       if (e.mediaType === 'directory') {
         this.cwd.contents.directories.push(e);
       } else {
@@ -156,6 +157,7 @@ export class CwdService {
   /* new directories created, push them to cwd */
   pushToDirectories(directories) {
     for (const d of directories) {
+      this.root.size += d.size;
       this.cwd.contents.directories.push(d);
     }
     this.cwdEvent.emit(this.cwd);
@@ -165,6 +167,7 @@ export class CwdService {
   pushToFiles(files) {
     for (const f of files) {
       this.cwd.contents.files.push(f);
+      this.root.size += f.size;
     }
     this.cwdEvent.emit(this.cwd);
   }
@@ -176,12 +179,20 @@ export class CwdService {
         const index = this.cwd.contents.directories.findIndex(i => {
           return e.location === i.location;
         });
-        this.cwd.contents.directories.splice(index, 1);
+
+        if (index >= 0) {
+          this.root.size -= this.cwd.contents.directories[index].size;
+          this.cwd.contents.directories.splice(index, 1);
+        }
       } else {
         const index = this.cwd.contents.files.findIndex(i => {
           return e.location === i.location;
         });
-        this.cwd.contents.files.splice(index, 1);
+
+        if (index >= 0) {
+          this.root.size -= this.cwd.contents.files[index].size;
+          this.cwd.contents.files.splice(index, 1);
+        }
       }
     }
 

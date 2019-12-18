@@ -16,7 +16,7 @@
       {{file.mediaType | filetype}} | {{file.extension}}
     </div>
     <div class="flex-item alert alert-sm alert-secondary text-right p-0 ml-2">
-      {{ hru(file.size) }}
+      {{ hru(file.size)[0] | to4Precision }} {{ hru(file.size)[1] }}
     </div>
   </div>
 
