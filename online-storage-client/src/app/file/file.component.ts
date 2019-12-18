@@ -10,6 +10,7 @@ import { CwdService } from '../cwd.service';
 import { Router } from '@angular/router';
 import { trigger, transition, query, style, animate } from '@angular/animations';
 import { NotificationService } from '../notification.service';
+import { decryptAuth } from '../decrypt-auth';
 
 @Component({
   selector: 'app-file',
@@ -124,8 +125,9 @@ export class FileComponent implements OnInit {
       /* prepare audio */
       let location = this.file.location;
       location = location.replace(/\//g, '%2F');
-      this.audio.src = 'http://' + this.cookieService.get('login') + ':' +
-        '@10.0.0.1/fileSystem/' + location;
+      const auth = decryptAuth(this.cookieService.get('login'));
+      this.audio.src = 'http://' + auth.email + ':' + auth.password +
+        '@127.0.0.1/fileSystem/' + location;
       this.audio.controls = true;
       this.audio.addEventListener('complete', ((ev) => {
         stopEventPropagation(ev);

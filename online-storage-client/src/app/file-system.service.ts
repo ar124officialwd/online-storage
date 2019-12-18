@@ -9,11 +9,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FileSystemService {
-  auth =
-  'Basic ' +
-  Buffer.Buffer.from(this.cookieService.get('login')).toString('base64');
+  auth: string;
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) {
+    this.auth = 'Basic ' + this.cookieService.get('login');
+  }
 
   /************************************************************************** */
   // ENTRY LEVEL OPERATIONS
@@ -92,8 +92,6 @@ export class FileSystemService {
   /* end file operations */
 
   private reloadAuth() {
-    this.auth =
-    'Basic ' +
-    Buffer.Buffer.from(this.cookieService.get('login')).toString('base64');
+    this.auth = 'Basic ' + this.cookieService.get('login');
   }
 }

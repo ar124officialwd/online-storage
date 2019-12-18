@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       this.loginSuccess = true;
       this.cookieService.set('firstName', user.firstName);
       this.cookieService.set('secondName', user.secondName);
-      this.cookieService.set('login', user.email);
+      this.cookieService.set('login', auth);
       this.cookieService.set('maxStorage', String(user.pricingPlan.size));
 
       // fetch entries from filesystem at server

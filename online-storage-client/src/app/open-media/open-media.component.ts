@@ -1,12 +1,13 @@
 import { Location } from '@angular/common';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import { ExtendedFile } from './../extended-file';
-import { Component, OnInit }  from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MimeTypesService } from '../mime-types.service';
 import { FileSystemService } from '../file-system.service';
 import { CwdService } from '../cwd.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { decryptAuth } from '../decrypt-auth';
 
 @Component({
   selector: 'app-open-media',
@@ -35,8 +36,9 @@ export class OpenMediaComponent implements OnInit {
   open() {
     let location = this.media.location;
     location = location.replace(/\//g, '%2F');
-    const fileUrl = 'http://' + this.cookieService.get('login') +
-    '@10.0.0.1/fileSystem/' + location;
+    const auth = decryptAuth(this.cookieService.get('login'));
+    const fileUrl = 'http://' + auth.email + ':' + auth.password +
+    '@127.0.0.1/fileSystem/' + location;
 
     window.scrollTo(0, 0);
 
