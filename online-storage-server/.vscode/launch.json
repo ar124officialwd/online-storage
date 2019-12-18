@@ -34,7 +34,7 @@
       "sourceMaps": false,
       "outFiles": [],
       "localRoot": "${workspaceRoot}",
-      "remoteRoot": null
+      "remoteRoot": ""
     }
   ]
 }
