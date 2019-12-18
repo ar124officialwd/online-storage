@@ -247,7 +247,8 @@ export class UserPanelComponent implements OnInit {
       if (from.mediaType === 'directory') {
         to.location = path.join(to.location, to.name);
       } else {
-        to.location = path.join(to.location, to.name + to.extension);
+        to.extension = from.extension;
+        to.location = path.join(to.location, to.name + '.' + to.extension);
       }
 
       copyObjects.push({

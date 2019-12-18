@@ -3,7 +3,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as Buffer from 'buffer';
-import { Directory } from 'api';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,6 +18,11 @@ export class FileSystemService {
   /************************************************************************** */
   // ENTRY LEVEL OPERATIONS
   getEntries(location = null): Observable<any> {
+    /* reload auth first:
+      it might be login, but angular construct services at start,
+      so reload first */
+    this.reloadAuth();
+
     if (!location) {
       return this.http.get('/fileSystem', {
         headers: {
@@ -86,4 +90,10 @@ export class FileSystemService {
   }
 
   /* end file operations */
+
+  private reloadAuth() {
+    this.auth =
+    'Basic ' +
+    Buffer.Buffer.from(this.cookieService.get('login')).toString('base64');
+  }
 }

@@ -44,16 +44,15 @@ export class LoginComponent implements OnInit {
       this.cookieService.set('maxStorage', String(user.pricingPlan.size));
 
       // fetch entries from filesystem at server
-      this.cwdService.fetchEntries();
 
-      // open user panel
-      this.router.navigateByUrl('/user-panel');
     }, (error: HttpErrorResponse) => {
       if (error.status === 403) {
         this.loginFailed = true;
       } else {
         this.otherError = true;
       }
+    }, () => {
+      this.router.navigateByUrl('/user-panel');
     });
   }
 }
